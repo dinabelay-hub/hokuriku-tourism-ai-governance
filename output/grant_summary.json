@@ -2,21 +2,21 @@
   "title": "Hokuriku Tourism AI Governance – Grant Summary",
   "project": "AI-Driven Demand Forecasting & Spatial Optimization for Fukui Prefecture",
   "author": "Amil Khanzada",
-  "generated": "2026-02-24T11:49:29.706710",
+  "generated": "2026-02-27T07:13:14.013401",
   "headline_metrics": {
     "ols_r_squared": 0.8096,
     "lost_visitors_single_node": 85512,
     "lost_visitors_three_node": 852775,
-    "satake_number_yen": 11777680728.11,
-    "satake_number_usd": 78517871.52,
+    "satake_number_yen": 11959183083.15,
+    "satake_number_usd": 79727887.22,
     "spending_per_visitor_yen": 13811.0,
     "ishikawa_pipeline_r": 0.537,
     "winter_sensitivity_ratio": 6.29
   },
   "economic_impact": {
     "opportunity_gap_description": "Weather-related planning friction causes visitors to cancel trips even when demand (Google intent) is high.",
-    "three_node_loss_yen": "¥11,777,680,728",
-    "three_node_loss_usd": "$78,517,872"
+    "three_node_loss_yen": "¥11,959,183,083",
+    "three_node_loss_usd": "$79,727,887"
   },
   "cross_prefectural_pipeline": {
     "description": "Ishikawa tourist activity predicts Tojinbo arrivals with a measurable lag, proving inter-prefectural demand spillover.",
