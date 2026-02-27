@@ -6,9 +6,11 @@ Requirements (install once):
     sudo apt-get install -y pandoc texlive-xetex texlive-lang-japanese fonts-noto-cjk
 
 Usage:
-    python3 output/pdf/generate_pdfs.py
-    python3 output/pdf/generate_pdfs.py --kansei      # kansei brief only
-    python3 output/pdf/generate_pdfs.py --executive   # executive report only
+    python3 output/pdf/generate_pdfs.py                # build all
+    python3 output/pdf/generate_pdfs.py --kansei       # Japanese kansei brief only
+    python3 output/pdf/generate_pdfs.py --kansei-en    # English kansei brief only
+    python3 output/pdf/generate_pdfs.py --executive    # Japanese executive report only
+    python3 output/pdf/generate_pdfs.py --executive-en # English executive report only
 """
 
 import argparse
@@ -21,13 +23,21 @@ ROOT = Path(__file__).parent.parent.parent  # repo root
 PDF_DIR = Path(__file__).parent             # output/pdf/
 
 DOCS = {
-    "kansei": {
-        "source": PDF_DIR / "kansei_brief_pdf.md",
-        "output": PDF_DIR / "KANSEI_RESEARCH_BRIEF.pdf",
+    "executive_en": {
+        "source": PDF_DIR / "executive_report_pdf_en.md",
+        "output": PDF_DIR / "EXECUTIVE_REPORT.pdf",
     },
     "executive": {
         "source": PDF_DIR / "executive_report_pdf.md",
-        "output": PDF_DIR / "EXECUTIVE_REPORT.pdf",
+        "output": PDF_DIR / "EXECUTIVE_REPORT.ja.pdf",
+    },
+    "kansei_en": {
+        "source": PDF_DIR / "kansei_brief_pdf_en.md",
+        "output": PDF_DIR / "KANSEI_RESEARCH_BRIEF.pdf",
+    },
+    "kansei": {
+        "source": PDF_DIR / "kansei_brief_pdf.md",
+        "output": PDF_DIR / "KANSEI_RESEARCH_BRIEF.ja.pdf",
     },
 }
 
@@ -44,7 +54,7 @@ def check_deps():
         print("  sudo apt-get install -y pandoc texlive-xetex texlive-lang-japanese fonts-noto-cjk")
         sys.exit(1)
 
-    # Check font
+    # Check font (required for Japanese reports)
     result = subprocess.run(
         ["fc-list", "Noto Sans CJK JP"],
         capture_output=True, text=True
@@ -66,7 +76,8 @@ def build(name: str, doc: dict) -> bool:
     print(f"  Building {output.name} ...", end=" ", flush=True)
     result = subprocess.run(
         ["pandoc", str(source), "--pdf-engine=xelatex", "-o", str(output)],
-        capture_output=True, text=True
+        capture_output=True, text=True,
+        cwd=str(source.parent),   # resolve ../image.png relative to the markdown file
     )
     if result.returncode == 0:
         size_kb = output.stat().st_size // 1024
@@ -80,16 +91,21 @@ def build(name: str, doc: dict) -> bool:
 
 def main():
     parser = argparse.ArgumentParser(description="Regenerate PDF reports.")
-    parser.add_argument("--kansei",    action="store_true", help="Build kansei brief only")
-    parser.add_argument("--executive", action="store_true", help="Build executive report only")
+    parser.add_argument("--kansei",       action="store_true", help="Build Japanese kansei brief only")
+    parser.add_argument("--kansei-en",    action="store_true", help="Build English kansei brief only")
+    parser.add_argument("--executive",    action="store_true", help="Build Japanese executive report only")
+    parser.add_argument("--executive-en", action="store_true", help="Build English executive report only")
     args = parser.parse_args()
 
-    # Default: build all
-    targets = list(DOCS.keys())
-    if args.kansei and not args.executive:
-        targets = ["kansei"]
-    elif args.executive and not args.kansei:
-        targets = ["executive"]
+    # Default: build all; otherwise build only requested targets
+    flags = {
+        "executive_en": args.executive_en,
+        "executive":    args.executive,
+        "kansei_en":    args.kansei_en,
+        "kansei":       args.kansei,
+    }
+    requested = [k for k, v in flags.items() if v]
+    targets = requested if requested else list(DOCS.keys())
 
     print("Checking dependencies...")
     check_deps()

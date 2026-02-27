@@ -33,7 +33,7 @@ header-includes: |
 テキスト感性分析により、低評価群（1-2★）において「寂しさ／閑散さ」関連表現が、高評価群（4-5★）の \textbf{11.4倍} 出現する構造を確認。形態素解析器 Janome を使用し、品詞（形容詞）ベースで語形正規化した頻度比較を実施。
 
 \begin{center}
-\includegraphics[width=0.60\textwidth]{/home/amil/active/hokuriku-tourism-ai-governance/kansei/fig_kansei_keywords_ja.png}
+\includegraphics[width=0.60\textwidth]{../kansei/fig_kansei_keywords_ja.png}
 \captionof{figure}{\small 1★（Lonely）と5★（Vibrant）における過少な賑わい関連語の比較（1,000レビュー当たり出現率）。}
 \end{center}
 
@@ -44,7 +44,7 @@ header-includes: |
 永平寺を対象に、相対密度（0〜100%）と満足度の関係を2次回帰で推定。推定ピーク密度 $x^*=47.2\%$（頂点満足度 $\hat{y}=4.26$）は、聖地体験保全のための\textbf{ファジィルール}として解釈可能。「高密度化そのもの」ではなく「静寂が維持される密度帯」を管理目標とする政策設計が妥当。
 
 \begin{center}
-\includegraphics[width=0.60\textwidth]{/home/amil/active/hokuriku-tourism-ai-governance/kansei/fig_eiheiji_threshold_ja.png}
+\includegraphics[width=0.60\textwidth]{../kansei/fig_eiheiji_threshold_ja.png}
 \captionof{figure}{\small 永平寺における相対密度と満足度の2次回帰（ピーク: 47.2\%）。}
 \end{center}
 
@@ -57,7 +57,7 @@ header-includes: |
 \textbf{広域連携:} 県境を跨ぐ時系列相関では、石川側シグナル→福井流入において $r\approx0.537$ を確認。北陸を一体の感性空間（\textbf{Hokuriku Impression Space}）として扱うべきことを示唆。感性誘導（期待形成）と移動誘導（行動実装）を同時最適化する必要がある。
 
 \begin{center}
-\includegraphics[width=0.70\textwidth]{/home/amil/active/hokuriku-tourism-ai-governance/kansei/fig_di_heatmap_ja.png}
+\includegraphics[width=0.70\textwidth]{../kansei/fig_di_heatmap_ja.png}
 \captionof{figure}{\small 4ノードにおける DI / 体感温度 / 満足度の相関ヒートマップ。}
 \end{center}
 
