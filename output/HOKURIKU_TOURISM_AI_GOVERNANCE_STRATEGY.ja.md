@@ -1,0 +1,3 @@
+# 北陸観光AIガバナンス戦略報告書
+
+...existing content from HOKURIKU_TOURISM_AI_GOVERNANCE_STRATEGY_JA.md...
