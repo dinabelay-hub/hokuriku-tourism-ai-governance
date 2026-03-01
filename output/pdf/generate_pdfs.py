@@ -7,8 +7,6 @@ Requirements (install once):
 
 Usage:
     python3 output/pdf/generate_pdfs.py                # build all
-    python3 output/pdf/generate_pdfs.py --kansei       # Japanese kansei brief only
-    python3 output/pdf/generate_pdfs.py --kansei-en    # English kansei brief only
     python3 output/pdf/generate_pdfs.py --executive    # Japanese executive report only
     python3 output/pdf/generate_pdfs.py --executive-en # English executive report only
 """
@@ -32,14 +30,6 @@ DOCS = {
         "source": PDF_DIR / "executive_report_pdf.md",
         "output": PDF_DIR / "EXECUTIVE_REPORT.ja.pdf",
         "expected_pages": 1,
-    },
-    "kansei_en": {
-        "source": PDF_DIR / "kansei_brief_pdf_en.md",
-        "output": PDF_DIR / "KANSEI_RESEARCH_BRIEF.pdf",
-    },
-    "kansei": {
-        "source": PDF_DIR / "kansei_brief_pdf.md",
-        "output": PDF_DIR / "KANSEI_RESEARCH_BRIEF.ja.pdf",
     },
 }
 
@@ -128,8 +118,6 @@ def build(name: str, doc: dict) -> bool:
 
 def main():
     parser = argparse.ArgumentParser(description="Regenerate PDF reports.")
-    parser.add_argument("--kansei",       action="store_true", help="Build Japanese kansei brief only")
-    parser.add_argument("--kansei-en",    action="store_true", help="Build English kansei brief only")
     parser.add_argument("--executive",    action="store_true", help="Build Japanese executive report only")
     parser.add_argument("--executive-en", action="store_true", help="Build English executive report only")
     args = parser.parse_args()
@@ -138,8 +126,6 @@ def main():
     flags = {
         "executive_en": args.executive_en,
         "executive":    args.executive,
-        "kansei_en":    args.kansei_en,
-        "kansei":       args.kansei,
     }
     requested = [k for k, v in flags.items() if v]
     targets = requested if requested else list(DOCS.keys())
