@@ -26,10 +26,12 @@ DOCS = {
     "executive_en": {
         "source": PDF_DIR / "executive_report_pdf_en.md",
         "output": PDF_DIR / "EXECUTIVE_REPORT.pdf",
+        "expected_pages": 1,
     },
     "executive": {
         "source": PDF_DIR / "executive_report_pdf.md",
         "output": PDF_DIR / "EXECUTIVE_REPORT.ja.pdf",
+        "expected_pages": 1,
     },
     "kansei_en": {
         "source": PDF_DIR / "kansei_brief_pdf_en.md",
@@ -40,6 +42,27 @@ DOCS = {
         "output": PDF_DIR / "KANSEI_RESEARCH_BRIEF.ja.pdf",
     },
 }
+
+
+def get_pdf_pages(pdf_path: Path) -> int | None:
+    if not shutil.which("pdfinfo"):
+        return None
+    result = subprocess.run(
+        ["pdfinfo", str(pdf_path)],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        return None
+    for line in result.stdout.splitlines():
+        if line.startswith("Pages:"):
+            parts = line.split(":", 1)
+            if len(parts) == 2:
+                try:
+                    return int(parts[1].strip())
+                except ValueError:
+                    return None
+    return None
 
 
 def check_deps():
@@ -80,6 +103,20 @@ def build(name: str, doc: dict) -> bool:
         cwd=str(source.parent),   # resolve ../image.png relative to the markdown file
     )
     if result.returncode == 0:
+        expected_pages = doc.get("expected_pages")
+        if expected_pages is not None:
+            actual_pages = get_pdf_pages(output)
+            if actual_pages is None:
+                print("FAILED")
+                print("[ERROR] Could not verify page count (pdfinfo missing or unreadable output).")
+                return False
+            if actual_pages != expected_pages:
+                print("FAILED")
+                print(
+                    f"[ERROR] {output.name} page count mismatch: "
+                    f"expected {expected_pages}, got {actual_pages}"
+                )
+                return False
         size_kb = output.stat().st_size // 1024
         print(f"OK  ({size_kb} KB)")
         return True
