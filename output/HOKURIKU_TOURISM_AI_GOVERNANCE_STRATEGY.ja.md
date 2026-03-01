@@ -1,243 +1,243 @@
-# HOKURIKU TOURISM AI GOVERNANCE STRATEGY REPORT
+# 北陸観光AIガバナンス戦略レポート
 
-**Project Name:** Distributed Human Data Engine for Demand Forecasting and Spatial Optimization in Hokuriku Tourism
-**Author:** Amil Khanzada, Associate Professor, University of Fukui
-**Submitted to:** Hokuriku Tourism & AI Policy Committee (Kanazawa Conference)
-**Date:** February 27, 2026
-**Category:** Evidence-Based Policy Making (EBPM) Strategy Document
-
----
-
-## Executive Summary
-
-This report summarizes the analysis results and policy recommendations for revitalizing tourism in Fukui Prefecture using AI and data science.
-
-- **Core Issue:** Fukui ranks **47th (last)** in winter tourist numbers. The root cause is not lack of demand, but **"Planning Friction"**—a gap where high digital intent does not convert to actual visits.
-- **Quantified Loss:** Annually, **865,917 potential visitors** are lost, with an economic loss of **~¥11.96 billion** (the "Satake Number").
-- **Accuracy:** The AI model explains **81%** of daily visitor variation ($R^2=0.810$). Adding weather data improves accuracy by **+5.6%**.
-- **Policy Goal:** Implementing two AI interventions (supply-side and demand-side nudges) could improve the ranking from **47th to about 35th**.
+**プロジェクト名:** 北陸観光における需要予測・空間最適化のための分散型ヒューマンデータエンジン（DHDE）
+**著者:** アミル・カーンザダ（福井大学 特命准教授）
+**提出先:** 北陸観光・AI政策委員会（金沢会議）
+**日付:** 2026年2月27日
+**分類:** EBPM（Evidence-Based Policy Making）戦略文書
 
 ---
 
-## 1. Problem Definition: Structural Stagnation and Economic Opportunity Loss
+## エグゼクティブサマリー
 
-Fukui Prefecture has been **structurally last** among Japan's 47 prefectures for winter tourism numbers.
+本レポートは、福井県観光の再活性化に向けて、AIとデータサイエンスに基づく分析結果と政策提言を示すものです。
 
-**Conventional Misdiagnosis:** "Lack of tourism resources."
-**This Study's Redefinition:** "**Planning Friction** is blocking actual visits."
-
-Specific mechanisms causing opportunity loss:
-
-- **High digital intent** — Google search and route queries show strong interest
-- **Weather uncertainty blocks visits** — Especially in winter, snow, wind, and rain cause people to abandon plans
-- **Lack of vibrancy lowers satisfaction** — "Deserted shopping streets" negatively impact reviews
-
-> **Policy Focus:** The key is not developing new resources, but **improving the conversion rate of existing demand**.
+- **中核課題:** 福井県は冬季観光客数で **47位（最下位）**。本研究は、原因を「需要不足」ではなく、デジタル需要が実来訪に転換しない **計画摩擦（Planning Friction）** と定義します。
+- **損失規模:** 年間 **865,917人** の潜在来訪者機会を失い、経済損失は **約119.6億円（Satake Number）**。
+- **モデル精度:** 日次来訪変動の **81%** を説明（$R^2=0.810$）。気象データ追加で精度 **+5.6%** 改善。
+- **政策目標:** 供給側・需要側の2つのAI介入により、順位を **47位→35位程度** へ改善可能。
 
 ---
 
-## 2. Data Architecture: Distributed Human Data Engine (DHDE)
+## 1. 課題定義：構造的停滞と経済機会損失
 
-This project built a unique system, **DHDE**, integrating four data streams.
+福井県は、冬季観光客数で全国47都道府県中、構造的に最下位が継続しています。
+
+**従来の誤診:** 「観光資源が不足している」
+**本研究の再定義:** 「**計画摩擦（Planning Friction）** が実来訪を阻害している」
+
+機会損失を生む具体メカニズム：
+
+- **デジタル需要は高い** — Google検索・ルート検索には強い関心が出ている
+- **気象不確実性が来訪を中断** — 冬季の降雪・降雨・強風で計画がキャンセルされる
+- **賑わい不足が満足度を低下** — 「閑散としている」体験が評価を下げる
+
+> **政策焦点:** 新規資源の追加より、既存需要の **転換率（intent → visit）改善** が最重要。
+
+---
+
+## 2. データアーキテクチャ：分散型ヒューマンデータエンジン（DHDE）
+
+本研究では、4系統データを統合する独自基盤 **DHDE** を構築しました。
 
 ```mermaid
 graph TD
-	subgraph Inputs["Data Streams (4 types)"]
-		G["🔍 Google Business Profile<br/>(Search & Route Queries)"]
-		W["🌦️ JMA Weather Data<br/>(Temperature, Precipitation, Snow, Wind)"]
-		C["📷 AI Camera Visitor Counts<br/>(4 nodes, daily)"]
-		S["📋 Hokuriku Tourism Survey<br/>(95,653 responses + 89,414 spending records)"]
-	end
-	subgraph Engine["Processing Engine"]
-		M["⚙️ Distributed Human Data Engine<br/>(DHDE)<br/>Random Forest + OLS Regression"]
-	end
-	subgraph Outputs["Policy Intelligence"]
-		F["📈 Demand Forecast<br/>R² = 0.810"]
-		O["💴 Quantified Opportunity Loss<br/>~¥11.96B / 865,917 people"]
-		V["🎯 Vibrancy Threshold<br/>Nature vs Sacred Sites"]
-	end
-	G --> M
-	W --> M
-	C --> M
-	S --> M
-	M --> F
-	M --> O
-	M --> V
+    subgraph Inputs["入力データ（4系統）"]
+        G["🔍 Googleビジネスプロフィール<br/>(検索・ルート検索)"]
+        W["🌦️ 気象庁データ<br/>(気温・降水・積雪・風速)"]
+        C["📷 AIカメラ来訪カウント<br/>(4ノード日次)"]
+        S["📋 北陸観光調査<br/>(95,653回答 + 89,414消費記録)"]
+    end
+    subgraph Engine["処理エンジン"]
+        M["⚙️ Distributed Human Data Engine<br/>(DHDE)<br/>Random Forest + OLS"]
+    end
+    subgraph Outputs["政策インテリジェンス"]
+        F["📈 需要予測<br/>R² = 0.810"]
+        O["💴 機会損失の定量化<br/>約119.6億円 / 865,917人"]
+        V["🎯 賑わい閾値<br/>自然系 vs 聖地系"]
+    end
+    G --> M
+    W --> M
+    C --> M
+    S --> M
+    M --> F
+    M --> O
+    M --> V
 ```
 
-**4 Geographic Nodes (Full Geographic Saturation):**
+**地理的4ノード（地理的飽和を達成）**
 
-| Node | Location | Feature |
-|------|----------|---------|
-| Node A: Tojinbo/Mikuni | North (Coast) | Nature site, highest weather sensitivity |
-| Node B: Fukui Station | Central (Hub) | Transport hub |
-| Node C: Katsuyama/Dinosaur Museum | South (Mountain) | Year-round attraction |
-| Node D: Rainbow Line/Wakasa | East (Scenic) | 1.85x seasonality, max snow impact |
-
----
-
-## 3. Key Analysis Results
-
-### 3.1 Forecast Accuracy & Weather Shield Effect
-
-**Model accuracy:** $R^2 = 0.810$ (adj. $R^2 = 0.802$)
-
-- Explains **81%** of daily visitor variation with a single model
-- Top predictor: Google "Directions" intent ($r = 0.781$)
-- Adding JMA weather data improves accuracy by **+5.6%**
-- **Policy implication:** Weather acts as an "economic gatekeeper"; weather-adaptive policies are numerically validated
-
-> 📊 *Figure 1: Demand forecast (red) and AI camera actual (blue) show high agreement ($R^2=0.810$)—proving EBPM effectiveness*
+| ノード | 地点 | 特徴 |
+|------|------|------|
+| Node A: 東尋坊・三国 | 北（沿岸） | 自然景勝地、気象感度最大 |
+| Node B: 福井駅周辺 | 中央（ハブ） | 交通結節点 |
+| Node C: 勝山・恐竜博物館 | 南（山側） | 通年集客拠点 |
+| Node D: レインボーライン・若狭 | 東（景観） | 季節性1.85倍、積雪影響最大 |
 
 ---
 
-### 3.2 Under-vibrancy Paradox (Text Sentiment Analysis)
+## 3. 主要分析結果
 
-**Target:** 70,668 review texts (morphological analysis: Janome)
+### 3.1 予測精度とWeather Shield効果
 
-- **1–2★ (low satisfaction)** group uses "lonely/deserted" expressions **11.4x** more than 4–5★ group
-- Fukui's core issue is "**under-vibrancy**"—not over-tourism, but under-tourism
-- **Policy implication:** Need for vibrancy-creating policies that generate a "come because it's crowded" virtuous cycle
+**モデル精度:** $R^2 = 0.810$（調整済み $R^2 = 0.802$）
 
-> 📊 *Figure 2: Sentiment keyword frequency for 1★ (loneliness) vs 5★ (vibrancy) per 1,000 reviews*
+- 単一モデルで日次来訪変動の **81%** を説明
+- 最大予測因子は Google「ルート検索」（$r = 0.781$）
+- 気象データ導入で精度 **+5.6%** 改善
+- **政策含意:** 気象は経済活動の「ゲートキーパー」であり、気象適応施策の有効性を数値で裏付け
 
----
-
-### 3.3 Quantifying Economic Loss ("Satake Number": ~¥11.96B)
-
-> **⚠️ Annual Opportunity Loss: 865,917 people / ~¥11.96B**
-
-This value is defined as the "Satake Number" and presented as a policy intervention benchmark.
-
-**Details:**
-
-- Target: Total of 4 nodes (after geographic saturation)
-- Lost visitors: **865,917/year**
-- Estimated economic loss: **~¥11.96B/year** (spending per visitor × lost visitors)
-- **Winter is 6.29x** more sensitive to weather than summer—winter countermeasures are top priority
-
-> 📊 *Figure 3: If AI governance recovers 865,917 visitors, Fukui improves from 47th to about 35th place*
+> 📊 *図1: 需要予測（赤）とAIカメラ実測（青）が高一致（$R^2=0.810$）し、EBPMの有効性を示す*
 
 ---
 
-### 3.4 Sacred Site Quietude Threshold (Eiheiji) — Joint Research with Prof. Inoue
+### 3.2 過少賑わいパラドックス（テキスト感性分析）
 
-**This section is based on joint research with Prof. Inoue (Kansei Information Science, University of Fukui).**
+**分析対象:** 70,668件レビュー（形態素解析: Janome）
 
-For Eiheiji (Zen sacred site), the relationship between **relative visitor density and satisfaction** was estimated using quadratic regression.
+- **低満足（1–2★）層** は「寂しい・閑散」語を高満足層比で **11.4倍** 使用
+- 福井の中核問題は「オーバーツーリズム」ではなく **アンダーツーリズム（過少賑わい）**
+- **政策含意:** 「人が集まるから人が集まる」賑わい循環を作る介入が必要
 
-**Mathematical model:** $\hat{y} = ax^2 + bx + c$
+> 📊 *図2: 1★群（寂しさ語）と5★群（賑わい語）の出現頻度比較（1,000レビューあたり）*
 
-| Parameter | Value |
+---
+
+### 3.3 経済損失の定量化（Satake Number: 約119.6億円）
+
+> **⚠️ 年間機会損失: 865,917人 / 約119.6億円**
+
+この値を政策介入目標として **Satake Number** と定義します。
+
+**内訳:**
+
+- 対象: 4ノード合算（地理的飽和後）
+- 損失来訪者: **865,917人/年**
+- 経済損失推計: **約119.6億円/年**（1人あたり消費額 × 損失来訪者）
+- 冬季は夏季比 **6.29倍** の気象感度 → 冬季対策を最優先
+
+> 📊 *図3: 865,917人回復時、福井は47位から35位程度まで改善可能*
+
+---
+
+### 3.4 聖地静寂閾値（永平寺）— 井上教授との共同研究
+
+**本節は福井大学感性情報学・井上教授との共同研究成果に基づきます。**
+
+永平寺（禅の聖地）における **相対混雑率と満足度** の関係を二次回帰で推定しました。
+
+**モデル:** $\hat{y} = ax^2 + bx + c$
+
+| パラメータ | 値 |
 |-----------|-------|
 | $a$ | $1.858 \times 10^{-5}$ |
 | $b$ | $-1.754 \times 10^{-3}$ |
 | $c$ | $4.304$ |
-| **Optimal density $x^*$** | **47.2%** (max satisfaction) |
-| **Max satisfaction $\hat{y}(x^*)$** | **4.26 / 5.00** |
+| **最適混雑率 $x^*$** | **47.2%**（満足度最大） |
+| **最大満足度 $\hat{y}(x^*)$** | **4.26 / 5.00** |
 
-**Policy implications (fuzzy rules):**
+**政策含意（ファジールール）:**
 
-- When relative density exceeds **47.2%**, satisfaction starts to decline
-- The key to preserving the sacred site experience is **managing density to maintain quietude**, not maximizing visitor numbers
-- Quantifying cultural value is a practical example of data-driven cultural property policy using kansei information science
+- 相対混雑率が **47.2%** を超えると満足度は低下開始
+- 聖地価値維持は「最大集客」ではなく「静寂を保つ密度制御」が鍵
+- 文化価値の定量化は、感性情報学による文化資産政策の実装例
 
-> 📊 *Figure 4: Quadratic regression of relative density and satisfaction at Eiheiji (peak: 47.2%)*
-
----
-
-## 4. Need for Regional Collaboration: Ishikawa-Fukui Data Pipeline
-
-**Finding:** Tourism activity signals in Ishikawa **lead** actual visitor numbers in Fukui.
-
-- **Lead correlation coefficient:** $r = 0.537$ (statistically significant)
-- **Policy implication:** Fukui and Ishikawa function as a **single tourism region (Hokuriku Impression Space)**
-- Single-prefecture policy design cannot optimize; **broader Hokuriku governance is essential**
-
-**Directions for regional policy design:**
-
-1. Kansei guidance (expectation formation)—information dissemination in Ishikawa drives inflow to Fukui
-2. Mobility guidance (behavior implementation)—designing routes to encourage travel within Hokuriku
-3. Data collaboration platform—building a joint data platform (basis for joint grant applications)
+> 📊 *図4: 永平寺の相対混雑率と満足度の二次回帰（頂点47.2%）*
 
 ---
 
-## 5. Policy Proposals: Socio-Technical Nudge Loop
+## 4. 広域連携の必要性：石川→福井データパイプライン
 
-To recover the ~¥11.96B opportunity loss, two AI interventions are proposed.
+**発見:** 石川県の観光活動シグナルが、福井県来訪実績を先行して説明します。
 
-### Intervention 1: Supply-side Nudge (Store Activation Alert)
+- **先行相関係数:** $r = 0.537$（統計的有意）
+- **政策含意:** 福井と石川は単独ではなく、**一体的観光圏（Hokuriku Impression Space）**
+- 単県最適では限界があり、**北陸広域ガバナンス** が必須
 
-> **72-hour demand forecasts** are used to recommend optimal opening hours and staffing to local stores and restaurants.
-> Prevents "deserted" conditions on high-demand days and creates a **virtuous cycle of vibrancy**.
+**広域政策設計の方向性:**
 
-### Intervention 2: Demand-side Nudge (Weather Routing)
+1. 感性誘導（期待形成）— 石川側情報発信が福井流入を促進
+2. 行動誘導（実行設計）— 周遊ルート最適化で広域回遊を促進
+3. データ協調基盤 — 共同補助金申請の土台となる統合プラットフォーム構築
 
-> **During bad weather**, visitors to Tojinbo (coast/outdoor) are automatically guided to Katsuyama and Eiheiji (indoor/mountain).
-> Minimizes weather-related opportunity loss and **levels out visitation**.
+---
+
+## 5. 政策提案：Socio-Technical Nudge Loop
+
+約119.6億円の機会損失回収に向け、2つのAI介入を提案します。
+
+### 介入1: 供給側ナッジ（店舗稼働アラート）
+
+> **72時間需要予測** に基づき、店舗・飲食の営業時間・人員配置を最適化。
+> 高需要日に「開いていない・人がいない」状態を防ぎ、賑わい循環を形成。
+
+### 介入2: 需要側ナッジ（気象ルーティング）
+
+> 悪天候時、東尋坊（沿岸・屋外）来訪予定者を勝山・永平寺（内陸・屋内）へ自動誘導。
+> 気象要因による機会損失を最小化し、域内来訪を平準化。
 
 ```mermaid
 graph LR
-	subgraph Forecast["72-hour Forecast Engine"]
-		F["⚙️ DHDE Demand Forecast<br/>(R²=0.810)"]
-	end
-	subgraph Supply["1. Supply-side Nudge"]
-		SN["🏪 Store Activation Alert<br/>(Optimize hours/staff)"]
-	end
-	subgraph Demand["2. Demand-side Nudge"]
-		DN["🌂 Weather Routing<br/>(Tojinbo → Katsuyama/Eiheiji)"]
-	end
-	subgraph Outcome["Policy Outcome"]
-		R["💴 Recover ~¥11.96B/year<br/>Opportunity Loss<br/>47th → ~35th"]
-	end
-	F -->|"High demand signal"| SN
-	F -->|"High demand + bad weather"| DN
-	SN -->|"Create vibrancy"| R
-	DN -->|"Level visitation"| R
+    subgraph Forecast["72時間予測エンジン"]
+        F["⚙️ DHDE需要予測<br/>(R²=0.810)"]
+    end
+    subgraph Supply["1. 供給側ナッジ"]
+        SN["🏪 店舗稼働アラート<br/>(営業時間・人員最適化)"]
+    end
+    subgraph Demand["2. 需要側ナッジ"]
+        DN["🌂 気象ルーティング<br/>(東尋坊 → 勝山・永平寺)"]
+    end
+    subgraph Outcome["政策成果"]
+        R["💴 年間約119.6億円回収<br/>47位 → 35位程度"]
+    end
+    F -->|"高需要シグナル"| SN
+    F -->|"高需要 + 悪天候"| DN
+    SN -->|"賑わい形成"| R
+    DN -->|"来訪平準化"| R
 ```
 
 ---
 
-## 6. Action Items & Committee Recommendations
+## 6. 実行アクションと委員会提言
 
-### Immediate Actions (Spring 2026~)
+### 直近アクション（2026年春〜）
 
-- [ ] Build prototype **weather-linked visitor attraction system** (Fukui & Ishikawa joint project)
-- [ ] Develop **real-time data sharing platform** for 4-node AI camera data
-- [ ] Pilot **demand forecast alerts** for local stores (Tojinbo/Mikuni area)
+- [ ] 気象連動来訪誘導システムのプロトタイプ構築（福井・石川共同）
+- [ ] 4ノードAIカメラのリアルタイム共有基盤整備
+- [ ] 東尋坊・三国エリアで需要予測アラート運用を試行
 
-### Mid-term Plan (2026–2027)
+### 中期計画（2026–2027）
 
-- [ ] Establish **Hokuriku Regional Governance Council** (Ishikawa, Fukui, Toyama collaboration)
-- [ ] Kansei engineering validation of Eiheiji density management (joint research with Prof. Inoue's group)
-- [ ] Joint grant applications: **JST, Japan Tourism Agency EBPM grants**
+- [ ] 北陸広域ガバナンス会議体の設置（石川・福井・富山）
+- [ ] 永平寺密度制御の感性工学検証（井上研究室との共同）
+- [ ] JST・観光庁EBPM系共同補助金の申請
 
-### Ongoing Research
+### 継続研究
 
-- [ ] Explore **scaling DHDE model to all 47 prefectures**
-- [ ] Build annual monitoring system for "Satake Number"
-- [ ] Multilingual sentiment analysis (for inbound tourism)
-
----
-
-## Reference: Key Metrics
-
-| Metric | Value |
-|--------|-------|
-| Model accuracy ($R^2$) | **0.810** (adj. 0.802) |
-| Top predictor | Google Directions ($r=0.781$) |
-| Weather data contribution | **+5.6%** accuracy gain |
-| Annual lost visitors | **865,917** |
-| Annual economic loss (Satake Number) | **~¥11.96B** |
-| Winter vs summer weather sensitivity | **6.29x** |
-| Ishikawa→Fukui lead correlation | $r = 0.537$ |
-| Eiheiji quietude threshold (optimal density) | **47.2%** |
-| Under-vibrancy sentiment ratio (1★/5★) | **11.4x** |
-| Target rank improvement | **47th → ~35th** |
+- [ ] DHDEの全国47都道府県スケール展開可能性評価
+- [ ] Satake Number年次モニタリングの制度化
+- [ ] インバウンド対応の多言語感性分析
 
 ---
 
-**Validation Status:** Full geographic saturation achieved with 4 camera nodes. The "Satake Number" (~¥11.96B) is confirmed as the annual opportunity loss for policy intervention.
+## 参考主要指標
 
-**Reproducible Code:** [github.com/amilkh/hokuriku-tourism-ai-governance](https://github.com/amilkh/hokuriku-tourism-ai-governance)
-**Analysis Pipeline:** All results reproducible with `python3 src/run_analysis.py`
+| 指標 | 値 |
+|------|------|
+| モデル精度（$R^2$） | **0.810**（調整済み0.802） |
+| 最大予測因子 | Googleルート検索（$r=0.781$） |
+| 気象データ寄与 | 精度 **+5.6%** |
+| 年間損失来訪者 | **865,917人** |
+| 年間経済損失（Satake Number） | **約119.6億円** |
+| 冬季/夏季の気象感度比 | **6.29倍** |
+| 石川→福井先行相関 | $r = 0.537$ |
+| 永平寺静寂最適密度 | **47.2%** |
+| 過少賑わい語比（1★/5★） | **11.4倍** |
+| 目標順位改善 | **47位 → 35位程度** |
+
+---
+
+**検証状態:** 4ノードで地理的飽和を達成。Satake Number（約119.6億円）を年次政策介入目標として確認。
+
+**再現コード:** [github.com/amilkh/hokuriku-tourism-ai-governance](https://github.com/amilkh/hokuriku-tourism-ai-governance)
+**実行コマンド:** `python3 src/run_analysis.py`
