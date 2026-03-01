@@ -9,19 +9,19 @@
 
 This report presents an integrated AI and data science framework to optimize tourism policy in Fukui and the wider Hokuriku region.
 
-*   **Core challenge:** Fukui remains the **lowest-ranked prefecture (47th place)** in winter tourism volume. The root cause is not low demand, but **Planning Friction**: high digital intent that fails to convert into physical visits.
-*   **Quantified loss:** This friction results in **865,917 lost potential visitors per year across our 4 monitored nodes**, with an estimated economic opportunity loss of **¥11.96 billion**.
-*   **Predictive validity:** The AI model predicts daily physical arrivals using digital search intent with **81% accuracy** ($R^2=0.810$) at the primary natural node (Tojinbo). Adding weather data adds +5.6% predictive gain.
+*   **Core challenge:** Fukui remains the **lowest-ranked prefecture (47th place)** in winter tourism volume. The root cause is not low demand but **Planning Friction**, where high digital intent fails to convert into physical visits.
+*   **Quantified loss:** This friction results in **865,917 lost potential visitors per year across our 4 monitored nodes**, with an estimated economic opportunity loss of **¥11.96 billion (~$77M)**.
+*   **Predictive validity:** At the primary natural node (Tojinbo), the AI model predicts daily physical arrivals from Google Maps search and Directions intent with **81% accuracy** ($R^2=0.810$). Adding weather data provides an additional +5.6% predictive gain.
 *   **Policy objective:** Two AI interventions (supply-side and demand-side nudges) can realistically move Fukui from **47th place to around 35th place** nationally.
 
 ---
 
 ## 1. Reframing the Problem: Structural Stagnation and Opportunity Loss
 
-Traditional policy diagnosis has focused on "insufficient tourism resources." Our evidence indicates a different mechanism: **Planning Friction blocks conversion from intent to arrival**.
+Traditional policy diagnosis has focused on "insufficient tourism resources." Our evidence indicates a different mechanism: planning friction reduces conversion from digital intent to physical arrival.
 
 Primary friction channels:
-*   **High digital intent exists:** Google Search and Directions signals show substantial interest in Fukui.
+*   **High digital intent exists:** Google Maps Search and Directions signals show substantial interest in Fukui.
 *   **Weather uncertainty blocks trips:** Snow, wind, and rain trigger cancellations, especially in winter.
 *   **Under-vibrancy lowers satisfaction:** Empty streets, closed shops, and low atmospheric vitality suppress post-visit evaluation.
 
@@ -68,31 +68,43 @@ This model predicts actual daily visitor arrivals at physical locations using Go
 *   **Top predictor:** Google Directions intent from previous days ($r = 0.781$).
 *   **Policy significance:** Weather acts as an **economic gatekeeper**. Incorporating JMA weather data improves prediction accuracy by +5.6%, numerically justifying weather-adaptive routing policies.
 
+> ![RF Predicted vs Actual](./deep_analysis_fig5_rf_prediction.png)
+> *Figure 1: High alignment between model-predicted demand and AI-camera physical arrivals at Tojinbo.*
+
 ### 3.2 Under-Vibrancy Paradox (Kansei Text Analytics)
-Morphological analysis (Janome) across 70,668 text responses shows Fukui's issue is **under-tourism (under-vibrancy)** rather than overtourism.
+Morphological analysis across 70,668 text responses shows Fukui's issue is **under-tourism (under-vibrancy)** rather than overtourism.
 *   Dissatisfied visitors (1★-2★) use "lonely", "closed", or "deserted" expressions **11.4x more frequently** than satisfied visitors (4★-5★).
 
-### 3.3 Sacred Quietude Threshold at Eiheiji (Joint Domain with Prof. Inoue)
+> ![Vibrancy Threshold](./ultimate_fig2_vibrancy_threshold.png)
+> *Figure 2: Vibrancy threshold contrast between natural and sacred destinations.*
+
+### 3.3 Sacred Quietude Threshold at Eiheiji
 Using Kansei Information Science methods, we estimate a quadratic relationship between relative crowd density and satisfaction at Eiheiji:
-*   **Optimal relative density:** 47.2% (Mathematical peak of visitor satisfaction).
+*   **Optimal relative density:** 47.2%, estimated as the vertex ($x^*=-\frac{b}{2a}$) of the fitted quadratic satisfaction curve.
 *   **Interpretation:** Above this threshold, satisfaction declines. 
 *   **Policy implication:** Sacred site policy should optimize **density quality**, not maximize volume.
 
 ### 3.4 Economic Leakage Quantification (¥11.96B Opportunity Gap)
 Across the four geographically saturated nodes (Tojinbo, Fukui Station, Katsuyama, Rainbow Line):
 *   **Lost visitors:** 865,917 annually.
-*   **Estimated annual opportunity loss:** **¥11.96 billion**.
+*   **Estimated annual opportunity loss:** **¥11.96 billion (~$77M)**.
 *   **Seasonal fragility:** Winter tourism is **6.29x** more weather-sensitive than summer.
+
+> ![Rank Resurrection Projection](./rank_resurrection_projection.png)
+> *Figure 3: Estimated ranking improvement under opportunity-gap recovery scenario.*
 
 ---
 
 ## 4. Why Regional Cooperation is Mandatory: Ishikawa to Fukui Pipeline
 
-Cross-prefectural analysis shows that tourism activity in Ishikawa is a significant lead indicator for Fukui arrivals.
-*   **Finding:** Visitor survey check-ins and activity in Ishikawa Prefecture strongly predict actual physical arrivals at Fukui tourist sites on the same day.
+Cross-prefectural analysis shows that tourism demand signals in Ishikawa are a significant lead indicator for Fukui arrivals.
+*   **Finding:** Daily tourism activity intensity in Ishikawa predicts same-day physical arrivals at Fukui monitored tourism sites.
 *   **Lead correlation:** $r = 0.537$ (statistically significant).
 
 This implies Fukui and Ishikawa function as one practical tourism sphere (**Hokuriku Impression Space**). Single-prefecture optimization is structurally insufficient; coordinated regional data governance is required.
+
+> ![Ishikawa Pipeline CCF](./deep_analysis_fig8_ishikawa_ccf.png)
+> *Figure 4: Cross-correlation profile showing Ishikawa demand as a lead indicator for Fukui arrivals.*
 
 ---
 
@@ -123,28 +135,5 @@ graph LR
 	DN -->|"Visits stabilized"| R
 ```
 
----
-
-## 6. WG Discussion Items for Tomorrow
-
-For discussion with Kanazawa University and University of Toyama colleagues:
-1.  **Joint data platform design:** Shared Hokuriku forecasting architecture leveraging the Ishikawa to Fukui pipeline ($r=0.537$).
-2.  **Co-application framework for FY2026:** Build a coordinated proposal structure for regional national university collaborative research support.
-
-
-<div style="page-break-after: always;"></div>
-
-## APPENDIX: Geographic Node Saturation Context
-*(Reference material for internal discussion)*
-
-The DHDE model has achieved **Full Geographic Saturation** across Fukui Prefecture by monitoring four distinct environmental and economic nodes. This ensures the predictive AI accounts for micro-climates (e.g., coastal wind vs. mountain snow).
-
-| Node | Location | Environment Type | Weather Proxy (JMA) | Key Characteristic |
-| :--- | :--- | :--- | :--- | :--- |
-| **Node A** | Tojinbo / Mikuni | Coastal / Natural | Mikuni Station | Highest wind sensitivity; unlimited vibrancy threshold. |
-| **Node B** | Fukui Station | Central / Transit Hub | Fukui City Station | Baseline entry point; high snow sensitivity. |
-| **Node C** | Katsuyama (Dino Museum) | East / Mountain | Katsuyama Station | Indoor focus; acts as the primary "Weather Shield." |
-| **Node D** | Rainbow Line / Wakasa | South / Scenic Drive | Mikata Proxy | Highest seasonality (1.85x summer peak); drive-through tourism. |
-
-**Strategic Geographic Insight:** 
-When Coastal Node A (Tojinbo) becomes hostile due to high winds or rain, predictive routing can save the regional economy by nudging visitors inland to Node C (Katsuyama) or Node B (Fukui City), keeping the tourism revenue inside the prefecture rather than losing the visitor entirely.
+> ![Weather Shield Network](./weather_shield_network.png)
+> *Figure 5: Weather-shield routing concept across the four-node governance system.*
