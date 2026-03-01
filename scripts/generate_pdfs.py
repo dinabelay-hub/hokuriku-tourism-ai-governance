@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
-"""
-Regenerate PDF reports from markdown source files.
+"""Regenerate PDF reports from Markdown source files.
 
 Requirements (install once):
     sudo apt-get install -y pandoc texlive-xetex texlive-lang-japanese fonts-noto-cjk
 
 Usage:
-    python3 output/pdf/generate_pdfs.py                # build all
-    python3 output/pdf/generate_pdfs.py --executive    # Japanese executive report only
-    python3 output/pdf/generate_pdfs.py --executive-en # English executive report only
+    python3 scripts/generate_pdfs.py                # build all
+    python3 scripts/generate_pdfs.py --executive    # Japanese executive report only
+    python3 scripts/generate_pdfs.py --executive-en # English executive report only
 """
 
 import argparse
@@ -17,8 +16,8 @@ import subprocess
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).parent.parent.parent  # repo root
-PDF_DIR = Path(__file__).parent             # output/pdf/
+ROOT = Path(__file__).parent.parent        # repo root
+PDF_DIR = ROOT / "output" / "pdf"
 
 DOCS = {
     "executive_en": {
@@ -55,7 +54,7 @@ def get_pdf_pages(pdf_path: Path) -> int | None:
     return None
 
 
-def check_deps():
+def check_deps() -> None:
     missing = []
     for tool in ("pandoc", "xelatex"):
         if not shutil.which(tool):
@@ -67,10 +66,9 @@ def check_deps():
         print("  sudo apt-get install -y pandoc texlive-xetex texlive-lang-japanese fonts-noto-cjk")
         sys.exit(1)
 
-    # Check font (required for Japanese reports)
     result = subprocess.run(
         ["fc-list", "Noto Sans CJK JP"],
-        capture_output=True, text=True
+        capture_output=True, text=True,
     )
     if not result.stdout.strip():
         print("[ERROR] Font 'Noto Sans CJK JP' not found.")
@@ -90,7 +88,7 @@ def build(name: str, doc: dict) -> bool:
     result = subprocess.run(
         ["pandoc", str(source), "--pdf-engine=xelatex", "-o", str(output)],
         capture_output=True, text=True,
-        cwd=str(source.parent),   # resolve ../image.png relative to the markdown file
+        cwd=str(source.parent),
     )
     if result.returncode == 0:
         expected_pages = doc.get("expected_pages")
@@ -98,13 +96,12 @@ def build(name: str, doc: dict) -> bool:
             actual_pages = get_pdf_pages(output)
             if actual_pages is None:
                 print("FAILED")
-                print("[ERROR] Could not verify page count (pdfinfo missing or unreadable output).")
+                print("[ERROR] Could not verify page count (pdfinfo missing).")
                 return False
             if actual_pages != expected_pages:
                 print("FAILED")
                 print(
-                    f"[ERROR] {output.name} page count mismatch: "
-                    f"expected {expected_pages}, got {actual_pages}"
+                    f"[ERROR] {output.name}: expected {expected_pages} pages, got {actual_pages}"
                 )
                 return False
         size_kb = output.stat().st_size // 1024
@@ -116,13 +113,12 @@ def build(name: str, doc: dict) -> bool:
         return False
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Regenerate PDF reports.")
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Regenerate PDF reports from Markdown sources.")
     parser.add_argument("--executive",    action="store_true", help="Build Japanese executive report only")
     parser.add_argument("--executive-en", action="store_true", help="Build English executive report only")
     args = parser.parse_args()
 
-    # Default: build all; otherwise build only requested targets
     flags = {
         "executive_en": args.executive_en,
         "executive":    args.executive,
@@ -132,8 +128,7 @@ def main():
 
     print("Checking dependencies...")
     check_deps()
-    print("  pandoc + xelatex + Noto Sans CJK JP: OK")
-    print()
+    print("  pandoc + xelatex + Noto Sans CJK JP: OK\n")
 
     print("Generating PDFs:")
     results = {name: build(name, DOCS[name]) for name in targets}
