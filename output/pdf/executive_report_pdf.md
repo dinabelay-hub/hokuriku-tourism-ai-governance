@@ -1,19 +1,19 @@
 ---
-geometry: "a4paper, margin=0.75cm, top=0.7cm, bottom=0.7cm"
+geometry: "a4paper, margin=0.85cm, top=0.8cm, bottom=0.8cm"
 classoption:
   - twocolumn
 mainfont: "Noto Sans CJK JP"
 CJKmainfont: "Noto Sans CJK JP"
-fontsize: 8pt
-linestretch: 0.98
+fontsize: 7pt
+linestretch: 0.94
 pagestyle: plain
 header-includes: |
   \usepackage{graphicx}
   \usepackage{caption}
-  \captionsetup{font=scriptsize, skip=2pt, labelfont=bf}
-  \setlength{\parskip}{2pt}
+  \captionsetup{font=tiny, skip=1pt, labelfont=bf}
+  \setlength{\parskip}{1.2pt}
   \setlength{\parindent}{0pt}
-  \setlength{\columnsep}{14pt}
+  \setlength{\columnsep}{12pt}
 ---
 
 # HOKURIKU TOURISM AI ガバナンス戦略レポート
@@ -83,12 +83,27 @@ DHDEは、東尋坊・福井駅・勝山・レインボーラインの4ノード
 
 ## 5. 政策実装：社会技術ナッジループ
 
+119.6億円の機会損失回収に向け、以下の2施策を統合実装します。
+
 1. **供給側ナッジ（店舗活性アラート）**: 72時間予測に基づく営業時間・人員の動的最適化
 2. **需要側ナッジ（耐候ルーティング）**: 悪天候時に沿岸需要を屋内・準屋内拠点へ誘導
+
+```mermaid
+graph LR
+  A[DHDE 72時間予測] --> B[供給側ナッジ: 店舗活性アラート]
+  A --> C[需要側ナッジ: 耐候ルーティング]
+  B --> D[開店率・受入能力の向上]
+  C --> E[悪天候時の来訪安定化]
+  D --> F[機会損失の回収]
+  E --> F
+  F --> G[順位改善: 47位 → 約35位]
+```
 
 ![耐候ネットワーク](../weather_shield_network_ja.png)
 *図4: 4ノード統合のWeather Shield政策ネットワーク。*
 
-**結論:** DHDEは「損失定量→予測→施策」の実装ループを構築済みで、政策導入フェーズに移行可能です。
+## 結論
+
+DHDEは「損失定量→予測→施策」の実装ループを構築済みで、政策導入フェーズに移行可能です。
 
 **再現コード:** github.com/amilkh/hokuriku-tourism-ai-governance
