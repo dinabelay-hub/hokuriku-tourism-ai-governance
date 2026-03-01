@@ -24,12 +24,12 @@ DOCS = {
     "executive_en": {
         "source": PDF_DIR / "executive_report_pdf_en.md",
         "output": PDF_DIR / "EXECUTIVE_REPORT.pdf",
-        "expected_pages": 1,
+        "expected_pages": 2,
     },
     "executive": {
         "source": PDF_DIR / "executive_report_pdf.md",
         "output": PDF_DIR / "EXECUTIVE_REPORT.ja.pdf",
-        "expected_pages": 1,
+        "expected_pages": 2,
     },
 }
 

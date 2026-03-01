@@ -1,99 +1,95 @@
 ---
-geometry: "a4paper, margin=0.7cm, top=0.65cm, bottom=0.65cm"
+geometry: "a4paper, margin=0.75cm, top=0.7cm, bottom=0.7cm"
+classoption:
+  - twocolumn
 mainfont: "Latin Modern Roman"
-fontsize: 7pt
-linestretch: 0.92
+fontsize: 8pt
+linestretch: 0.98
 pagestyle: plain
 header-includes: |
-  \usepackage{booktabs}
   \usepackage{graphicx}
   \usepackage{caption}
-  \usepackage{array}
-  \captionsetup{font=tiny, skip=1pt, labelfont=bf}
-  \setlength{\parskip}{1.5pt}
+  \captionsetup{font=scriptsize, skip=2pt, labelfont=bf}
+  \setlength{\parskip}{2pt}
   \setlength{\parindent}{0pt}
-  \setlength{\abovecaptionskip}{0.5pt}
-  \setlength{\belowcaptionskip}{0.5pt}
-  \renewcommand{\arraystretch}{1.0}
+  \setlength{\columnsep}{14pt}
 ---
 
-# Scientific Executive Report
+# HOKURIKU TOURISM AI GOVERNANCE STRATEGY REPORT
 
-\noindent\small\textbf{Project:} DHDE-based tourism governance optimization for Fukui/Hokuriku\quad\textbf{Date:} March 1, 2026\normalsize
+**Project:** Demand Forecasting and Spatial Optimization in Hokuriku Tourism using the Distributed Human Data Engine (DHDE)  
+**Date:** March 1, 2026
 
-\vspace{2pt}\noindent\rule{\linewidth}{0.3pt}\vspace{2pt}
+## Executive Summary
 
-## 1) Core Findings (One-page Executive)
+This report presents an integrated AI and data science framework for tourism policy optimization in Fukui and the wider Hokuriku region.
 
-\noindent\begin{minipage}[t]{0.48\textwidth}
-	extbf{Structural problem}
+- **Core challenge:** Fukui remains **47th** in winter tourism volume; the root cause is **Planning Friction** rather than weak demand.
+- **Quantified loss:** Across the 4-node monitored system, annual leakage reaches **865,917 lost potential visitors** and **~¥11.96B (~$77M)**.
+- **Predictive validity:** At Tojinbo, the model predicts daily arrivals from digital intent with **$R^2=0.810$**, with weather adding **+5.6%** predictive gain.
+- **Policy objective:** Combined supply- and demand-side AI nudges can support a realistic ranking shift from **47th to around 35th**.
 
-\smallskip
-Fukui remains \textbf{47th} in winter tourism. The bottleneck is \textbf{Planning Friction}: high digital intent fails to convert into physical arrivals due to weather risk and low on-site vibrancy.
+## 1. Reframing the Problem: Structural Stagnation and Opportunity Loss
 
-\smallskip
-	extbf{Economic leakage (4-node saturation)}
+Conventional diagnosis emphasizes resource scarcity. Evidence here shows a conversion failure from digital intent to physical arrivals.
 
-\smallskip
-Lost visitors: \textbf{865,917/year}. Estimated opportunity loss: \textbf{\textasciitilde\yen{}11.96B/year}. Winter demand is \textbf{6.29\texttimes} more weather-sensitive than summer.
-\end{minipage}\hfill
-\begin{minipage}[t]{0.48\textwidth}
-	extbf{Model validity}
+- High Google Search/Directions intent exists.
+- Weather uncertainty blocks travel completion, especially in winter.
+- Under-vibrancy (closed shops, low street vitality) reduces post-visit evaluation.
 
-\smallskip
-At Tojinbo, DHDE predicts daily arrivals at \textbf{$R^2=0.810$} (adj. 0.802). Top driver: Google Directions intent ($r=0.781$). Adding JMA weather improves accuracy by \textbf{+5.6\%}.
+**Policy implication:** Prioritize conversion from existing intent, not only new resource creation.
 
-\smallskip
-	extbf{Kansei evidence}
+## 2. Data Architecture: Distributed Human Data Engine (DHDE)
 
-\smallskip
-Across 70,668 texts, dissatisfied users mention ``lonely/closed'' signals \textbf{11.4\texttimes} more. Fukui's issue is under-vibrancy, not overtourism.
-\end{minipage}
+DHDE integrates four streams into one governance-ready analytical stack across Tojinbo, Fukui Station, Katsuyama, and Rainbow Line:
 
-\vspace{2pt}
+- Google Business Profile intent signals
+- JMA weather observations
+- AI camera ground-truth counts
+- Hokuriku survey responses
 
-## 2) Regional Mechanism and Policy Response
+## 3. Key Findings
 
-\noindent\begin{minipage}[t]{0.48\textwidth}
-	extbf{Regional linkage}
+### 3.1 Forecasting Physical Arrivals and Weather Shield Effect
 
-\smallskip
-Ishikawa demand signals lead Fukui arrivals ($r=0.537$). This requires \textbf{Hokuriku-wide governance}, not single-prefecture optimization.
+- **Model fit:** $R^2 = 0.810$ (Adj. $R^2 = 0.802$)
+- **Top predictor:** Google Directions intent ($r=0.781$)
+- **Interpretation:** Weather operates as an economic gatekeeper and justifies weather-adaptive routing.
 
-\smallskip
-	extbf{Two AI nudges}
+![Predicted vs Actual at Tojinbo](../deep_analysis_fig5_rf_prediction.png)
+*Figure 1. Predicted demand and AI-camera observed arrivals align strongly at Tojinbo.*
 
-\smallskip
-(1) \textbf{Supply-side:} 72h merchant activation alerts (hours/staffing).\\
-(2) \textbf{Demand-side:} weather-resilient routing from exposed to sheltered nodes.
-\end{minipage}\hfill
-\begin{minipage}[t]{0.48\textwidth}
-	extbf{Target outcome}
+### 3.2 Under-vibrancy Paradox and Sacred Quietude Threshold
 
-\smallskip
-Recovering the quantified leakage supports a realistic ranking shift from \textbf{47th to around 35th}, with policy action linked directly to forecast signals.
+- In 70,668 text responses, dissatisfied users mention “lonely/closed/deserted” expressions **11.4x** more often.
+- At Eiheiji, fitted satisfaction curves indicate an optimal relative density near **47.2%**; beyond it, satisfaction declines.
 
-\smallskip
-	extbf{Conclusion}
+![Vibrancy Threshold Contrast](../ultimate_fig2_vibrancy_threshold.png)
+*Figure 2. Vibrancy threshold differs by destination type (natural vs sacred).* 
 
-\smallskip
-DHDE is validation-ready for implementation: measurable loss, reproducible forecasts, and operational interventions are now integrated.
-\end{minipage}
+### 3.3 Economic Leakage Quantification
 
-\vspace{2pt}
+- **Lost visitors:** 865,917 annually
+- **Opportunity loss:** ~¥11.96B annually
+- **Seasonal fragility:** Winter demand is **6.29x** more weather-sensitive than summer
 
-\noindent\begin{minipage}[t]{0.48\textwidth}
-\centering
-\includegraphics[width=0.96\textwidth]{../deep_analysis_fig5_rf_prediction.png}
-\captionof{figure}{\tiny Predicted vs actual daily arrivals at Tojinbo ($R^2=0.810$).}
-\end{minipage}\hfill
-\begin{minipage}[t]{0.48\textwidth}
-\centering
-\includegraphics[width=0.96\textwidth]{../rank_resurrection_projection.png}
-\captionof{figure}{\tiny Estimated rank recovery under opportunity-gap closure scenario.}
-\end{minipage}
+![Opportunity-gap Recovery Scenario](../rank_resurrection_projection.png)
+*Figure 3. Estimated ranking recovery under leakage-closure scenario.*
 
-\vspace{2pt}\noindent\rule{\linewidth}{0.3pt}\vspace{2pt}
+## 4. Why Regional Cooperation is Mandatory
 
-\scriptsize\noindent
-	extbf{Validation status:} 4 nodes (north/central/south/east) are operationally saturated and policy-ready.\quad\textbf{Code:} github.com/amilkh/hokuriku-tourism-ai-governance
+Cross-prefectural analysis shows Ishikawa activity is a significant lead indicator for Fukui arrivals (**$r=0.537$**), indicating one practical tourism sphere.
+
+**Governance implication:** Single-prefecture optimization is structurally insufficient; Hokuriku-wide coordination is required.
+
+## 5. Policy Design: Socio-Technical Nudge Loop
+
+1. **Supply-side nudge (Merchant Vitality Alerts):** 72-hour forecasts trigger staffing/opening optimization on high-intent days.
+2. **Demand-side nudge (Weather-resilient routing):** During adverse weather, route exposed-demand flows toward sheltered nodes.
+
+![Weather Shield Governance Network](../weather_shield_network.png)
+*Figure 4. Weather-shield routing architecture across the four-node governance system.*
+
+**Conclusion:** DHDE provides quantified losses, validated forecasts, and implementable interventions to support measurable tourism recovery in Fukui.
+
+**Reproducible code:** github.com/amilkh/hokuriku-tourism-ai-governance

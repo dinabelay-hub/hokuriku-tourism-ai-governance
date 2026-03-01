@@ -1,100 +1,94 @@
 ---
-geometry: "a4paper, margin=0.7cm, top=0.65cm, bottom=0.65cm"
+geometry: "a4paper, margin=0.75cm, top=0.7cm, bottom=0.7cm"
+classoption:
+  - twocolumn
 mainfont: "Noto Sans CJK JP"
 CJKmainfont: "Noto Sans CJK JP"
-fontsize: 7pt
-linestretch: 0.92
+fontsize: 8pt
+linestretch: 0.98
 pagestyle: plain
 header-includes: |
-  \usepackage{booktabs}
   \usepackage{graphicx}
   \usepackage{caption}
-  \usepackage{array}
-  \captionsetup{font=tiny, skip=1pt, labelfont=bf}
-  \setlength{\parskip}{1.5pt}
+  \captionsetup{font=scriptsize, skip=2pt, labelfont=bf}
+  \setlength{\parskip}{2pt}
   \setlength{\parindent}{0pt}
-  \setlength{\abovecaptionskip}{0.5pt}
-  \setlength{\belowcaptionskip}{0.5pt}
-  \renewcommand{\arraystretch}{1.0}
+  \setlength{\columnsep}{14pt}
 ---
 
-# 科学的エグゼクティブレポート
+# HOKURIKU TOURISM AI ガバナンス戦略レポート
 
-\noindent\small\textbf{プロジェクト:} DHDEによる福井・北陸観光ガバナンス最適化\quad\textbf{日付:} 2026年3月1日\normalsize
+**プロジェクト:** 分散型ヒューマンデータエンジン（DHDE）を用いた福井・北陸観光の需要予測と空間最適化  
+**日付:** 2026年3月1日
 
-\vspace{2pt}\noindent\rule{\linewidth}{0.3pt}\vspace{2pt}
+## エグゼクティブサマリー
 
-## 1) 主要知見（1ページ要約）
+本レポートは、福井県および北陸圏の観光政策を最適化するための、AIとデータサイエンスを統合した実装可能なガバナンス枠組みを提示します。
 
-\noindent\begin{minipage}[t]{0.48\textwidth}
-\textbf{構造課題}
+- **中核課題:** 福井県は冬季観光で **全国47位**。原因は需要不足ではなく、デジタル意図が実訪問に転換されない **計画摩擦（Planning Friction）**。
+- **定量損失:** 4観測ノード合計で、年間 **865,917人** の潜在来訪が失われ、経済機会損失は **約119.6億円**。
+- **予測妥当性:** 主要自然拠点（東尋坊）で、Googleの検索・ルート意図から実来訪を **$R^2 = 0.810$** で予測し、気象導入で **+5.6%** 改善。
+- **政策目標:** 供給側・需要側の2つのAIナッジ実装により、観光順位を **47位→35位前後** まで改善可能。
 
-\smallskip
-福井は冬季観光で\textbf{47位}。問題は需要不足ではなく\textbf{計画摩擦}（高いデジタル意図が実来訪に転換しない構造）です。
+## 1. 問題の再定義：構造的停滞と機会損失
 
-\smallskip
-\textbf{経済漏出（4ノード飽和）}
+従来の「観光資源不足」仮説ではなく、本研究は「計画摩擦」による転換率低下を実証しました。
 
-\smallskip
-失われた来訪者は\textbf{865,917人/年}、機会損失は\textbf{約119.6億円/年}。冬季は夏季の\textbf{6.29倍}天候感度が高い。
-\end{minipage}\hfill
-\begin{minipage}[t]{0.48\textwidth}
-\textbf{予測妥当性}
+- デジタル意図（Search/Directions）は十分に強い。
+- 積雪・降雨・強風が冬季来訪を強く抑制。
+- 閉店感・空洞感が満足度評価を下方に固定。
 
-\smallskip
-東尋坊で来訪を\textbf{$R^2=0.810$}（調整済み0.802）で予測。最大説明変数はGoogle Directions意図（$r=0.781$）。JMA気象追加で\textbf{+5.6\%}精度向上。
+**政策焦点:** 新規資源の追加より、既存需要の「意図→来訪」転換率向上を優先。
 
-\smallskip
-\textbf{感性分析}
+## 2. データ基盤：分散型ヒューマンデータエンジン（DHDE）
 
-\smallskip
-70,668件のテキストで、低満足層は「寂しい・閉まっている」語彙を\textbf{11.4倍}多用。福井の本質は過密ではなく\textbf{過少賑わい}。
-\end{minipage}
+DHDEは、東尋坊・福井駅・勝山・レインボーラインの4ノードで地理的飽和を達成した統合分析基盤です。
 
-\vspace{2pt}
+- Google Business Profile（検索・ルート）
+- 気象庁データ（気温・降水・積雪・風）
+- AIカメラ実測（来訪カウント）
+- 北陸観光調査（大規模アンケート）
 
-## 2) 広域メカニズムと政策実装
+## 3. 主要知見
 
-\noindent\begin{minipage}[t]{0.48\textwidth}
-\textbf{広域連携の根拠}
+### 3.1 来訪予測とWeather Shield効果
 
-\smallskip
-石川の観光シグナルは福井来訪を先導（$r=0.537$）。単県最適化ではなく、\textbf{北陸広域ガバナンス}が必要。
+- **精度:** $R^2 = 0.810$（調整済み $R^2 = 0.802$）
+- **最大説明変数:** Google Directions意図（$r = 0.781$）
+- **政策含意:** 気象変数導入で予測精度 +5.6% 向上
 
-\smallskip
-\textbf{2つのAIナッジ}
+![予測 vs 実測](../deep_analysis_fig5_rf_prediction_ja.png)
+*図1: 東尋坊における予測需要とAIカメラ実測の高い整合。*
 
-\smallskip
-(1) \textbf{供給側:} 72時間先の店舗活性アラート（営業時間・人員最適化）\\
-(2) \textbf{需要側:} 悪天候時の耐候ルーティング（沿岸→屋内拠点）
-\end{minipage}\hfill
-\begin{minipage}[t]{0.48\textwidth}
-\textbf{到達目標}
+### 3.2 過少賑わいパラドックスと静寂閾値
 
-\smallskip
-定量漏出の回収により、観光順位は\textbf{47位→35位前後}への改善が現実的。
+- 70,668件の自由記述で、低満足層は「寂しい・閉まっている」語彙を **11.4倍** 多用。
+- 永平寺では相対密度 **47.2%** 付近が最適で、それを超えると満足度が低下。
 
-\smallskip
-\textbf{結論}
+![賑わい閾値](../ultimate_fig2_vibrancy_threshold_ja.png)
+*図2: 自然拠点と聖地で異なる最適賑わい閾値。*
 
-\smallskip
-DHDEは「損失定量→予測→施策」の実装ループを構築済み。政策導入に移行可能な状態にある。
-\end{minipage}
+### 3.3 経済漏出の定量化
 
-\vspace{2pt}
+- **失われた来訪者:** 年間 865,917人
+- **推定損失額:** 年間 約119.6億円
+- **季節脆弱性:** 冬季は夏季の 6.29倍、天候影響に敏感
 
-\noindent\begin{minipage}[t]{0.48\textwidth}
-\centering
-\includegraphics[width=0.96\textwidth]{../deep_analysis_fig5_rf_prediction_ja.png}
-\captionof{figure}{\tiny 東尋坊における予測需要と実測来訪の高い一致（$R^2=0.810$）。}
-\end{minipage}\hfill
-\begin{minipage}[t]{0.48\textwidth}
-\centering
-\includegraphics[width=0.96\textwidth]{../rank_resurrection_projection_ja.png}
-\captionof{figure}{\tiny 機会損失回収時の順位改善シナリオ（47位→約35位）。}
-\end{minipage}
+![順位改善シミュレーション](../rank_resurrection_projection_ja.png)
+*図3: 機会損失回収時の順位改善シナリオ（47位→約35位）。*
 
-\vspace{2pt}\noindent\rule{\linewidth}{0.3pt}\vspace{2pt}
+## 4. なぜ広域連携が必須か：石川→福井パイプライン
 
-\scriptsize\noindent
-\textbf{検証ステータス:} 4ノード（北/中央/南/東）で地理的飽和を達成し、政策実装フェーズへ移行可能。\quad\textbf{再現コード:} github.com/amilkh/hokuriku-tourism-ai-governance
+石川県の観光活動シグナルは、福井来訪の有意な先行指標（**$r = 0.537$**）であり、北陸を一体の実務圏として運用する必要があります。
+
+## 5. 政策実装：社会技術ナッジループ
+
+1. **供給側ナッジ（店舗活性アラート）**: 72時間予測に基づく営業時間・人員の動的最適化
+2. **需要側ナッジ（耐候ルーティング）**: 悪天候時に沿岸需要を屋内・準屋内拠点へ誘導
+
+![耐候ネットワーク](../weather_shield_network_ja.png)
+*図4: 4ノード統合のWeather Shield政策ネットワーク。*
+
+**結論:** DHDEは「損失定量→予測→施策」の実装ループを構築済みで、政策導入フェーズに移行可能です。
+
+**再現コード:** github.com/amilkh/hokuriku-tourism-ai-governance
