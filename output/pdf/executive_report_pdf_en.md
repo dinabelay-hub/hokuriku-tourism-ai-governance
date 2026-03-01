@@ -56,16 +56,22 @@ DHDE unifies four streams into one governance-grade analytical system across Toj
 - **Top predictor:** Google Directions intent ($r=0.781$)
 - **Policy implication:** Weather functions as an economic gatekeeper and justifies adaptive routing policy.
 
-![RF Predicted vs Actual](../deep_analysis_fig5_rf_prediction.png)
-*Figure 1. High alignment between model-predicted demand and AI-camera observed arrivals at Tojinbo.*
+\begin{center}
+\includegraphics[width=0.92\linewidth]{../deep_analysis_fig5_rf_prediction.png}
+
+{\scriptsize Figure 1. High alignment between model-predicted demand and AI-camera observed arrivals at Tojinbo.}
+\end{center}
 
 ### 3.2 Under-vibrancy Paradox and Sacred Quietude Threshold
 
 - In 70,668 text responses, low-satisfaction users mention “lonely/closed/deserted” signals **11.4x** more often.
 - At Eiheiji, fitted curves suggest an optimal relative density near **47.2%**; beyond that threshold, satisfaction declines.
 
-![Vibrancy Threshold](../ultimate_fig2_vibrancy_threshold.png)
-*Figure 2. Vibrancy threshold contrast between natural and sacred destinations.*
+\begin{center}
+\includegraphics[width=0.92\linewidth]{../ultimate_fig2_vibrancy_threshold.png}
+
+{\scriptsize Figure 2. Vibrancy threshold contrast between natural and sacred destinations.}
+\end{center}
 
 ### 3.3 Economic Leakage Quantification
 
@@ -73,8 +79,11 @@ DHDE unifies four streams into one governance-grade analytical system across Toj
 - **Estimated opportunity loss:** ~¥11.96B annually
 - **Seasonal fragility:** Winter demand is **6.29x** more weather-sensitive than summer
 
-![Rank Recovery Projection](../rank_resurrection_projection.png)
-*Figure 3. Estimated ranking recovery under opportunity-gap closure scenario.*
+\begin{center}
+\includegraphics[width=0.92\linewidth]{../rank_resurrection_projection.png}
+
+{\scriptsize Figure 3. Estimated ranking recovery under opportunity-gap closure scenario.}
+\end{center}
 
 ## 4. Regional Coordination Imperative: Ishikawa → Fukui Pipeline
 
@@ -87,19 +96,13 @@ The leakage-recovery design combines two operational interventions:
 1. **Supply-side nudge (Merchant Vitality Alerts):** 72-hour forecasts trigger staffing and opening-hour optimization on high-intent days.
 2. **Demand-side nudge (Weather-Resilient Routing):** During adverse weather, exposed demand is rerouted toward sheltered nodes.
 
-```mermaid
-graph LR
-  A[DHDE 72h Forecast] --> B[Supply Nudge: Merchant Vitality Alerts]
-  A --> C[Demand Nudge: Weather-Resilient Routing]
-  B --> D[Higher Open-Shop Probability]
-  C --> E[Stabilized Arrivals in Bad Weather]
-  D --> F[Opportunity-gap Recovery]
-  E --> F
-  F --> G[Rank Shift: 47th → ~35th]
-```
+**Governance Flow (rendered diagram):**
 
-![Weather Shield Network](../weather_shield_network.png)
-*Figure 4. Weather-shield routing concept across the 4-node governance system.*
+\begin{center}
+\includegraphics[width=0.92\linewidth]{../weather_shield_network.png}
+
+{\scriptsize Figure 4. Weather-shield routing concept across the 4-node governance system.}
+\end{center}
 
 ## Conclusion
 
