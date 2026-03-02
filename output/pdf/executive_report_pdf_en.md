@@ -3,8 +3,8 @@ geometry: "a4paper, margin=0.85cm, top=0.8cm, bottom=0.8cm"
 classoption:
   - twocolumn
 mainfont: "Latin Modern Roman"
-fontsize: 7pt
-linestretch: 0.94
+fontsize: 8pt
+linestretch: 0.92
 pagestyle: plain
 header-includes: |
   \usepackage{graphicx}
@@ -85,7 +85,7 @@ DHDE unifies four sensor streams into one governance-grade analytical system acr
 - **Robustness:** First-difference $R^2 = 0.708$; LDV $R^2 = 0.848$; DW = 1.893 (clean residuals).
 
 \includegraphics[width=\linewidth]{../deep_analysis_fig5_rf_prediction.png}
-{\scriptsize Figure 1. High alignment between model-predicted demand and AI-camera ground-truth arrivals at Tojinbo.}
+Figure 1. High alignment between model-predicted demand and AI-camera ground-truth arrivals at Tojinbo.
 
 ### 3.2 Under-vibrancy Paradox and Sacred Quietude Threshold
 
@@ -95,7 +95,7 @@ DHDE unifies four sensor streams into one governance-grade analytical system acr
 - At Tojinbo (natural site), visitor density positively correlates with satisfaction: crowding creates vibrancy.
 
 \includegraphics[width=\linewidth]{../ultimate_fig2_vibrancy_threshold.png}
-{\scriptsize Figure 2. Contrasting vibrancy thresholds: natural sites benefit from density; sacred sites require capping.}
+Figure 2. Contrasting vibrancy thresholds: natural sites benefit from density; sacred sites require capping.
 
 ### 3.3 Economic Leakage Quantification (¥11.96B Opportunity Gap)
 
@@ -107,14 +107,14 @@ Opportunity Gap is defined as the sum of lost visitors on weather-degraded days,
 - **Seasonal fragility:** Winter demand is **6.29× more weather-sensitive** than summer, the highest ROI intervention window.
 
 \includegraphics[width=\linewidth]{../rank_resurrection_projection.png}
-{\scriptsize Figure 3. Estimated prefecture ranking recovery under opportunity-gap closure scenario (47th to ~35th).}
+Figure 3. Estimated prefecture ranking recovery under opportunity-gap closure scenario (47th to ~35th).
 
 ## 4. Regional Coordination Imperative: Ishikawa--Fukui Pipeline
 
 Cross-prefectural CCF analysis reveals that Ishikawa daily tourism activity intensity is a statistically significant lead indicator for same-day physical arrivals at Fukui monitoring sites ($r = 0.537$). Ishikawa and Fukui form one practical Hokuriku Impression Space: tourists plan multi-prefecture itineraries, so demand flows across prefecture lines with a measurable lag structure. Single-prefecture optimization is structurally insufficient; coordinated Hokuriku-wide data governance is mandatory for full impact.
 
 \includegraphics[width=\linewidth]{../deep_analysis_fig8_ishikawa_ccf.png}
-{\scriptsize Figure 4. Cross-correlation profile: Ishikawa tourism activity as a lead indicator for Fukui arrivals ($r=0.537$).}
+Figure 4. Cross-correlation profile: Ishikawa tourism activity as a lead indicator for Fukui arrivals ($r=0.537$).
 
 ## 5. Policy Design: Socio-Technical Nudge Loop
 
@@ -124,7 +124,7 @@ To recover the ¥11.96B annual leakage, two AI nudges operating on a shared 72-h
 2. **Demand-side nudge (Weather-Resilient Routing):** During adverse weather, coastal and outdoor demand (Tojinbo) is algorithmically rerouted toward sheltered or indoor nodes (Katsuyama, Eiheiji), retaining visitor spend within the Hokuriku sphere rather than losing it to cancellation.
 
 \includegraphics[width=\linewidth]{../weather_shield_network.png}
-{\scriptsize Figure 5. Four-node Weather Shield governance network with demand-routing paths.}
+Figure 5. Four-node Weather Shield governance network with demand-routing paths.
 
 ## 6. Implementation Roadmap and KPIs
 
