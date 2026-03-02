@@ -23,7 +23,7 @@ header-includes: |
 \begin{center}
 {\normalsize\textbf{HOKURIKU TOURISM AI ガバナンス戦略レポート}}\\[2pt]
 {\scriptsize 分散型ヒューマンデータエンジン（DHDE）による福井・北陸観光の需要予測と空間最適化}\\[1pt]
-{\scriptsize Amil Khanzada \quad 福井大学・金沢大学連合博士課程 \quad 2026年3月2日}
+{\scriptsize Amil Khanzada \quad 福井大学 地域創生推進本部 特命助教 / 博士後期課程 \quad 2026年3月2日}
 \end{center}
 \vspace{3pt}
 }]
