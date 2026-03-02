@@ -84,7 +84,7 @@ DHDE unifies four sensor streams into one governance-grade analytical system acr
 ### 3.2 Under-vibrancy Paradox and Sacred Quietude Threshold
 
 - Morphological analysis of 70,668 free-text responses reveals Fukui's challenge is **under-tourism**, not overtourism: Spearman $r_s = +0.161$ ($p = 0.001$) between visitor count and satisfaction confirms more visitors → higher satisfaction.
-- Low-satisfaction visitors (1–2★) mention "lonely/closed/deserted" signals **11.4× more** than high-satisfaction visitors (4–5★).
+- Low-satisfaction visitors (1--2 star) mention "lonely/closed/deserted" signals **11.4× more** than high-satisfaction visitors (4--5 star).
 - At Eiheiji (sacred site), satisfaction peaks at relative density **~47.2%** — exceeding this threshold reduces satisfaction. Policy must optimize **density quality**, not maximize volume.
 - At Tojinbo (natural site), visitor density positively correlates with satisfaction — crowding creates vibrancy.
 
@@ -132,8 +132,31 @@ To recover the ¥11.96B annual leakage, two AI nudges operating on a shared 72-h
 {\scriptsize Figure 5. Four-node Weather Shield governance network with demand-routing paths.}
 \end{center}
 
+## 6. Implementation Roadmap and KPIs
+
+The framework is structured for phased deployment with measurable checkpoints at each stage.
+
+\begin{center}
+\small\begin{tabular}{lll}
+\toprule
+\textbf{Phase} & \textbf{Scope} & \textbf{Target KPI} \\
+\midrule
+Phase 1 (0--6 mo) & Tojinbo + Fukui Station & Forecast MAPE $<$15\% \\
+Phase 2 (7--12 mo) & Supply-side nudge live & Peak-day open rate +20\% \\
+Phase 3 (Year 2) & All 4 nodes + routing & Lost visitors $-$100K/yr \\
+Phase 4 (Year 3) & Full governance loop & Winter rank: 47th $\to$ $\sim$35th \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+**Data governance:** All four node datasets (camera, JMA, Google, survey) are ingested into a unified pipeline versioned in the DHDE repository. Each month of JMA data is merged via upsert script; Kolmogorov--Smirnov drift detection flags statistical shifts between 3-month rolling windows before retraining. Schema validation, outlier detection (IQR + Z-score), and date-gap auditing run automatically on every pipeline execution, with all results written to `analysis_metrics.txt` for automated KPI tracking.
+
+**Kansei quality dimension:** Beyond visitor counts, the nudge system targets satisfaction outcomes. The 11.4$\times$ under-vibrancy ratio and the Eiheiji density threshold (47.2\%) are embedded as secondary KPIs — nudge effectiveness is measured not only in visitor volume but in post-visit satisfaction scores from ongoing survey collection.
+
+**Grant justification:** The Ishikawa--Fukui pipeline ($r=0.537$) and the 6.29$\times$ winter sensitivity ratio together justify a Hokuriku-wide grant rather than single-prefecture funding. At ¥13,811 mean spend per visitor, recovering even 30\% of the 865,917 annual lost visitors yields a direct revenue impact of ¥3.58B — substantially exceeding the expected AI infrastructure investment over a 3-year horizon.
+
 ## Conclusion
 
-DHDE closes the full governance loop: quantified leakage → validated prediction → implementable intervention → measurable KPIs. The framework is policy-ready for phased execution, with expected recovery of visitor volume, satisfaction scores, and Fukui's prefecture winter ranking from 47th to approximately 35th nationally. Regional grant applications should emphasize the Ishikawa–Fukui demand pipeline as evidence that Hokuriku-scale coordination is both necessary and measurable.
+DHDE closes the full governance loop: quantified leakage $\to$ validated prediction $\to$ implementable nudge $\to$ measurable KPI recovery. The 865,917 lost visitors and ¥11.96B annual opportunity loss are not projections but empirically bounded estimates derived from AI-camera ground truth, Google intent signals, JMA weather observations, and 95,653 survey responses across three prefectures. The positive visitor--satisfaction correlation ($r_s=+0.161$, $p=0.001$) confirms that recovery efforts will simultaneously address vibrancy, not just volume. The framework is policy-ready for phased execution starting at existing monitored nodes, building toward Fukui's winter ranking recovery from 47th to approximately 35th nationally within a 3-year governance horizon.
 
 **Reproducible code:** github.com/amilkh/hokuriku-tourism-ai-governance
