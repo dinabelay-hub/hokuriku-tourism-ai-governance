@@ -11,6 +11,7 @@ header-includes: |
   \usepackage{booktabs}
   \usepackage{caption}
   \usepackage{titlesec}
+  \usepackage{array}
   \titlespacing*{\section}{0pt}{4pt}{2pt}
   \titlespacing*{\subsection}{0pt}{3pt}{1pt}
   \titlespacing*{\subsubsection}{0pt}{2pt}{1pt}
@@ -18,13 +19,14 @@ header-includes: |
   \setlength{\parskip}{1.2pt}
   \setlength{\parindent}{0pt}
   \setlength{\columnsep}{12pt}
+  \PassOptionsToPackage{hidelinks}{hyperref}
 ---
 
 \twocolumn[{%
 \begin{center}
 {\normalsize\textbf{HOKURIKU TOURISM AI GOVERNANCE}}\\[2pt]
 {\scriptsize Distributed Human Data Engine (DHDE) \textbullet{} Demand Forecasting \& Spatial Optimization}\\[1pt]
-{\scriptsize Amil Khanzada \quad Univ.\ of Fukui / Kanazawa Univ.\ \quad March 2026}
+{\scriptsize Amil Khanzada \quad Univ.\ of Fukui / Kanazawa Univ.\ \quad March 2, 2026}
 \end{center}
 \vspace{3pt}
 }]
@@ -36,8 +38,8 @@ header-includes: |
 - **Predictive validity:** Daily arrivals at Tojinbo predicted from Google intent at **$R^2 = 0.810$**; adding weather data contributes an additional +5.6% gain.
 - **Policy objective:** A dual-nudge AI system can realistically move Fukui from **47th to around 35th nationally**.
 
-\begin{center}
-\small\begin{tabular}{ll}
+\resizebox{\columnwidth}{!}{%
+\sffamily\begin{tabular}{ll}
 \toprule
 \textbf{Key Metric} & \textbf{Value} \\
 \midrule
@@ -51,8 +53,8 @@ Ishikawa--Fukui lead $r$ & 0.537 \\
 Under-vibrancy ratio & 11.4× \\
 Current winter rank & 47th of 47 \\
 \bottomrule
-\end{tabular}
-\end{center}
+\end{tabular}%
+}
 
 ## 1. Problem Reframing: Structural Stagnation
 
@@ -82,49 +84,37 @@ DHDE unifies four sensor streams into one governance-grade analytical system acr
 - **Weather value:** Adding JMA observations lifts model accuracy by +5.6%, establishing weather as an economic gatekeeper and justifying weather-adaptive routing policy.
 - **Robustness:** First-difference $R^2 = 0.708$; LDV $R^2 = 0.848$; DW = 1.893 (clean residuals).
 
-\begin{center}
-\includegraphics[width=0.92\linewidth]{../deep_analysis_fig5_rf_prediction.png}
-
+\includegraphics[width=\linewidth]{../deep_analysis_fig5_rf_prediction.png}
 {\scriptsize Figure 1. High alignment between model-predicted demand and AI-camera ground-truth arrivals at Tojinbo.}
-\end{center}
 
 ### 3.2 Under-vibrancy Paradox and Sacred Quietude Threshold
 
-- Morphological analysis of 70,668 free-text responses reveals Fukui's challenge is under-tourism, not overtourism: Spearman $r_s = +0.161$ ($p = 0.001$) between visitor count and satisfaction confirms more visitors yield higher satisfaction.
+- Morphological analysis of 70,668 free-text responses reveals Fukui's challenge is under-tourism, not overtourism: visitor count and satisfaction are positively correlated ($p = 0.001$), confirming more visitors yield higher satisfaction.
 - Low-satisfaction visitors (1--2 star) mention "lonely/closed/deserted" signals **11.4× more** than high-satisfaction visitors (4--5 star).
 - At Eiheiji (sacred site), satisfaction peaks at relative density **~47.2%**; exceeding this threshold reduces satisfaction. Policy must optimize density quality, not maximize volume.
 - At Tojinbo (natural site), visitor density positively correlates with satisfaction: crowding creates vibrancy.
 
-\begin{center}
-\includegraphics[width=0.92\linewidth]{../ultimate_fig2_vibrancy_threshold.png}
-
+\includegraphics[width=\linewidth]{../ultimate_fig2_vibrancy_threshold.png}
 {\scriptsize Figure 2. Contrasting vibrancy thresholds: natural sites benefit from density; sacred sites require capping.}
-\end{center}
 
 ### 3.3 Economic Leakage Quantification (¥11.96B Opportunity Gap)
 
-Opportunity Gap is defined as the sum of lost visitors on weather-degraded days, days where model-predicted demand (from Google intent) exceeded actual AI-camera arrivals, scaled by mean visitor spending (¥13,811, from $n=95{,}653$ survey responses).
+Opportunity Gap is defined as the sum of lost visitors on weather-degraded days, where model-predicted demand (from Google intent) exceeded actual AI-camera arrivals, scaled by mean visitor spending (¥13,811, from $n=95{,}653$ survey responses).
 
 - **Gap days:** 207 per year at primary node; extrapolated across 4 nodes.
 - **Lost visitors (4 nodes):** 865,917 annually.
 - **Estimated opportunity loss:** ~¥11.96B/year (~$77M).
 - **Seasonal fragility:** Winter demand is **6.29× more weather-sensitive** than summer, the highest ROI intervention window.
 
-\begin{center}
-\includegraphics[width=0.92\linewidth]{../rank_resurrection_projection.png}
-
+\includegraphics[width=\linewidth]{../rank_resurrection_projection.png}
 {\scriptsize Figure 3. Estimated prefecture ranking recovery under opportunity-gap closure scenario (47th to ~35th).}
-\end{center}
 
 ## 4. Regional Coordination Imperative: Ishikawa--Fukui Pipeline
 
 Cross-prefectural CCF analysis reveals that Ishikawa daily tourism activity intensity is a statistically significant lead indicator for same-day physical arrivals at Fukui monitoring sites ($r = 0.537$). Ishikawa and Fukui form one practical Hokuriku Impression Space: tourists plan multi-prefecture itineraries, so demand flows across prefecture lines with a measurable lag structure. Single-prefecture optimization is structurally insufficient; coordinated Hokuriku-wide data governance is mandatory for full impact.
 
-\begin{center}
-\includegraphics[width=0.92\linewidth]{../deep_analysis_fig8_ishikawa_ccf.png}
-
+\includegraphics[width=\linewidth]{../deep_analysis_fig8_ishikawa_ccf.png}
 {\scriptsize Figure 4. Cross-correlation profile: Ishikawa tourism activity as a lead indicator for Fukui arrivals ($r=0.537$).}
-\end{center}
 
 ## 5. Policy Design: Socio-Technical Nudge Loop
 
@@ -133,37 +123,34 @@ To recover the ¥11.96B annual leakage, two AI nudges operating on a shared 72-h
 1. **Supply-side nudge (Merchant Vitality Alerts):** Forecast-triggered staffing and opening-hour optimization reduces "closed shop" dissatisfaction on high-intent days, directly addressing the 11.4× under-vibrancy gap.
 2. **Demand-side nudge (Weather-Resilient Routing):** During adverse weather, coastal and outdoor demand (Tojinbo) is algorithmically rerouted toward sheltered or indoor nodes (Katsuyama, Eiheiji), retaining visitor spend within the Hokuriku sphere rather than losing it to cancellation.
 
-\begin{center}
-\includegraphics[width=0.92\linewidth]{../weather_shield_network.png}
-
+\includegraphics[width=\linewidth]{../weather_shield_network.png}
 {\scriptsize Figure 5. Four-node Weather Shield governance network with demand-routing paths.}
-\end{center}
 
 ## 6. Implementation Roadmap and KPIs
 
 The framework is structured for phased deployment with measurable checkpoints at each stage.
 
-\begin{center}
-\small\begin{tabular}{lll}
+\resizebox{\columnwidth}{!}{%
+\sffamily\begin{tabular}{lll}
 \toprule
 \textbf{Phase} & \textbf{Scope} & \textbf{Target KPI} \\
 \midrule
-Phase 1 (0--6 mo) & Tojinbo + Fukui Station & Forecast MAPE $<$15\% \\
-Phase 2 (7--12 mo) & Supply-side nudge live & Peak-day open rate +20\% \\
-Phase 3 (Year 2) & All 4 nodes + routing & Lost visitors $-$100K/yr \\
-Phase 4 (Year 3) & Full governance loop & Winter rank: 47th $\to$ $\sim$35th \\
+Phase 1 (0--6 mo) & Tojinbo + Fukui Stn. & MAPE $<$15\% \\
+Phase 2 (7--12 mo) & Supply nudge live & Open rate +20\% \\
+Phase 3 (Year 2) & 4 nodes + routing & $-$100K lost/yr \\
+Phase 4 (Year 3) & Full governance & Rank 47th $\to$ $\sim$35th \\
 \bottomrule
-\end{tabular}
-\end{center}
+\end{tabular}%
+}
 
 **Data governance:** All four node datasets (camera, JMA, Google, survey) are ingested into a unified pipeline versioned in the DHDE repository. Each month of JMA data is merged via upsert script; Kolmogorov--Smirnov drift detection flags statistical shifts between 3-month rolling windows before retraining. Schema validation, outlier detection (IQR + Z-score), and date-gap auditing run automatically on every pipeline execution, with all results written to `analysis_metrics.txt` for automated KPI tracking.
 
 **Kansei quality dimension:** Beyond visitor counts, the nudge system targets satisfaction outcomes. The 11.4$\times$ under-vibrancy ratio and the Eiheiji density threshold (47.2\%) are embedded as secondary KPIs, measured in post-visit satisfaction scores from ongoing survey collection.
 
-**Grant justification:** The Ishikawa--Fukui pipeline ($r=0.537$) and the 6.29$\times$ winter sensitivity ratio together justify a Hokuriku-wide grant rather than single-prefecture funding. At ¥13,811 mean spend per visitor, recovering even 30\% of the 865,917 annual lost visitors yields a direct revenue impact of ¥3.58B, substantially exceeding the expected AI infrastructure investment over a 3-year horizon.
+**Grant justification:** The Ishikawa--Fukui pipeline ($r=0.537$) and the 6.29$\times$ winter sensitivity ratio together justify a Hokuriku-wide grant rather than single-prefecture funding. At ¥13,811 mean spend per visitor, recovering even 30\% of the 865,917 annual lost visitors yields a direct revenue impact of ¥3.58B, substantially exceeding the expected AI infrastructure investment over a 3-year horizon. The existing sensor infrastructure (AI cameras, JMA stations, Google Business Profile) minimizes new capital expenditure, making this a high-leverage deployment relative to cost.
 
 ## Conclusion
 
-DHDE closes the full governance loop: quantified leakage, validated prediction, implementable nudge, and measurable KPI recovery. The 865,917 lost visitors and ¥11.96B annual opportunity loss are not projections but empirically bounded estimates derived from AI-camera ground truth, Google intent signals, JMA weather observations, and 95,653 survey responses across three prefectures. The positive visitor--satisfaction correlation ($r_s=+0.161$, $p=0.001$) confirms that recovery efforts will simultaneously address vibrancy, not just volume. The framework is policy-ready for phased execution starting at existing monitored nodes, building toward Fukui's winter ranking recovery from 47th to approximately 35th nationally within a 3-year governance horizon.
+DHDE closes the full governance loop: quantified leakage, validated prediction, implementable nudge, and measurable KPI recovery. The 865,917 lost visitors and ¥11.96B annual opportunity loss are not projections but empirically bounded estimates derived from AI-camera ground truth, Google intent signals, JMA weather observations, and 95,653 survey responses across three prefectures. The positive visitor--satisfaction correlation ($p=0.001$) confirms that recovery efforts will simultaneously address vibrancy, not just volume.
 
-**Reproducible code:** github.com/amilkh/hokuriku-tourism-ai-governance
+The dual-nudge architecture is uniquely self-reinforcing: supply-side vitality improvements raise post-visit satisfaction scores, which feed back into repeat-visit intent and word-of-mouth signals captured in the next survey cycle. Each data collection round tightens forecast accuracy, creating a compounding governance advantage unavailable to static policy instruments. The framework is policy-ready for phased execution starting at existing monitored nodes, building toward Fukui's winter ranking recovery from 47th to approximately 35th nationally within a 3-year governance horizon.
