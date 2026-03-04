@@ -1,6 +1,6 @@
 ================================================================================
 BOLSTERED RESULTS – Tojinbo Demand Forecast Model
-Generated: 2026-03-04 12:09
+Generated: 2026-03-04 16:34
 ================================================================================
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -28,7 +28,7 @@ Generated: 2026-03-04 12:09
   3. KANSEI (EMOTIONAL) OVERTOURISM THRESHOLD
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   Visitors vs Satisfaction (Spearman): r = +0.000, p = 1.0000
-  Visitors vs NPS (Spearman):         r = +0.000, p = 1.0000
+  Visitors vs NPS (Spearman):         r = +0.087, p = 0.0765
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -75,6 +75,7 @@ Generated: 2026-03-04 12:09
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   Under-vibrancy mentions in 1-2 star reviews: 65
   Percentage of low-sat responses:             6.1%
+  Ratio vs high-satisfaction visitors:         11.5x
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -91,10 +92,47 @@ Generated: 2026-03-04 12:09
 END OF BOLSTERED RESULTS
 ================================================================================
 MULTI_NODE_SPATIAL_GOVERNANCE
-  Node_C=Katsuyama (unknown)
-FourNode_Satake_Number (nodes=0)
-  Node_D_Status=not_available
-  Lost_Visitors=0.00
+  Node_C=Katsuyama (survey_proxy)
+Node A (Tojinbo/Mikuni)
+  n=418
+  OLS_R2=0.482301
+  OLS_Adj_R2=0.477287
+  Weather_Lift_R2=+0.016159
+  Snow_Beta_Std=+nan
+  Opportunity_Lost_Visitors=538091.31
+  Opportunity_Lost_Yen=7431579028.33
+Node B (Fukui Station)
+  n=419
+  OLS_R2=0.436585
+  OLS_Adj_R2=0.429764
+  Weather_Lift_R2=+0.007666
+  Snow_Beta_Std=-0.017461
+  Opportunity_Lost_Visitors=313694.14
+  Opportunity_Lost_Yen=4332429791.00
+Node C (Katsuyama/Dinosaur)
+  n=419
+  OLS_R2=0.374270
+  OLS_Adj_R2=0.368225
+  Weather_Lift_R2=+0.009580
+  Snow_Beta_Std=+nan
+  Opportunity_Lost_Visitors=989.93
+  Opportunity_Lost_Yen=13671908.78
+Node D (Rainbow Line/Wakasa)
+  n=420
+  OLS_R2=0.169717
+  OLS_Adj_R2=0.159690
+  Weather_Lift_R2=+0.041469
+  Snow_Beta_Std=-0.091612
+  Opportunity_Lost_Visitors=13141.87
+  Opportunity_Lost_Yen=181502355.04
+FourNode_Satake_Number (nodes=4)
+  Node_D_Status=camera
+  Lost_Visitors=865917.25
   Spending_Per_Visitor_Yen=13811.00
-  Total_Lost_Yen=0.00
-  Total_Lost_Billion_Yen=0.000
+  Total_Lost_Yen=11959183083.15
+  Total_Lost_Billion_Yen=11.959
+  ★ GEOGRAPHIC_SATURATION=ACHIEVED (North/Central/South/East)
+  Node A (Tojinbo/Mikuni): lag=+0, r=+0.491812, n=418
+  Node B (Fukui Station): lag=+0, r=+0.226247, n=419
+  Node C (Katsuyama/Dinosaur): lag=+0, r=+0.323949, n=419
+  Node D (Rainbow Line/Wakasa): lag=+4, r=-0.178771, n=416
