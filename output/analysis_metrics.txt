@@ -1,15 +1,15 @@
 ================================================================================
 BOLSTERED RESULTS – Tojinbo Demand Forecast Model
-Generated: 2026-03-02 10:15
+Generated: 2026-03-04 12:09
 ================================================================================
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   1. CORE MODEL PERFORMANCE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   Training Data:         397 days
-  Camera Data Range:     2024-12-20 → 2026-02-18
+  Camera Data Range:     2024-12-20 → 2026-03-02
 
-  OLS R²           = 0.8096  (Adj R² = 0.8015)
+  OLS R²           = 0.8096  (Adj R² = 0.8016)
   RF Train R²      = 0.9087
   RF 5-fold CV R²  = 0.5572 ± 0.1306
 
@@ -21,7 +21,7 @@ Generated: 2026-03-02 10:15
   2. CROSS-PREFECTURAL SIGNAL (Ishikawa → Fukui Pipeline)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   Best Ishikawa → Tojinbo lag:  +0 day(s)
-  Correlation at best lag:      r = +0.537
+  Correlation at best lag:      r = +0.552
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -34,19 +34,19 @@ Generated: 2026-03-02 10:15
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   4. LOST POPULATION (The "Satake Number")
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Opportunity Gap days:             42
-  Total Lost Visitors:              85,512
-  Mean Lost per day:                2,036
+  Opportunity Gap days:             41
+  Total Lost Visitors:              83,644
+  Mean Lost per day:                2,040
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   5. MODEL ROBUSTNESS (PhD Shield)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Durbin-Watson (original):  1.004  (WARNING)
-  Durbin-Watson (1st-diff):  2.525  (residual)
-  First-Difference R²:       0.7085  (original: 0.8096)
-  LDV R²:                    0.8483
-  LDV DW:                    1.893
+  Durbin-Watson (original):  1.005  (WARNING)
+  Durbin-Watson (1st-diff):  2.524  (residual)
+  First-Difference R²:       0.7083  (original: 0.8096)
+  LDV R²:                    0.8485
+  LDV DW:                    1.898
   Newey-West sig. predictors: 8
   Weather Data Value:   +0.0559 R²
   OLS R² without JMA:   0.7537
@@ -56,7 +56,7 @@ Generated: 2026-03-02 10:15
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   6. RANKING IMPACT SIMULATION (Fukui Resurrection)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Total lost visitors:        85,512
+  Total lost visitors:        83,644
   Winter actual mean rank:    47.0
   Winter hypothetical rank:   45.7
   Best monthly improvement:   6 ranks
@@ -66,61 +66,35 @@ Generated: 2026-03-02 10:15
   7. SEASONAL WEATHER SENSITIVITY
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   Summer weather lift (ΔR²):  +0.0215
-  Winter weather lift (ΔR²):  +0.1354
-  Ratio (Winter/Summer):      6.29x
+  Winter weather lift (ΔR²):  +0.1349
+  Ratio (Winter/Summer):      6.27x
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   8. QUALITATIVE UNDER-VIBRANCY LINK
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   Under-vibrancy mentions in 1-2 star reviews: 65
-  Percentage of low-sat responses:             6.2%
+  Percentage of low-sat responses:             6.1%
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  9. STATISTICAL RIGOR (効果量 / Prof. Takemoto Review)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Top-3 Standardised β: is_weekend_or_holiday=+0.547, directions=+0.456, month=+0.331
+  Cohen's f²:           4.2518
+  Train N:              317  |  Hold-out N: 80
+  Hold-out MAE:         1793.3 visitors/day
+  Hold-out RMSE:        2460.9 visitors/day
+  Hold-out R²:          0.6834
 
 ================================================================================
 END OF BOLSTERED RESULTS
 ================================================================================
 MULTI_NODE_SPATIAL_GOVERNANCE
-  Node_C=Katsuyama (survey_proxy)
-Node A (Tojinbo/Mikuni)
-  n=418
-  OLS_R2=0.482301
-  OLS_Adj_R2=0.477287
-  Weather_Lift_R2=+0.016159
-  Snow_Beta_Std=+nan
-  Opportunity_Lost_Visitors=538091.31
-  Opportunity_Lost_Yen=7431579028.33
-Node B (Fukui Station)
-  n=419
-  OLS_R2=0.436585
-  OLS_Adj_R2=0.429764
-  Weather_Lift_R2=+0.007666
-  Snow_Beta_Std=-0.017461
-  Opportunity_Lost_Visitors=313694.14
-  Opportunity_Lost_Yen=4332429791.00
-Node C (Katsuyama/Dinosaur)
-  n=419
-  OLS_R2=0.374270
-  OLS_Adj_R2=0.368225
-  Weather_Lift_R2=+0.009580
-  Snow_Beta_Std=+nan
-  Opportunity_Lost_Visitors=989.93
-  Opportunity_Lost_Yen=13671908.78
-Node D (Rainbow Line/Wakasa)
-  n=420
-  OLS_R2=0.169717
-  OLS_Adj_R2=0.159690
-  Weather_Lift_R2=+0.041469
-  Snow_Beta_Std=-0.091612
-  Opportunity_Lost_Visitors=13141.87
-  Opportunity_Lost_Yen=181502355.04
-FourNode_Satake_Number (nodes=4)
-  Node_D_Status=camera
-  Lost_Visitors=865917.25
+  Node_C=Katsuyama (unknown)
+FourNode_Satake_Number (nodes=0)
+  Node_D_Status=not_available
+  Lost_Visitors=0.00
   Spending_Per_Visitor_Yen=13811.00
-  Total_Lost_Yen=11959183083.15
-  Total_Lost_Billion_Yen=11.959
-  ★ GEOGRAPHIC_SATURATION=ACHIEVED (North/Central/South/East)
-  Node A (Tojinbo/Mikuni): lag=+0, r=+0.491812, n=418
-  Node B (Fukui Station): lag=+0, r=+0.226247, n=419
-  Node C (Katsuyama/Dinosaur): lag=+0, r=+0.323949, n=419
-  Node D (Rainbow Line/Wakasa): lag=+4, r=-0.178771, n=416
+  Total_Lost_Yen=0.00
+  Total_Lost_Billion_Yen=0.000
