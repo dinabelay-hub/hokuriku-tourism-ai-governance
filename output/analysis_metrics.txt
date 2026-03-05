@@ -1,6 +1,6 @@
 ================================================================================
 BOLSTERED RESULTS – Tojinbo Demand Forecast Model
-Generated: 2026-03-05 10:10
+Generated: 2026-03-05 15:55
 ================================================================================
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -75,7 +75,7 @@ Generated: 2026-03-05 10:10
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   Under-vibrancy mentions in 1-2 star reviews: 65
   Percentage of low-sat responses:             6.1%
-  Ratio vs high-satisfaction visitors:         11.4x
+  Ratio vs high-satisfaction visitors:         11.5x
   Fukui free-text responses analysed:          71,288
 
 
