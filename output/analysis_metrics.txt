@@ -1,6 +1,6 @@
 ================================================================================
 BOLSTERED RESULTS – Tojinbo Demand Forecast Model
-Generated: 2026-03-05 09:20
+Generated: 2026-03-05 09:42
 ================================================================================
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -76,6 +76,18 @@ Generated: 2026-03-05 09:20
   Under-vibrancy mentions in 1-2 star reviews: 65
   Percentage of low-sat responses:             6.1%
   Ratio vs high-satisfaction visitors:         11.4x
+  Fukui free-text responses analysed:          71,288
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  8b. EIHEIJI ZEN-SILENCE THRESHOLD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Eiheiji survey responses:          4475
+  Qualifying days (≥3 resp/day):     588
+  Spearman r (density vs sat):       +0.047 (p = 0.2558)
+  Quietude threshold (vertex x*):    42.4%
+  Peak satisfaction at threshold:    4.409
+  Raw survey entries (all.csv):      574,137
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
