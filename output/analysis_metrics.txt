@@ -1,6 +1,6 @@
 ================================================================================
 BOLSTERED RESULTS – Tojinbo Demand Forecast Model
-Generated: 2026-03-05 17:03
+Generated: 2026-03-06 16:07
 ================================================================================
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -131,10 +131,10 @@ Node C (Katsuyama/Dinosaur)
   Opportunity_Lost_Yen=13671908.78
 Node D (Rainbow Line/Wakasa)
   n=420
-  OLS_R2=0.169717
-  OLS_Adj_R2=0.159690
-  Weather_Lift_R2=+0.041469
-  Snow_Beta_Std=-0.091612
+  OLS_R2=0.167578
+  OLS_Adj_R2=0.159554
+  Weather_Lift_R2=+0.039329
+  Snow_Beta_Std=+nan
   Opportunity_Lost_Visitors=13141.87
   Opportunity_Lost_Yen=181502355.04
 FourNode_Satake_Number (nodes=4)
