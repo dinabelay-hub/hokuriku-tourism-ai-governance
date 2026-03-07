@@ -1,6 +1,6 @@
 ================================================================================
 BOLSTERED RESULTS – Tojinbo Demand Forecast Model
-Generated: 2026-03-06 16:07
+Generated: 2026-03-07 22:27
 ================================================================================
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -115,10 +115,10 @@ Node A (Tojinbo/Mikuni)
   Opportunity_Lost_Yen=7431579028.33
 Node B (Fukui Station)
   n=419
-  OLS_R2=0.436585
-  OLS_Adj_R2=0.429764
-  Weather_Lift_R2=+0.007666
-  Snow_Beta_Std=-0.017461
+  OLS_R2=0.436041
+  OLS_Adj_R2=0.429214
+  Weather_Lift_R2=+0.007122
+  Snow_Beta_Std=-0.005585
   Opportunity_Lost_Visitors=313694.14
   Opportunity_Lost_Yen=4332429791.00
 Node C (Katsuyama/Dinosaur)
