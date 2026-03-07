@@ -217,9 +217,7 @@ This appendix outlines the geographic metadata for the four Japan Meteorological
 | Katsuyama (勝山) | AMeDAS | 1226 | 36°03.6' | 136°30.0' | 160 m | Node C (Katsuyama / Dinosaur Museum) | ~2 km |
 | Mihama (美浜) | AMeDAS | 1010 | 35°35.8' | 135°57.3' | 5 m | Node D (Rainbow Line / Wakasa) | ~5 km |
 
-> **Station identity note:** The pipeline file `jma_fukui_hourly_8.csv` was confirmed via JMA ETRN query (prec_no=57, block_no=47631) to contain **Tsuruga (敦賀)** observatory data, not Fukui City. It was misnamed at creation and retained for backwards compatibility. The Mihama (美浜) AMeDAS station (block\_no=1010) was identified by programmatically querying the JMA ETRN prefecture station list for prec\_no=57, and its full hourly archive (December 2024 – March 2026) was subsequently fetched via the pipeline's `fetch_jma_monthly.py` utility. Mihama is approximately 5 km from the Rainbow Line parking gate, making it the closest available JMA station for Node D.
-
-> **Node D station upgrade:** Prior to this study, Node D weather was proxied by Tsuruga (~15 km away). The Mihama AMeDAS station (~5 km) was subsequently identified and its data fetched programmatically. With Mihama, Node D achieves a weather lift of ΔR² = +0.039, confirming strong localised predictive signal for Wakasa Bay visitor behaviour. As a coastal low-elevation AMeDAS station, Mihama does not record snow depth; the snow sensitivity metric for Node D is therefore not applicable.
+> **Station selection note:** All four stations were verified via JMA ETRN block\_no lookup (prec\_no=57). The Mihama AMeDAS station (block\_no=1010) was identified by programmatically querying the prefecture station list and its full hourly archive (December 2024 – March 2026) fetched via `fetch_jma_monthly.py`. Node D achieves a weather lift of ΔR² = +0.039 with Mihama data. As a coastal low-elevation AMeDAS station, Mihama does not record snow depth; the snow sensitivity metric for Node D is therefore not applicable.
 
 ### D.2 Regional Micro-Climate Context
 
