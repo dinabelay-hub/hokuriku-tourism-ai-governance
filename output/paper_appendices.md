@@ -52,16 +52,18 @@ Daily route-search metrics from the Tojinbo Google Business Profile were extract
 
 Two separate survey datasets are used by the pipeline; they serve distinct analytical purposes and are not derived from one another.
 
-**Dataset 1 — Fukui-specific raw survey (`fukui-kanko-survey/all.csv`):** Contains **90,015 individual responses** collected at Fukui Prefecture tourism sites. The file spans 574,137 physical lines due to embedded newlines in free-text fields (approximately 6.4 lines per response on average). Of the 90,015 responses, **71,288** included non-empty free-text fields and were used for under-vibrancy text mining (Appendix C). This dataset is loaded by `load_raw_fukui_survey`.
+**Dataset 1 — Fukui-specific raw survey (`fukui-kanko-survey/all.csv`):** Contains **90,015 individual responses** collected at Fukui Prefecture tourism sites. The file spans 574,137 physical lines due to embedded newlines in free-text fields (approximately 6.4 lines per response on average). Loaded by `load_raw_fukui_survey` and used exclusively for **spending analysis** (`県内消費額` → yen midpoints). Note: `都道府県` in this file records the **visitor's home prefecture** (e.g. 滋賀県, 福井県), not the collection site; the collection site is in `登録施設`.
 
-**Dataset 2 — Hokuriku three-prefecture merged survey (`opendata/output_merge/merged_survey_*.csv`):** Contains **96,986 standardised responses** drawn from four survey exports spanning April 2023 to March 2026. The survey was administered exclusively at tourism sites within the three Hokuriku prefectures: Fukui (71,288 responses), Ishikawa (20,592), and Toyama (5,106). The `prefecture` column records the **survey collection site's prefecture** (where the respondent was surveyed), not the visitor's home prefecture. This dataset supplies satisfaction scores, NPS, and site-prefecture data for the cross-prefectural signal analysis and overtourism threshold analysis. It is loaded by `load_survey_prefectures`, `load_survey_satisfaction`, and `load_survey_text`.
+**Dataset 2 — Hokuriku three-prefecture merged survey (`opendata/output_merge/merged_survey_*.csv`):** Contains **96,986 standardised responses** drawn from four survey exports spanning April 2023 to March 2026. The survey was administered exclusively at tourism sites within the three Hokuriku prefectures: Fukui (71,288 responses), Ishikawa (20,592), and Toyama (5,106). Column 0 (`対象県（富山/石川/福井）`) records the **survey collection site's prefecture**, not the visitor's home prefecture (stored separately in `居住都道府県`). This dataset supplies satisfaction scores, NPS, site-prefecture data, and the 71,288-response Fukui free-text corpus used for under-vibrancy text mining (Appendix C). Loaded by `load_survey_prefectures`, `load_survey_satisfaction`, and `load_survey_text`.
 
-> **Relationship to Dataset 1:** The 71,288 Fukui-site responses in Dataset 2 are a standardised subset of Dataset 1's 90,015 responses — specifically those records that passed the merged export's completeness criteria (valid date and prefecture fields). The remaining ~18,727 Dataset 1 records (responses with incomplete metadata or collected outside the export window) are available only in `all.csv`. Dataset 2 adds Ishikawa and Toyama responses not present in Dataset 1.
+> **Relationship between datasets:** The 71,288 Fukui-site responses in Dataset 2 are a standardised subset of Dataset 1's 90,015 responses — those records that passed the merged export's completeness criteria (valid date and prefecture fields). The remaining ~18,727 Dataset 1 records (incomplete metadata or outside the export window) are available only in `all.csv`. Dataset 2 adds Ishikawa and Toyama responses not present in Dataset 1.
+
+**Dataset 2 column mapping (`merged_survey_*.csv`):**
 
 | Source CSV Column | Pipeline Variable | Data Type | Notes |
 |---|---|---|---|
-| Column 0 | `prefecture` | String | **Survey collection site's prefecture** (Fukui, Ishikawa, or Toyama). Not the visitor's home address. |
-| Column 1 | `survey_date` | Date | Date of the recorded visit. |
+| `対象県（富山/石川/福井）` (col 0) | `prefecture` | String | **Survey collection site's prefecture** (富山, 石川, or 福井). Not the visitor's home address. |
+| `アンケート回答日` (col 1) | `survey_date` | Date | Date of the recorded visit. |
 | `満足度（旅行全体）` | `satisfaction` | Integer (1–5) | Overall trip satisfaction; see mapping below. |
 | `おすすめ度` | `nps_raw` | Integer (0–10) | Raw Net Promoter Score. |
 | `満足度（商品・サービス）` | `satisfaction_service` | Integer (1–5) | Satisfaction specifically regarding services. |
