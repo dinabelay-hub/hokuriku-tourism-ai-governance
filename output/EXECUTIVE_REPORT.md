@@ -118,7 +118,7 @@ The DHDE framework is validated across **4 geographic nodes with full saturation
 **Validation Status:** Geographic saturation achieved with 4 camera nodes covering all major tourism corridors. The ¥11.96B "Satake Number" represents the annual opportunity loss ready for policy intervention.
 
 ---
-*All USD figures converted at ¥150 = $1 USD.*
+*All USD figures converted at ¥157 = $1 USD.*
 
 **Status:** Submission-Ready Executive Draft  
 **Reproducible Code:** [https://github.com/amilkh/hokuriku-tourism-ai-governance](https://github.com/amilkh/hokuriku-tourism-ai-governance)
