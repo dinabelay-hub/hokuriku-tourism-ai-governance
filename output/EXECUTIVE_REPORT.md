@@ -13,7 +13,7 @@ To bridge the gap between intent and arrivals, we engineered a system integratin
 - **Digital Intent:** Google Business Profile (search / directions)
 - **Environmental Filters:** JMA weather observations (temp, precip, snow depth, wind)
 - **Ground-Truth:** AI camera physical visitor counts
-- **Behavioral Sensors:** 95,653 Hokuriku survey rows (satisfaction/NPS/text) + 89,414 Fukui spending rows
+- **Behavioral Sensors:** 96,986 Hokuriku survey rows (satisfaction/NPS/text) + 90,015 Fukui spending rows
 
 ```mermaid
 graph TD
@@ -21,14 +21,14 @@ graph TD
         G["Google Intent<br/>(Search & Directions)"]
         W["JMA Weather<br/>(Temp, Precip, Snow, Wind)"]
         C["AI Camera<br/>(Physical Counts)"]
-        S["Survey Data<br/>(95,653 + 89,414 rows)"]
+        S["Survey Data<br/>(96,986 + 90,015 rows)"]
     end
     subgraph Engine["Processing"]
         M["Distributed Human<br/>Data Engine (DHDE)"]
     end
     subgraph Outputs["Actionable Intelligence"]
         F["Demand Forecast<br/>R² = 0.810"]
-        O["Opportunity Gap<br/>$78.5M / 852K visitors"]
+        O["Opportunity Gap<br/>$76.3M / 865,917 visitors"]
         V["Vibrancy Thresholds<br/>Natural vs Sacred"]
     end
     G --> M
@@ -59,9 +59,9 @@ By combining intent, physical counts, and weather filters, we test whether the D
 > *Figure 1: High alignment between AI-predicted demand (Red) and physical AI-camera counts (Blue) proves the model's validity for Evidence-Based Policy Making.*
 
 #### 4.2 The Under-Vibrancy Paradox & Sacred Thresholds
-Text mining of 70,668 surveys reveals that Fukui suffers from "Under-vibrancy," not overtourism.
-- **The Loneliness Gap:** Dissatisfied visitors (1-2★) are **11.4x more likely** to complain about "emptiness/closed shops" than satisfied visitors.
-- **Natural vs. Sacred Nodes:** While natural sites like Tojinbo thrive on limitless crowds, sacred sites like **Eiheiji** exhibit a **"Zen-Silence Threshold"** (relative density ~23). Beyond this, satisfaction drops, providing a mathematical rule for spiritual site preservation.
+Text mining of 71,288 surveys reveals that Fukui suffers from "Under-vibrancy," not overtourism.
+- **The Loneliness Gap:** Dissatisfied visitors (1-2★) are **11.5x more likely** to complain about "emptiness/closed shops" than satisfied visitors.
+- **Natural vs. Sacred Nodes:** While natural sites like Tojinbo thrive on limitless crowds, sacred sites like **Eiheiji** exhibit a **"Zen-Silence Threshold"** (relative density ~42.4%). Beyond this, satisfaction drops, providing a mathematical rule for spiritual site preservation.
 
 > ![Vibrancy Threshold](./ultimate_fig2_vibrancy_threshold.png)
 > *Figure 2: Tojinbo satisfaction scales with volume (Natural Node), while Eiheiji requires precision density management to preserve spiritual quality (Sacred Node).*
@@ -69,15 +69,15 @@ Text mining of 70,668 surveys reveals that Fukui suffers from "Under-vibrancy," 
 #### 4.3 Economic Impact: The ¥11.96 Billion Opportunity Gap (4-Node Geographic Saturation)
 By expanding from 3 to 4 nodes (adding Rainbow Line as Node D), we achieved **geographic saturation** covering North, Central, South, and East Fukui:
 - **Lost Visitors:** **865,917** potential visitors annually across 4 nodes.
-- **Estimated Revenue Leak:** **¥11.96 Billion** (~$79.7 Million at ¥150/$1) — the definitive "Satake Number."
-- **Geographic Coverage:** Tojinbo (coastal/north), Fukui Station (hub/central), Katsuyama (mountain/south), Rainbow Line (scenic/east).
-- **Seasonal Vulnerability:** Winter tourism remains **6.29x more sensitive** to weather friction than summer.
+- **Estimated Revenue Leak:** **¥11.96 Billion** (~$76.3 Million at ¥157/$1) — the definitive "Satake Number."
+- **Geographic Coverage:** Tojinbo (coastal/north), Fukui Station (hub/central), Katsuyama (mountain/east), Rainbow Line (scenic/south).
+- **Seasonal Vulnerability:** Winter tourism remains **6.27x more sensitive** to weather friction than summer.
 
 > ![Fukui Resurrection](./rank_resurrection_projection.png)
 > *Figure 3: By recovering 865,917 lost visitors through AI governance, Fukui could jump from 47th to ~35th place in national rankings.*
 
 #### 4.4 Regional Synergy: The Ishikawa Pipeline (Grant Evidence)
-Our cross-prefectural analysis proves that Fukui and Ishikawa operate as a single ecosystem. We identified a **strong leading correlation (r = 0.537)** between visitor survey activity in Ishikawa and same-day physical arrivals in Fukui. This mandates a unified, Hokuriku-wide approach to tourism governance.
+Our cross-prefectural analysis proves that Fukui and Ishikawa operate as a single ecosystem. We identified a **strong leading correlation (r = 0.552)** between visitor survey activity in Ishikawa and same-day physical arrivals in Fukui. This mandates a unified, Hokuriku-wide approach to tourism governance.
 
 > ![Ishikawa Pipeline](./deep_analysis_fig8_ishikawa_ccf.png)
 > *Figure 4: Cross-Correlation Function proving visitor signals in Ishikawa act as a direct leading indicator for physical flow into Fukui.*

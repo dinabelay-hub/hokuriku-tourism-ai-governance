@@ -35,7 +35,7 @@ Fukui Prefecture remains structurally weak in winter tourism (\textbf{47th/47}).
 \textbf{2. Distributed Human Data Engine (DHDE)}
 
 \smallskip
-Four data streams integrated: \textbf{Digital Intent} (Google search/route queries), \textbf{Environmental Filter} (JMA weather: temperature, precipitation, snow, wind), \textbf{Observed Data} (AI camera visitor counts), \textbf{Behavioral Sensor} (Hokuriku survey: 95,653 responses + 89,414 spending records).
+Four data streams integrated: \textbf{Digital Intent} (Google search/route queries), \textbf{Environmental Filter} (JMA weather: temperature, precipitation, snow, wind), \textbf{Observed Data} (AI camera visitor counts), \textbf{Behavioral Sensor} (Hokuriku survey: 96,986 responses + 90,015 spending records).
 \end{minipage}
 
 \vfill
@@ -52,7 +52,7 @@ Accuracy: $R^2=0.810$ (adj.\ 0.802). 81\% of daily visitor variation explained. 
 \textbf{3.2 Under-vibrancy Paradox \& Sacred Site Threshold}
 
 \smallskip
-Text mining (70,668 reviews) reveals Fukui's essence is ``under-vibrancy.'' Low satisfaction (1--2$\star$) complaints about ``loneliness/closed shops'' are 11.4$\times$ more frequent. Tojinbo (nature) satisfaction rises with crowding; Eiheiji (sacred site) requires density management (threshold $\approx47\%$).
+Text mining (71,288 reviews) reveals Fukui's essence is ``under-vibrancy.'' Low satisfaction (1--2$\star$) complaints about ``loneliness/closed shops'' are 11.5$\times$ more frequent. Tojinbo (nature) satisfaction rises with crowding; Eiheiji (sacred site) requires density management (threshold $\approx42.4\%$).
 \end{minipage}
 
 \vspace{4pt}
@@ -76,13 +76,13 @@ Text mining (70,668 reviews) reveals Fukui's essence is ``under-vibrancy.'' Low 
 \textbf{4.1 Opportunity Loss: \textasciitilde\yen{}11.96B (4 Nodes)}
 
 \smallskip
-4 nodes (Tojinbo/North, Fukui Stn/Central, Katsuyama/South, Rainbow Line/East) achieved geographic saturation. Lost visitors: \textbf{865,917/year}. Estimated loss: \textbf{\textasciitilde\yen{}11.96B} (``Satake Number''). Winter sensitivity: \textbf{6.29$\times$} higher than summer.
+4 nodes (Tojinbo/North, Fukui Stn/Central, Katsuyama/East, Rainbow Line/South) achieved geographic saturation. Lost visitors: \textbf{865,917/year}. Estimated loss: \textbf{\textasciitilde\yen{}11.96B} (``Satake Number''). Winter sensitivity: \textbf{6.27$\times$} higher than summer.
 
 \vspace{5pt}
 \textbf{4.2 Ishikawa Pipeline (Regional Linkage Evidence)}
 
 \smallskip
-Ishikawa tourism activity strongly leads Fukui visits ($r=0.537$). Hokuriku functions as a single ecosystem---regional governance and joint grants are essential.
+Ishikawa tourism activity strongly leads Fukui visits ($r=0.552$). Hokuriku functions as a single ecosystem---regional governance and joint grants are essential.
 \end{minipage}\hfill
 \begin{minipage}[t]{0.48\textwidth}
 \centering
