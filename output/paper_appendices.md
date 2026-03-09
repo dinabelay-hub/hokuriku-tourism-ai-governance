@@ -37,7 +37,7 @@ Hourly meteorological observations were obtained from three JMA automated weathe
 | `precip_1h_mm` | `precip` | Sum | mm/day |
 | `sun_1h_h` | `sun` | Mean | Hours/hour |
 | `wind_speed_ms` | `wind` | Mean | m/s |
-| `snow_depth_cm` | `snow_depth` | Mean | cm |
+| `snow_depth_cm` | `snow_depth` | Mean | cm | *(Recorded only at Node B main obs.; unavailable at AMeDAS stations)* |
 | `humidity_pct` | `humidity` | Mean | % |
 
 ### A.3 Google Business Profile (Digital Intent Signal)
@@ -217,7 +217,7 @@ This appendix outlines the geographic metadata for the four Japan Meteorological
 | Katsuyama (勝山) | AMeDAS | 1226 | 36°03.6' | 136°30.0' | 160 m | Node C (Katsuyama / Dinosaur Museum) | ~2 km |
 | Mihama (美浜) | AMeDAS | 1010 | 35°35.8' | 135°57.3' | 5 m | Node D (Rainbow Line / Wakasa) | ~5 km |
 
-> **Station selection note:** All four stations were verified via JMA ETRN block\_no lookup (prec\_no=57). Fukui City main observatory (block\_no=47616) is co-located with Node B (Fukui Station, ~1 km separation), supplying urban-basin weather data including snow depth. The Mihama AMeDAS station (block\_no=1010) was identified by programmatically querying the prefecture station list; its full hourly archive (December 2024 – March 2026) was fetched via `fetch_jma_monthly.py`. Node D achieves a weather lift of ΔR² = +0.039 with Mihama data. Node B achieves a weather lift of ΔR² = +0.007; as a main observatory, Fukui City records snow depth and yields a significant snow depth coefficient (β = −0.0056 standardised), making it the most snow-sensitive node. As a coastal low-elevation AMeDAS station, Mihama does not record snow depth; the snow sensitivity metric for Node D is therefore not applicable.
+> **Station selection note:** All four stations were verified via JMA ETRN block\_no lookup (prec\_no=57). Fukui City main observatory (block\_no=47616) is co-located with Node B (Fukui Station, ~1 km separation), supplying urban-basin weather data including snow depth. The Mihama AMeDAS station (block\_no=1010) was identified by programmatically querying the prefecture station list; its full hourly archive (December 2024 – March 2026) was fetched via `fetch_jma_monthly.py`. Node D achieves a weather lift of ΔR² = +0.039 with Mihama data. Node B achieves a weather lift of ΔR² = +0.007; as a main observatory, Fukui City records snow depth and yields a significant snow depth coefficient (β = −0.0056 standardised), making it the most snow-sensitive node. Similarly, the Mihama, Mikuni, and Katsuyama AMeDAS stations do not record snow depth; as a result, the snow depth regression coefficient (β) is estimable only at Node B.
 
 ### D.2 Regional Micro-Climate Context
 
@@ -225,9 +225,9 @@ The selected four-station configuration captures the principal climatological gr
 
 | JMA Station | Climatological Context | Primary Environmental Friction |
 |---|---|---|
-| Mikuni | Coastal Sea of Japan exposure; highly susceptible to winter monsoons. | Heavy snowfall (Dec–Feb) and severe northwestern winds (*Yamase*); wind chill is the primary comfort deterrent. |
+| Mikuni | Coastal Sea of Japan exposure; highly susceptible to winter monsoons. | Sea-effect snowfall events (Dec–Feb) and severe northwestern winds (*Yamase*); snow depth is not recorded at this AMeDAS station, making wind chill and precipitation the primary quantifiable comfort deterrents. |
 | Fukui City | Urban lowland basin (9 m elevation); inland from Sea of Japan coast by ~20 km. | Winter snowfall suppresses transit-node mobility (snow depth β = −0.0056 std.); moderate precipitation year-round; summer heat island effect elevates Discomfort Index. |
-| Katsuyama | Highland mountain basin (Echizen region, 160 m elevation). | Experiences the heaviest snowfall of the monitored stations; notable diurnal temperature variation (±8–12°C). |
+| Katsuyama | Highland mountain basin (Echizen region, 160 m elevation). | Located in the highest-elevation monitored zone (160 m) and expected to receive the heaviest snowfall based on geographic position, though snow depth is not recorded by this AMeDAS station; notable diurnal temperature variation (±8–12°C). |
 | Mihama | Coastal Wakasa Bay; low elevation, oceanic thermal moderation. | Moderate rainfall (Sea of Japan front); elevated humidity and sea breeze; no snow depth recorded at this AMeDAS station. |
 
 ### D.3 Environmental Severity Scoring Framework
