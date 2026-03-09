@@ -86,7 +86,7 @@ Ishikawa tourism activity strongly leads Fukui visits ($r=0.552$). Hokuriku func
 \end{minipage}\hfill
 \begin{minipage}[t]{0.48\textwidth}
 \centering
-\includegraphics[width=0.96\textwidth]{../fig15_rank_projection.png}
+\includegraphics[width=0.96\textwidth]{../fig09_rank_projection.png}
 \captionof{figure}{\scriptsize AI governance recovers 865,917 lost visitors, improving rank from 47th to \textasciitilde{}35th.}
 \end{minipage}
 
