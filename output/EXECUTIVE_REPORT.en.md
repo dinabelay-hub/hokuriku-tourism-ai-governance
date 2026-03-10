@@ -63,9 +63,6 @@ Text mining of 71,288 surveys reveals that Fukui suffers from "Under-vibrancy," 
 - **The Loneliness Gap:** Dissatisfied visitors (1-2★) are **11.5x more likely** to complain about "emptiness/closed shops" than satisfied visitors.
 - **Natural vs. Sacred Nodes:** While natural sites like Tojinbo thrive on limitless crowds, sacred sites like **Eiheiji** exhibit a **"Zen-Silence Threshold"** (relative density ~42.4%). Beyond this, satisfaction drops, providing a mathematical rule for spiritual site preservation.
 
-> ![Vibrancy Threshold](./paper_fig3_vibrancy_threshold.png)
-> *Figure 2: Tojinbo satisfaction scales with volume (Natural Node), while Eiheiji requires precision density management to preserve spiritual quality (Sacred Node).*
-
 #### 4.3 Economic Impact: The ¥11.96 Billion Opportunity Gap (4-Node Geographic Saturation)
 By expanding from 3 to 4 nodes (adding Rainbow Line as Node D), we achieved **geographic saturation** covering North, Central, South, and East Fukui:
 - **Lost Visitors:** **865,917** potential visitors annually across 4 nodes.

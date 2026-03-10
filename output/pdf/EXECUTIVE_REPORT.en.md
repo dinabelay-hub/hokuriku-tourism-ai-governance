@@ -61,11 +61,6 @@ Text mining (71,288 reviews) reveals Fukui's essence is ``under-vibrancy.'' Low 
 \centering
 \includegraphics[width=\linewidth]{../paper_fig2_rf_prediction.png}
 \captionof{figure}{\scriptsize Demand forecast (red) vs AI camera actual (blue). High agreement at $R^2=0.810$.}
-\end{minipage}\hfill
-\begin{minipage}[t]{0.48\textwidth}
-\centering
-\includegraphics[width=\linewidth]{../paper_fig3_vibrancy_threshold.png}
-\captionof{figure}{\scriptsize Tojinbo (nature) vs Eiheiji (sacred site) vibrancy threshold.}
 \end{minipage}
 
 \vspace{6pt}
