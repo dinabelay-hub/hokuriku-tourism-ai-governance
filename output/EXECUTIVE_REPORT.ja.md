@@ -67,14 +67,14 @@ graph TD
 - **最大説明変数:** Google Directions意図（$r = 0.781$）。
 - **政策含意:** 気象変数導入で予測精度が +5.6% 向上し、耐候ルーティング施策の正当性を定量的に裏付け。
 
-> ![予測 vs 実測](./deep_analysis_fig5_rf_prediction_ja.png)
+> ![予測 vs 実測](./paper_fig2_rf_prediction_ja.png)
 > *図1: 東尋坊における予測需要とAIカメラ実測の高い整合。*
 
 ### 3.2 過少賑わいパラドックス（感性テキスト分析）
 - 70,668件の自由記述で、福井の本質課題はオーバーツーリズムではなく **アンダーツーリズム**。
 - 低満足層（1★-2★）は、高満足層（4★-5★）より「寂しい・閉まっている」語彙を **11.4倍** 多用。
 
-> ![賑わい閾値](./ultimate_fig2_vibrancy_threshold_ja.png)
+> ![賑わい閾値](./paper_fig3_vibrancy_threshold_ja.png)
 > *図2: 自然拠点と聖地で異なる最適賑わいの閾値。*
 
 ### 3.3 永平寺における静寂閾値
@@ -87,7 +87,7 @@ graph TD
 - **推定損失額:** 年間 約119.6億円。
 - **季節脆弱性:** 冬季は夏季の 6.29倍、天候影響に敏感。
 
-> ![順位改善シミュレーション](./rank_resurrection_projection_ja.png)
+> ![順位改善シミュレーション](./fig09_rank_projection_ja.png)
 > *図3: 機会損失を回収した場合の順位改善シナリオ（47位→約35位）。*
 
 ---
@@ -99,7 +99,7 @@ graph TD
 - **先行相関:** $r = 0.537$（有意）。
 - **解釈:** 福井単独最適化では限界があり、北陸を1つの実務圏（Hokuriku Impression Space）として共同運用する必要がある。
 
-> ![石川先行相関](./deep_analysis_fig8_ishikawa_ccf_ja.png)
+> ![石川先行相関](./paper_fig5_ishikawa_ccf_ja.png)
 > *図4: 石川需要が福井来訪を先導するクロス相関。*
 
 ---
@@ -131,5 +131,5 @@ graph LR
 	DN -->|"来訪安定化"| R
 ```
 
-> ![耐候ネットワーク](./weather_shield_network_ja.png)
+> ![耐候ネットワーク](./paper_fig6_weather_shield_map_ja.png)
 > *図5: 4ノード統合のWeather Shield政策ネットワーク。*

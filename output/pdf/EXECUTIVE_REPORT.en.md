@@ -38,7 +38,7 @@ Fukui Prefecture remains structurally weak in winter tourism (\textbf{47th/47}).
 Four data streams integrated: \textbf{Digital Intent} (Google search/route queries), \textbf{Environmental Filter} (JMA weather: temperature, precipitation, snow, wind), \textbf{Observed Data} (AI camera visitor counts), \textbf{Behavioral Sensor} (Hokuriku survey: 96,986 responses + 90,015 spending records).
 \end{minipage}
 
-\vfill
+\vspace{6pt}
 
 ## 3. Key Results (Forecast Accuracy \& Kansei Threshold)
 
@@ -59,16 +59,16 @@ Text mining (71,288 reviews) reveals Fukui's essence is ``under-vibrancy.'' Low 
 
 \noindent\begin{minipage}[t]{0.48\textwidth}
 \centering
-\includegraphics[width=0.96\textwidth]{../paper_fig2_rf_prediction.png}
+\includegraphics[width=\linewidth]{../paper_fig2_rf_prediction.png}
 \captionof{figure}{\scriptsize Demand forecast (red) vs AI camera actual (blue). High agreement at $R^2=0.810$.}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.48\textwidth}
 \centering
-\includegraphics[width=0.96\textwidth]{../paper_fig3_vibrancy_threshold.png}
+\includegraphics[width=\linewidth]{../paper_fig3_vibrancy_threshold.png}
 \captionof{figure}{\scriptsize Tojinbo (nature) vs Eiheiji (sacred site) vibrancy threshold.}
 \end{minipage}
 
-\vfill
+\vspace{6pt}
 
 ## 4. Economic Impact \& Regional Linkage
 
@@ -86,11 +86,11 @@ Ishikawa tourism activity strongly leads Fukui visits ($r=0.552$). Hokuriku func
 \end{minipage}\hfill
 \begin{minipage}[t]{0.48\textwidth}
 \centering
-\includegraphics[width=0.96\textwidth]{../fig09_rank_projection.png}
+\includegraphics[width=\linewidth]{../fig09_rank_projection.png}
 \captionof{figure}{\scriptsize AI governance recovers 865,917 lost visitors, improving rank from 47th to \textasciitilde{}35th.}
 \end{minipage}
 
-\vfill
+\vspace{6pt}
 
 \vspace{3pt}\noindent\rule{\linewidth}{0.3pt}\vspace{3pt}
 
@@ -98,14 +98,17 @@ Ishikawa tourism activity strongly leads Fukui visits ($r=0.552$). Hokuriku func
 
 \textbf{Policy (Recovering \textasciitilde\yen{}11.96B in lost demand):}\quad\textbf{(1) Supply-side Nudge} (Shop Activation Alert): Optimize opening hours/staffing 72 hours ahead based on demand forecast.\quad\textbf{(2) Demand-side Nudge} (Weather Routing): Guide visitors from Tojinbo to indoor sites (Katsuyama, Eiheiji) during bad weather.
 
-\begin{center}
-\includegraphics[width=0.84\textwidth]{../paper_fig6_weather_shield.png}
-\captionof{figure}{\scriptsize 4-node weather shield network. Each node's weather sensitivity coefficients. Rainbow Line shows strongest seasonality (1.85$\times$) and snow impact ($\beta=-0.0916$).}
-\end{center}
+\vspace{4pt}
 
-\textbf{Conclusion:} DHDE achieves \textbf{full geographic saturation} (north, central, south, east). Connecting forecasts to AI nudges can recover \textasciitilde\yen{}11.96B in demand, raising Fukui's tourism economy from \textbf{47th to \textasciitilde{}35th place}.
+\noindent\centering
+\includegraphics[width=0.88\textwidth]{../paper_fig6_weather_shield_map.png}
+\captionof{figure}{\scriptsize 4-node weather shield network. Geography-accurate map with weather sensitivity coefficients at each node. Rainbow Line shows strongest seasonality (1.85$\times$) and snow impact ($\beta=-0.0916$).}
 
-\vfill
+\vspace{4pt}
+
+\noindent\raggedright\textbf{Conclusion:} DHDE achieves \textbf{full geographic saturation} (north, central, south, east). Connecting forecasts to AI nudges can recover \textasciitilde\yen{}11.96B in demand, raising Fukui's tourism economy from \textbf{47th to \textasciitilde{}35th place}.
+
+\vspace{6pt}
 
 \vspace{3pt}\noindent\rule{\linewidth}{0.3pt}\vspace{3pt}
 
