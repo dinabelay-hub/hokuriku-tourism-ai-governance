@@ -81,7 +81,7 @@ Ishikawa tourism activity strongly leads Fukui visits ($r=0.552$). Hokuriku func
 \end{minipage}\hfill
 \begin{minipage}[t]{0.48\textwidth}
 \centering
-\includegraphics[width=\linewidth]{../fig09_rank_projection.png}
+\includegraphics[width=\linewidth]{../paper_fig3_ranking_recovery.png}
 \captionof{figure}{\scriptsize AI governance recovers 865,917 lost visitors, improving rank from 47th to \textasciitilde{}35th.}
 \end{minipage}
 
@@ -96,7 +96,7 @@ Ishikawa tourism activity strongly leads Fukui visits ($r=0.552$). Hokuriku func
 \vspace{4pt}
 
 \noindent\centering
-\includegraphics[width=0.88\textwidth]{../paper_fig6_weather_shield_map.png}
+\includegraphics[width=0.88\textwidth]{../paper_fig5_weather_shield_map.png}
 \captionof{figure}{\scriptsize 4-node weather shield network. Geography-accurate map with weather sensitivity coefficients at each node. Rainbow Line shows strongest seasonality (1.85$\times$) and snow impact ($\beta=-0.0916$).}
 
 \vspace{4pt}
@@ -105,7 +105,3 @@ Ishikawa tourism activity strongly leads Fukui visits ($r=0.552$). Hokuriku func
 
 \vspace{6pt}
 
-\vspace{3pt}\noindent\rule{\linewidth}{0.3pt}\vspace{3pt}
-
-\scriptsize\noindent
-\textbf{Validation Status:} All four camera nodes cover main tourist corridors, achieving geographic saturation. The ``Satake Number'' (\textasciitilde\yen{}11.96B) is quantified and ready for policy intervention as annual opportunity loss.\quad\textbf{Reproducible Code:} github.com/amilkh/hokuriku-tourism-ai-governance
