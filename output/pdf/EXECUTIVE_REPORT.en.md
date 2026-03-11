@@ -35,7 +35,7 @@ Fukui Prefecture remains structurally weak in winter tourism (\textbf{47th/47}).
 \textbf{2. Distributed Human Data Engine (DHDE)}
 
 \smallskip
-Four data streams integrated: \textbf{Digital Intent} (Google search/route queries), \textbf{Environmental Filter} (JMA weather: temperature, precipitation, snow, wind), \textbf{Observed Data} (AI camera visitor counts), \textbf{Behavioral Sensor} (Hokuriku survey: 96,986 responses + 90,015 spending records).
+Four data streams integrated: \textbf{Digital Intent} (Google search/route queries), \textbf{Environmental Filter} (JMA weather: temperature, precipitation, snow, wind), \textbf{Observed Data} (AI camera visitor counts), \textbf{Behavioral Sensor} (Hokuriku survey: 97,719 responses + 90,350 spending records).
 \end{minipage}
 
 \vspace{6pt}
