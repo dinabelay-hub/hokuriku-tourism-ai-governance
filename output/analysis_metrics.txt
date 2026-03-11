@@ -1,13 +1,13 @@
 ================================================================================
 BOLSTERED RESULTS – Tojinbo Demand Forecast Model
-Generated: 2026-03-09 13:47
+Generated: 2026-03-11 09:26
 ================================================================================
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   1. CORE MODEL PERFORMANCE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   Training Data:         397 days
-  Camera Data Range:     2024-12-20 → 2026-03-02
+  Camera Data Range:     2024-12-20 → 2026-03-10
 
   OLS R²           = 0.8096  (Adj R² = 0.8016)
   RF Train R²      = 0.9087
@@ -21,32 +21,32 @@ Generated: 2026-03-09 13:47
   2. CROSS-PREFECTURAL SIGNAL (Ishikawa → Fukui Pipeline)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   Best Ishikawa → Tojinbo lag:  +0 day(s)
-  Correlation at best lag:      r = +0.552
+  Correlation at best lag:      r = +0.549
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   3. KANSEI (EMOTIONAL) OVERTOURISM THRESHOLD
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Visitors vs Satisfaction (Spearman): r = +0.148, p = 0.0023
-  Visitors vs NPS (Spearman):         r = +0.087, p = 0.0765
+  Visitors vs Satisfaction (Spearman): r = +0.150, p = 0.0019
+  Visitors vs NPS (Spearman):         r = +0.091, p = 0.0619
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   4. LOST POPULATION (The "Satake Number")
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Opportunity Gap days:             41
-  Total Lost Visitors:              83,644
-  Mean Lost per day:                2,040
+  Opportunity Gap days:             42
+  Total Lost Visitors:              85,522
+  Mean Lost per day:                2,036
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   5. MODEL ROBUSTNESS (PhD Shield)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   Durbin-Watson (original):  1.005  (WARNING)
-  Durbin-Watson (1st-diff):  2.524  (residual)
+  Durbin-Watson (1st-diff):  2.525  (residual)
   First-Difference R²:       0.7083  (original: 0.8096)
   LDV R²:                    0.8485
-  LDV DW:                    1.898
+  LDV DW:                    1.899
   Newey-West sig. predictors: 8
   Weather Data Value:   +0.0559 R²
   OLS R² without JMA:   0.7537
@@ -56,7 +56,7 @@ Generated: 2026-03-09 13:47
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   6. RANKING IMPACT SIMULATION (Fukui Resurrection)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Total lost visitors:        83,644
+  Total lost visitors:        85,522
   Winter actual mean rank:    47.0
   Winter hypothetical rank:   45.7
   Best monthly improvement:   6 ranks
@@ -66,8 +66,8 @@ Generated: 2026-03-09 13:47
   7. SEASONAL WEATHER SENSITIVITY
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   Summer weather lift (ΔR²):  +0.0215
-  Winter weather lift (ΔR²):  +0.1349
-  Ratio (Winter/Summer):      6.27x
+  Winter weather lift (ΔR²):  +0.1348
+  Ratio (Winter/Summer):      6.26x
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -76,28 +76,30 @@ Generated: 2026-03-09 13:47
   Under-vibrancy mentions in 1-2 star reviews: 65
   Percentage of low-sat responses:             6.1%
   Ratio vs high-satisfaction visitors:         11.5x
-  Fukui free-text responses analysed:          71,288
+  Fukui free-text responses analysed:          71,623
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  8b. EIHEIJI ZEN-SILENCE THRESHOLD
+  8b. EIHEIJI ATMOSPHERIC RESILIENCE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Eiheiji survey responses:          4475
-  Qualifying days (≥3 resp/day):     588
-  Spearman r (density vs sat):       +0.047 (p = 0.2558)
-  Quietude threshold (vertex x*):    42.4%
-  Peak satisfaction at threshold:    4.409
-  Raw survey entries (all.csv):      574,137
+  Eiheiji survey responses:          4504
+  High-satisfaction (4-5★) rate:     93.7%
+  Qualifying days (≥3 resp/day):     592
+  Spearman r (density vs sat):       +0.047 (p = 0.2506)
+  Congestion complaints (all):       0.2% of responses
+  Congestion in low-sat reviews:     0.0% of 1-2★
+  Under-vibrancy in low-sat reviews: 0
+  Raw survey entries (all.csv):      90,317
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   9. STATISTICAL RIGOR (効果量 / Prof. Takemoto Review)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   Top-3 Standardised β: is_weekend_or_holiday=+0.547, directions=+0.456, month=+0.331
-  Cohen's f²:           4.2518
+  Cohen's f²:           4.2519
   Train N:              317  |  Hold-out N: 80
-  Hold-out MAE:         1793.3 visitors/day
-  Hold-out RMSE:        2460.9 visitors/day
+  Hold-out MAE:         1793.2 visitors/day
+  Hold-out RMSE:        2461.0 visitors/day
   Hold-out R²:          0.6834
 
 ================================================================================
