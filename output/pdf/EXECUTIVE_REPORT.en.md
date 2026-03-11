@@ -96,7 +96,7 @@ Ishikawa tourism activity strongly leads Fukui visits ($r=0.552$). Hokuriku func
 \vspace{4pt}
 
 \noindent\centering
-\includegraphics[width=0.88\textwidth]{../paper_fig5_weather_shield_map.png}
+\includegraphics[width=0.88\textwidth]{../paper_fig6_weather_shield_map.png}
 \captionof{figure}{\scriptsize 4-node weather shield network. Geography-accurate map with weather sensitivity coefficients at each node. Rainbow Line shows strongest seasonality (1.85$\times$) and snow impact ($\beta=-0.0916$).}
 
 \vspace{4pt}
