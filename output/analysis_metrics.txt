@@ -1,6 +1,6 @@
 ================================================================================
 BOLSTERED RESULTS – Tojinbo Demand Forecast Model
-Generated: 2026-03-11 15:03
+Generated: 2026-03-11 16:42
 ================================================================================
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -57,9 +57,9 @@ Generated: 2026-03-11 15:03
   6. RANKING IMPACT SIMULATION (Fukui Resurrection)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   Total lost visitors:        85,522
-  Winter actual mean rank:    47.0
-  Winter hypothetical rank:   45.7
-  Best monthly improvement:   6 ranks
+  Winter actual mean rank:    46.7
+  Winter hypothetical rank:   46.7
+  Best monthly improvement:   0 ranks
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
