@@ -71,7 +71,7 @@ Text mining (71,288 reviews) reveals Fukui's essence is ``under-vibrancy.'' Low 
 \textbf{4.1 Opportunity Loss: \textasciitilde\yen{}11.96B (4 Nodes)}
 
 \smallskip
-4 nodes (Tojinbo/North, Fukui Stn/Central, Katsuyama/East, Rainbow Line/South) achieved geographic saturation. Lost visitors: \textbf{865,917/year}. Estimated loss: \textbf{\textasciitilde\yen{}11.96B} (``Satake Number''). Winter sensitivity: \textbf{6.27$\times$} higher than summer.
+4 nodes (Tojinbo/North, Fukui Stn/Central, Katsuyama/East, Rainbow Line/South) achieved geographic saturation. Lost visitors: \textbf{865,917/year}. Estimated aggregate revenue loss: \textbf{\textasciitilde\yen{}11.96B}. Winter sensitivity: \textbf{6.27$\times$} higher than summer.
 
 \vspace{5pt}
 \textbf{4.2 Ishikawa Pipeline (Regional Linkage Evidence)}

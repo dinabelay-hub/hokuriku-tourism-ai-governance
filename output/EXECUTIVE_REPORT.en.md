@@ -66,7 +66,7 @@ Text mining of 71,288 surveys reveals that Fukui suffers from "Under-vibrancy," 
 #### 4.3 Economic Impact: The ¥11.96 Billion Opportunity Gap (4-Node Geographic Saturation)
 By expanding from 3 to 4 nodes (adding Rainbow Line as Node D), we achieved **geographic saturation** covering North, Central, South, and East Fukui:
 - **Lost Visitors:** **865,917** potential visitors annually across 4 nodes.
-- **Estimated Revenue Leak:** **¥11.96 Billion** (~$76.3 Million at ¥157/$1) — the definitive "Satake Number."
+- **Estimated Revenue Leak:** **¥11.96 Billion** (~$76.3 Million at ¥157/$1) — aggregate multi-node opportunity loss.
 - **Geographic Coverage:** Tojinbo (coastal/north), Fukui Station (hub/central), Katsuyama (mountain/east), Rainbow Line (scenic/south).
 - **Seasonal Vulnerability:** Winter tourism remains **6.27x more sensitive** to weather friction than summer.
 
@@ -112,7 +112,7 @@ The DHDE framework is validated across **4 geographic nodes with full saturation
 > ![Weather Shield Network](./paper_fig6_weather_shield_map.png)
 > *Figure 5: The 4-node Weather Shield Network showing weather sensitivity coefficients at each node. Rainbow Line exhibits strongest seasonal sensitivity (1.85x) and highest snow impact (-0.0916 β).*
 
-**Validation Status:** Geographic saturation achieved with 4 camera nodes covering all major tourism corridors. The ¥11.96B "Satake Number" represents the annual opportunity loss ready for policy intervention.
+**Validation Status:** Geographic saturation achieved with 4 camera nodes covering all major tourism corridors. The ¥11.96B aggregate revenue loss represents annual suppressed demand ready for policy intervention.
 
 ---
 *All USD figures converted at ¥157 = $1 USD.*

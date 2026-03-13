@@ -32,7 +32,7 @@ Generated: 2026-03-13 11:30
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  4. LOST POPULATION (The "Satake Number")
+  4. LOST POPULATION (Aggregate Visitor Loss)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   Opportunity Gap days:             42
   Total Lost Visitors:              85,522
@@ -54,9 +54,9 @@ Generated: 2026-03-13 11:30
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  6. RANKING IMPACT SIMULATION (Fukui Resurrection – 4-node Satake total)
+  6. RANKING IMPACT SIMULATION (Fukui Resurrection – 4-node aggregate total)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  4-node Satake total:        865,917
+  4-node aggregate total:     865,917
   Winter actual mean rank:    46.7
   Winter hypothetical rank:   41.3
   Best monthly improvement:   7 ranks
@@ -140,7 +140,7 @@ Node D (Rainbow Line/Wakasa)
   Snow_Beta_Std=+nan
   Opportunity_Lost_Visitors=13141.87
   Opportunity_Lost_Yen=181502355.04
-FourNode_Satake_Number (nodes=4)
+Multinode_Aggregate_Loss (nodes=4)
   Node_D_Status=camera
   Lost_Visitors=865917.25
   Spending_Per_Visitor_Yen=13811.00
