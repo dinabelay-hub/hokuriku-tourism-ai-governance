@@ -1,6 +1,6 @@
 ================================================================================
 BOLSTERED RESULTS – Tojinbo Demand Forecast Model
-Generated: 2026-03-12 10:31
+Generated: 2026-03-12 19:19
 ================================================================================
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -54,12 +54,13 @@ Generated: 2026-03-12 10:31
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  6. RANKING IMPACT SIMULATION (Fukui Resurrection)
+  6. RANKING IMPACT SIMULATION (Fukui Resurrection – 4-node Satake total)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Total lost visitors:        85,522
+  4-node Satake total:        865,917
   Winter actual mean rank:    46.7
-  Winter hypothetical rank:   46.7
-  Best monthly improvement:   0 ranks
+  Winter hypothetical rank:   41.3
+  Best monthly improvement:   7 ranks
+  Shortfall closure range:    8.2% – 66.2%
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -145,7 +146,20 @@ FourNode_Satake_Number (nodes=4)
   Spending_Per_Visitor_Yen=13811.00
   Total_Lost_Yen=11959183083.15
   Total_Lost_Billion_Yen=11.959
+  USD_Exchange_Rate=157.0
+  Total_Lost_USD_Million=76.2
   ★ GEOGRAPHIC_SATURATION=ACHIEVED (North/Central/South/East)
+Survey_Proxy_Validation
+  Pearson_r=0.564
+  p_value=1.448e-38
+  n=443
+Ranking_Simulation_4Node
+  Best_Monthly_Improvement=7_ranks
+  Shortfall_Closure_Min=8.2%
+  Shortfall_Closure_Max=66.2%
+Undervibrancy_ChiSquare
+  chi2=514.7
+  p=5.874e-114
   Node A (Tojinbo/Mikuni): lag=+0, r=+0.491812, n=418
   Node B (Fukui Station): lag=+0, r=+0.226247, n=419
   Node C (Katsuyama/Dinosaur): lag=+0, r=+0.323949, n=419
