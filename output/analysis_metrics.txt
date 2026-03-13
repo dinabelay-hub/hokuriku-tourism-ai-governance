@@ -1,6 +1,6 @@
 ================================================================================
 BOLSTERED RESULTS – Tojinbo Demand Forecast Model
-Generated: 2026-03-12 19:19
+Generated: 2026-03-13 11:30
 ================================================================================
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -146,8 +146,8 @@ FourNode_Satake_Number (nodes=4)
   Spending_Per_Visitor_Yen=13811.00
   Total_Lost_Yen=11959183083.15
   Total_Lost_Billion_Yen=11.959
-  USD_Exchange_Rate=157.0
-  Total_Lost_USD_Million=76.2
+  USD_Exchange_Rate=164.7
+  Total_Lost_USD_Million=72.6
   ★ GEOGRAPHIC_SATURATION=ACHIEVED (North/Central/South/East)
 Survey_Proxy_Validation
   Pearson_r=0.564
