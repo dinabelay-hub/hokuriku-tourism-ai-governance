@@ -77,7 +77,7 @@ Text mining (71,288 reviews) reveals Fukui's essence is ``under-vibrancy.'' Low 
 \textbf{4.2 Ishikawa Pipeline (Regional Linkage Evidence)}
 
 \smallskip
-Ishikawa tourism activity strongly leads Fukui visits ($r=0.552$). Hokuriku functions as a single ecosystem---regional governance and joint grants are essential.
+Ishikawa tourism activity strongly leads Fukui visits ($r=0.549$). Hokuriku functions as a single ecosystem---regional governance and joint grants are essential.
 \end{minipage}\hfill
 \begin{minipage}[t]{0.48\textwidth}
 \centering
@@ -96,7 +96,7 @@ Ishikawa tourism activity strongly leads Fukui visits ($r=0.552$). Hokuriku func
 \vspace{4pt}
 
 \noindent\centering
-\includegraphics[width=0.88\textwidth]{../paper_fig6_weather_shield_map.png}
+\includegraphics[width=0.88\textwidth]{../paper_fig5_weather_shield_map.png}
 \captionof{figure}{\scriptsize 4-node weather shield network. Geography-accurate map with weather sensitivity coefficients at each node. Rainbow Line shows strongest seasonality (1.85$\times$) and snow impact ($\beta=-0.0916$).}
 
 \vspace{4pt}
