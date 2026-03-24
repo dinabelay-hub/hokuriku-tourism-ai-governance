@@ -82,13 +82,13 @@ The DHDE integrates four sensor modalities into a single analytical pipeline:
 | **RF 5-fold CV R²** | 0.557 ± 0.131 | Out-of-sample predictive accuracy |
 | **First-Difference R²** | 0.708 | Autocorrelation-corrected |
 | **LDV R² / DW** | 0.848 / 1.899 | Dynamic model, clean residuals |
-| **#1 Predictor** | Google `directions` | Route-search intent, β = +0.456 |
-| **Ishikawa → Tojinbo lag** | r = +0.549 | Cross-prefectural demand pipeline |
-| **Visitors vs Satisfaction** | rs = +0.150 (p = 0.002) | **No overtourism** detected |
+| **#1 Predictor** | Google `directions` | Route-search intent, *β* = +0.456 |
+| **Ishikawa → Tojinbo lag** | *r* = +0.549 | Cross-prefectural demand pipeline |
+| **Visitors vs Satisfaction** | *r*<sub>s</sub> = +0.150 (*p* = 0.002) | **No overtourism** detected |
 | **Lost Visitors** | 85,522 (single-node) | Annual Opportunity Gap |
 | **Winter Weather Sensitivity** | 6.26× summer | Seasonal asymmetry |
 | **Under-vibrancy Ratio** | 11.5× | Low-satisfaction review prevalence |
-| **National Ranking (Winter)** | 47th / 47 | Fukui's structural deficit |
+| **National Ranking (Winter)** | 47th / 47 (lowest) | Fukui's structural deficit |
 
 ---
 
@@ -139,7 +139,7 @@ where $V$ is wind speed in km/h. Valid for $T \leq 10°C$ and $V > 4.8$ km/h.
 
 Spearman correlation between daily visitor count and mean satisfaction:
 
-rs(visitors, satisfaction) = +0.150 (p = 0.002)
+*r*<sub>s</sub>(visitors, satisfaction) = +0.150 (*p* = 0.002)
 
 The **positive** correlation confirms Fukui's problem is *under-vibrancy*, not overtourism. More visitors → higher satisfaction.
 
