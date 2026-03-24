@@ -4,7 +4,7 @@
 
 ### AI-Driven Visitor Demand Forecasting & Spatial Under-vibrancy Analysis
 
-**Amil Khanzada** — *Specially Appointed Professor, Regional Revitalization Lab, University of Fukui*
+**Amil Khanzada** — *Specially Appointed Professor, Headquarters for Regional Revitalization, University of Fukui*
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-All%20Rights%20Reserved-red.svg)](LICENSE)
