@@ -5,6 +5,8 @@ Framework for Mitigating Under-Vibrancy via Human Data Engines
 
 **Journal:** Sustainable Cities and Society (Elsevier)
 
+*For setup, installation, and full reproduction steps, see `README.md § 9`.*
+
 ---
 
 ## 1. Final OLS Model Parameters — Node A (Tojinbo, Primary Coastal Node)
@@ -13,7 +15,7 @@ Dependent variable: daily physical visitor arrivals (camera count).
 N = 397 days (2024-12-20 → 2026-03-10, after sensor-outage exclusion).
 Standard errors corrected via Newey-West HAC (lags = 8).
 
-| Variable | Coefficient | *p*-value | Std. β | Rank |
+| Variable | Coefficient | *p*-value | Std. *β* | Rank |
 |---|---|---|---|---|
 | const | −722.33 | 0.4482 | — | — |
 | directions | +0.9174 | < 0.001 *** | +0.456 | 2 |
@@ -69,8 +71,7 @@ Standard errors corrected via Newey-West HAC (lags = 8).
 
 ## 4. Key Dataset Schema (Dataset 2 — merged\_survey\_\*.csv)
 
-Dataset 2: 97,719 standardized responses, Hokuriku three-prefecture merged survey,
-April 2023 – March 2026.
+97,719 standardized responses, Hokuriku three-prefecture merged survey, April 2023 – March 2026.
 
 | Column (Japanese) | Pipeline Variable | Type | Description |
 |---|---|---|---|
@@ -108,12 +109,10 @@ Full dependency list with lower-bound version pins: `requirements.txt`.
 
 ## 6. External Data Repositories (Pinned Commits)
 
-The DHDE pipeline reads from four sibling repositories that are **not** bundled in this
-archive. Each repository below was frozen at the commit SHA listed at the time of
-submission. Reviewers should clone each repo at the specified SHA to exactly reproduce
-the analysis dataset.
+The DHDE pipeline reads from four sibling repositories. Each was frozen at the commit SHA
+below at the time of submission; clone at these SHAs to exactly reproduce the analysis dataset.
 
-| Repository | Purpose | Commit SHA (submission) |
+| Repository | Purpose | Commit SHA |
 |---|---|---|
 | `fukui-kanko-people-flow-data` | Edge-AI camera 5-min CSV files (Nodes A, B, D) | `ca79a526ed50` |
 | `fukui-kanko-trend-report` | Google Business Profile directions data | `8bbab30` |
@@ -122,70 +121,3 @@ the analysis dataset.
 
 JMA meteorological data is bundled directly in `jma/` (cleaned merged CSVs):
 `jma/jma_{mikuni,fukuicity,katsuyama,mihama}_hourly_8.csv`.
-
----
-
-## 7. Reproduce Instructions
-
-```bash
-# 1. Clone this repository (analysis pipeline)
-git clone https://github.com/amilkh/hokuriku-tourism-ai-governance
-cd hokuriku-tourism-ai-governance
-git checkout submission/scs-v1   # or the tagged release
-
-# 2. Clone data repositories into sibling directories
-cd ..
-git clone https://github.com/code4fukui/fukui-kanko-people-flow-data
-git -C fukui-kanko-people-flow-data checkout ca79a526ed50
-
-git clone https://github.com/code4fukui/fukui-kanko-trend-report
-git -C fukui-kanko-trend-report checkout 8bbab30
-
-git clone https://github.com/hokuriku-inbound-kanko/opendata
-git -C opendata checkout c782c51
-
-git clone https://github.com/code4fukui/fukui-kanko-survey
-git -C fukui-kanko-survey checkout 30f8aa1c
-
-# 3. Install dependencies
-cd hokuriku-tourism-ai-governance
-python -m venv .venv
-source .venv/bin/activate          # Windows: .venv\Scripts\activate
-pip install -e ".[dev]"
-
-# 4. Run the full pipeline
-python -m src.run_analysis
-
-# 5. Verify outputs match (machine-readable metrics)
-cat output/analysis_metrics.txt
-```
-
-Expected key outputs after a successful run:
-- `output/analysis_metrics.txt` — all reported statistics
-- `output/paper_fig{1-5}_*.png` — paper figures (Figures 1–5)
-- `output/table{1-3}_ols.tex` — LaTeX tables (Tables 1–3)
-
----
-
-## 8. Workspace Layout
-
-```
-hokuriku-workspace/              ← parent directory
-├── hokuriku-tourism-ai-governance/   ← this repo (pipeline + analysis)
-├── fukui-kanko-people-flow-data/     ← camera sensor CSVs
-├── fukui-kanko-trend-report/         ← Google Business Profile data
-├── opendata/                         ← Hokuriku merged survey (Dataset 2)
-└── fukui-kanko-survey/               ← Fukui raw survey (Dataset 1)
-```
-
-The pipeline locates sibling repositories automatically via `config/settings.yaml`
-(`workspace_root` key). No absolute paths are hard-coded.
-
----
-
-## 9. Note on Submodules
-
-The data repositories are intentionally maintained as **separate repositories** rather
-than git submodules. This design choice ensures that Zenodo DOI archives
-(which do not recursively capture submodule contents) include all necessary information
-in this supplement, and that data consumers can cite each repository independently.
