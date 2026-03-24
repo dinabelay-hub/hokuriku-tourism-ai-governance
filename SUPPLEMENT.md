@@ -95,10 +95,10 @@ Full satisfaction scale: 1 = とても不満, 2 = 不満, 3 = どちらでもな
 | Library | Version | Role |
 |---|---|---|
 | Python | 3.12.3 | Runtime |
-| pandas | 2.3.2 | Data harmonization and cleaning |
-| statsmodels | 0.14.5 | OLS regression, ADF tests, Durbin-Watson, Newey-West HAC |
+| pandas | 3.0.1 | Data harmonization and cleaning |
+| statsmodels | 0.14.6 | OLS regression, ADF tests, Durbin-Watson, Newey-West HAC |
 | scikit-learn | 1.8.0 | Random Forest Regressor, Permutation Importance, cross-validation |
-| numpy | 1.26.4 | Numerical computation |
+| numpy | 2.4.2 | Numerical computation |
 | jpholiday | 1.0.3 | Japanese national holiday calendar logic |
 | matplotlib | (see requirements.txt) | Figure generation |
 | scipy | (see requirements.txt) | Spearman correlation, chi-square tests |
