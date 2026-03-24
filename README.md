@@ -110,8 +110,8 @@ where $\bar{S} = ¥13{,}811$ is the mean spending per visitor (from Fukui survey
 |-----------|-------|
 | Gap days | 42 (high-friction days) |
 | Total lost visitors | 85,522 |
-| Mean spending per visitor | ¥13,811 (~$84) |
-| **Total annual revenue loss** | **¥11.96 billion (~$72.6M)** |
+| Mean spending per visitor | ¥13,811 (~$88) |
+| **Total annual revenue loss** | **¥11.96 billion (~USD 76.2M)** |
 
 ---
 
