@@ -187,9 +187,15 @@ def build_features(
     reporter.log(f"Weather severity distribution:\n"
                  f"{daily['weather_severity'].value_counts().sort_index().to_string()}")
 
-    daily = add_rolling_features(daily, route_col)
-    daily = add_lag_features(daily, route_col)
-    daily = add_interaction_features(daily, route_col)
+    # Google-dependent features
+    if route_col is not None and route_col in daily.columns:
+      daily = add_rolling_features(daily, route_col)
+      daily = add_lag_features(daily, route_col)
+      daily = add_interaction_features(daily, route_col)
+    else:
+        reporter.log("Skipping rolling features for Google data (not available).")
+    
+    # Independent features
     daily = add_dow_mean_encoding(daily)
 
     # Log DOW averages

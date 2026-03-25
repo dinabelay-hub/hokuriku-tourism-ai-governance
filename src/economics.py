@@ -39,7 +39,12 @@ def compute_opportunity_gap(
     reporter.section(4, "Opportunity Gap Analysis")
     daily = daily.copy()
 
-    intent_med = daily[route_col].median()
+    if route_col is not None and route_col in daily.columns:
+        intent_med = daily[route_col].median()
+    else:
+        reporter.log("Skipping opportunity gap (no Google intent data).")
+        daily["opportunity_gap"] = np.nan
+        return daily
     count_med = daily["count"].median()
 
     daily["high_intent"] = (daily[route_col] > intent_med).astype(int)

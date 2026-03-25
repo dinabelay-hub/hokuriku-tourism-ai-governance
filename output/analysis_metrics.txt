@@ -1,92 +1,92 @@
 ================================================================================
 BOLSTERED RESULTS – Tojinbo Demand Forecast Model
-Generated: 2026-03-24 15:35
+Generated: 2026-03-25 04:56
 ================================================================================
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   1. CORE MODEL PERFORMANCE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Training Data:         397 days
-  Camera Data Range:     2024-12-20 → 2026-03-10
+  Training Data:         421 days
+  Camera Data Range:     2024-12-20 → 2026-03-24
 
-  OLS R²           = 0.8096  (Adj R² = 0.8016)
-  RF Train R²      = 0.9087
-  RF 5-fold CV R²  = 0.5572 ± 0.1306
+  OLS R²           = 0.5946  (Adj R² = 0.5867)
+  RF Train R²      = 0.8314
+  RF 5-fold CV R²  = 0.3975 ± 0.2564
 
-  Top 3 Predictors (MDI): directions, month, temp
-  Top 3 Predictors (PI):  directions, month, temp
+  Top 3 Predictors (MDI): is_weekend_or_holiday, temp, month
+  Top 3 Predictors (PI):  is_weekend_or_holiday, temp, month
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   2. CROSS-PREFECTURAL SIGNAL (Ishikawa → Fukui Pipeline)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   Best Ishikawa → Tojinbo lag:  +0 day(s)
-  Correlation at best lag:      r = +0.549
+  Correlation at best lag:      r = +0.589
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   3. KANSEI (EMOTIONAL) OVERTOURISM THRESHOLD
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Visitors vs Satisfaction (Spearman): r = +0.150, p = 0.0019
-  Visitors vs NPS (Spearman):         r = +0.091, p = 0.0619
+  Visitors vs Satisfaction (Spearman): r = +0.145, p = 0.0023
+  Visitors vs NPS (Spearman):         r = +0.093, p = 0.0506
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   4. LOST POPULATION (Aggregate Visitor Loss)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Opportunity Gap days:             42
-  Total Lost Visitors:              85,522
-  Mean Lost per day:                2,036
+  Opportunity Gap days:             0
+  Total Lost Visitors:              0
+  Mean Lost per day:                0
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   5. MODEL ROBUSTNESS (PhD Shield)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Durbin-Watson (original):  1.005  (WARNING)
-  Durbin-Watson (1st-diff):  2.525  (residual)
-  First-Difference R²:       0.7083  (original: 0.8096)
-  LDV R²:                    0.8485
-  LDV DW:                    1.899
-  Newey-West sig. predictors: 8
-  Weather Data Value:   +0.0559 R²
-  OLS R² without JMA:   0.7537
-  OLS R² with JMA:      0.8096
+  Durbin-Watson (original):  0.676  (WARNING)
+  Durbin-Watson (1st-diff):  2.462  (CLEAN)
+  First-Difference R²:       0.6165  (original: 0.5946)
+  LDV R²:                    0.7430
+  LDV DW:                    1.496
+  Newey-West sig. predictors: 6
+  Weather Data Value:   +0.1567 R²
+  OLS R² without JMA:   0.4379
+  OLS R² with JMA:      0.5946
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   6. RANKING IMPACT SIMULATION (Fukui Resurrection – 4-node aggregate total)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  4-node aggregate total:     865,917
+  4-node aggregate total:     0
   Winter actual mean rank:    46.7
-  Winter hypothetical rank:   41.3
-  Best monthly improvement:   7 ranks
-  Shortfall closure range:    8.2% – 66.2%
+  Winter hypothetical rank:   46.7
+  Best monthly improvement:   0 ranks
+  Shortfall closure range:    0.0% – 0.0%
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   7. SEASONAL WEATHER SENSITIVITY
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Summer weather lift (ΔR²):  +0.0215
-  Winter weather lift (ΔR²):  +0.1348
-  Ratio (Winter/Summer):      6.26x
+  Summer weather lift (ΔR²):  +0.0242
+  Winter weather lift (ΔR²):  +0.1598
+  Ratio (Winter/Summer):      6.59x
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   8. QUALITATIVE UNDER-VIBRANCY LINK
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   Under-vibrancy mentions in 1-2 star reviews: 65
-  Percentage of low-sat responses:             6.1%
-  Ratio vs high-satisfaction visitors:         11.5x
-  Fukui free-text responses analysed:          71,623
+  Percentage of low-sat responses:             6.0%
+  Ratio vs high-satisfaction visitors:         11.3x
+  Fukui free-text responses analysed:          72,601
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   8b. EIHEIJI ATMOSPHERIC RESILIENCE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Eiheiji survey responses:          4504
-  High-satisfaction (4-5★) rate:     93.7%
-  Qualifying days (≥3 resp/day):     592
-  Spearman r (density vs sat):       +0.047 (p = 0.2506)
+  Eiheiji survey responses:          4607
+  High-satisfaction (4-5★) rate:     93.8%
+  Qualifying days (≥3 resp/day):     602
+  Spearman r (density vs sat):       +0.056 (p = 0.1727)
   Congestion complaints (all):       0.2% of responses
   Congestion in low-sat reviews:     0.0% of 1-2★
   Under-vibrancy in low-sat reviews: 0
@@ -96,71 +96,30 @@ Generated: 2026-03-24 15:35
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   9. STATISTICAL RIGOR (効果量 / Effect Sizes & Hold-Out Validation)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Top-3 Standardised β: is_weekend_or_holiday=+0.547, directions=+0.456, month=+0.331
-  Cohen's f²:           4.2519
-  Train N:              317  |  Hold-out N: 80
-  Hold-out MAE:         1793.2 visitors/day
-  Hold-out RMSE:        2461.0 visitors/day
-  Hold-out R²:          0.6834
+  Top-3 Standardised β: is_weekend_or_holiday=+0.556, month=+0.257, temp=+0.218
+  Cohen's f²:           1.4666
+  Train N:              336  |  Hold-out N: 85
+  Hold-out MAE:         2357.5 visitors/day
+  Hold-out RMSE:        3154.0 visitors/day
+  Hold-out R²:          0.4084
 
 ================================================================================
 END OF BOLSTERED RESULTS
 ================================================================================
 MULTI_NODE_SPATIAL_GOVERNANCE
-  Node_C=Katsuyama (survey_proxy)
-Node A (Tojinbo/Mikuni)
-  n=418
-  OLS_R2=0.482301
-  OLS_Adj_R2=0.477287
-  Weather_Lift_R2=+0.016159
-  Snow_Beta_Std=+nan
-  Opportunity_Lost_Visitors=538091.31
-  Opportunity_Lost_Yen=7431579028.33
-Node B (Fukui Station)
-  n=419
-  OLS_R2=0.436041
-  OLS_Adj_R2=0.429214
-  Weather_Lift_R2=+0.007122
-  Snow_Beta_Std=-0.005585
-  Opportunity_Lost_Visitors=313694.14
-  Opportunity_Lost_Yen=4332429791.00
-Node C (Katsuyama/Dinosaur)
-  n=419
-  OLS_R2=0.374270
-  OLS_Adj_R2=0.368225
-  Weather_Lift_R2=+0.009580
-  Snow_Beta_Std=+nan
-  Opportunity_Lost_Visitors=989.93
-  Opportunity_Lost_Yen=13671908.78
-Node D (Rainbow Line/Wakasa)
-  n=420
-  OLS_R2=0.167578
-  OLS_Adj_R2=0.159554
-  Weather_Lift_R2=+0.039329
-  Snow_Beta_Std=+nan
-  Opportunity_Lost_Visitors=13141.87
-  Opportunity_Lost_Yen=181502355.04
-Multinode_Aggregate_Loss (nodes=4)
-  Node_D_Status=camera
-  Lost_Visitors=865917.25
+  Node_C=Katsuyama (unknown)
+Multinode_Aggregate_Loss (nodes=0)
+  Node_D_Status=not_available
+  Lost_Visitors=0.00
   Spending_Per_Visitor_Yen=13811.00
-  Total_Lost_Yen=11959183083.15
-  Total_Lost_Billion_Yen=11.959
+  Total_Lost_Yen=0.00
+  Total_Lost_Billion_Yen=0.000
   USD_Exchange_Rate=164.7
-  Total_Lost_USD_Million=72.6
-  GEOGRAPHIC_SATURATION=ACHIEVED (North/Central/South/East)
-Survey_Proxy_Validation
-  Pearson_r=0.564
-  p_value=1.448e-38
-  n=443
+  Total_Lost_USD_Million=0.0
 Ranking_Simulation_4Node
-  Best_Monthly_Improvement=7_ranks
-  Shortfall_Closure_Min=8.2%
-  Shortfall_Closure_Max=66.2%
+  Best_Monthly_Improvement=0_ranks
+  Shortfall_Closure_Min=0.0%
+  Shortfall_Closure_Max=0.0%
 Undervibrancy_ChiSquare
-  chi2=514.7
-  p=5.874e-114
-  Node A (Tojinbo/Mikuni): lag=+0, r=+0.491812, n=418
-  Node B (Fukui Station): lag=+0, r=+0.226247, n=419
-  Node C (Katsuyama/Dinosaur): lag=+0, r=+0.323949, n=419
-  Node D (Rainbow Line/Wakasa): lag=+4, r=-0.178771, n=416
+  chi2=504.8
+  p=8.744e-112

@@ -184,7 +184,11 @@ def load_google_intent(
                 frames.append(pd.read_csv(str(total_path)))
 
     if not frames:
-        raise FileNotFoundError(f"No Google trend CSV found in {trend_root}.")
+        # Instead of crashing, log a warning
+        rpt(f"WARNING: No Google trend CSV found in {trend_root}. "
+            f"Skipping Google Trends analysis. Other data will still be processed.")
+        # Return empty DataFrame and None for route column
+        return pd.DataFrame(), None
 
     google = pd.concat(frames, ignore_index=True)
 
@@ -391,7 +395,7 @@ def load_raw_fukui_survey(
     return df
 
 
-# ── Merge into master daily ──────────────────────────────────────────────────
+# ── Merge into master daily (patched for missing Google) ──────────────────────────────────────────────────
 
 def merge_daily(
     camera: pd.DataFrame,
@@ -413,9 +417,22 @@ def merge_daily(
     """
     rpt = reporter.log if reporter else print
 
+    # Merge camera + weather first
     daily = camera.merge(weather, on="date", how="left")
-    daily = daily.merge(google, on="date", how="left")
+
+    # Merge Google only if present
+    if google.empty:
+        rpt("Google data is empty, skipping Google merge.")
+    else:
+        daily = daily.merge(google, on="date", how="left")
+
     daily = daily.dropna(subset=["count"]).reset_index(drop=True)
+
+    # Update merged source description
+    source_text = "camera ∩ weather"
+    if not google.empty:
+        source_text += " ∩ google"
+    rpt(f"Merged daily rows ({source_text}): {len(daily)}")
     rpt(f"Merged daily rows (camera ∩ weather ∩ google): {len(daily)}")
     rpt(f"Date range: {daily['date'].min().date()} → {daily['date'].max().date()}")
 
@@ -436,7 +453,7 @@ def merge_daily(
 
 def run_adf_tests(
     daily: pd.DataFrame,
-    route_col: str,
+    route_col: str | None,
     *,
     reporter: Reporter | None = None,
 ) -> None:
@@ -450,8 +467,16 @@ def run_adf_tests(
     rpt = reporter.log if reporter else print
     rpt("\nAugmented Dickey-Fuller tests:")
 
-    for name, series in [("count", daily["count"]),
-                          (route_col, daily[route_col].dropna())]:
+    # Always test camera count
+    series_list = [("count", daily["count"])]
+
+    # Include Google column only if it exists
+    if route_col is not None and route_col in daily.columns:
+        series_list.append((route_col, daily[route_col].dropna()))
+    else:
+        rpt("Skipping ADF tests for Google series (missing data).")
+
+    for name, series in series_list:
         if len(series) < 20:
             rpt(f"  {name}: too few observations ({len(series)})")
             continue
@@ -459,7 +484,7 @@ def run_adf_tests(
         status = "STATIONARY" if p_value < 0.05 else "NON-STATIONARY"
         rpt(f"  {name}: ADF={adf_stat:.3f}  p={p_value:.4f}  "
             f"→ {status}  (lag={used_lag})")
-
+        
 
 # ── Convenience wrapper ──────────────────────────────────────────────────────
 
@@ -506,7 +531,12 @@ def load_all_data(
 
     # Merge
     daily = merge_daily(camera, weather_daily, google, reporter=reporter)
-    run_adf_tests(daily, route_col, reporter=reporter)
+
+    # Only run ADF tests on Google data if it exists
+    if route_col is not None and route_col in daily.columns:
+        run_adf_tests(daily, route_col, reporter=reporter)
+    else:
+        reporter.log("Skipping ADF test for Google data (not available).")
 
     # Surveys
     survey_glob = str(resolve_ws_path(cfg, paths["survey"]["merged_glob"]))

@@ -99,7 +99,6 @@ def main() -> None:
     # Rename columns for display (more descriptive labels in figure)
     _label_map = {
         "count": "AI Camera Count",
-        route_col: f"Google {route_col.capitalize()}",
         "precip": "Precipitation (mm)",
         "temp": "Temperature (°C)",
         "sun": "Sunshine (h)",
@@ -107,6 +106,10 @@ def main() -> None:
         "is_weekend_or_holiday": "Weekend/Holiday",
         "weather_severity": "Weather Severity",
     }
+    # Only add Google label if available
+    if route_col is not None:
+        _label_map[route_col] = f"Google {route_col.capitalize()}"
+
     corr_matrix = corr_matrix.rename(index=_label_map, columns=_label_map)
 
     # ══════════════════════════════════════════════════════════════════════
@@ -128,32 +131,48 @@ def main() -> None:
     # 4. OPPORTUNITY GAP
     # ══════════════════════════════════════════════════════════════════════
     daily = compute_opportunity_gap(daily, route_col, rpt)
-    intent_median = daily[route_col].median()
+    if route_col is not None and route_col in daily.columns:
+       intent_median = daily[route_col].median()
+    else:
+       rpt.log("Skipping intent median calculation (no Google data).")
+       intent_median = None
     count_median = daily["count"].median()
-
+        
     # ══════════════════════════════════════════════════════════════════════
     # 5. EXPLAINING THE NEGATIVE CORRELATION
     # ══════════════════════════════════════════════════════════════════════
-    rpt.section(5, "Explaining the Negative Lag-2 Correlation")
-    rpt.log("\nLag correlations (full data):")
-    for lag in range(0, 8):
-        col = f"{route_col}_lag{lag}"
-        if col in daily.columns:
-            r = daily[["count", col]].dropna().corr().iloc[0, 1]
-            rpt.log(f"  lag {lag}: r = {r:+.3f}")
 
-    for label, mask in [("Weekday", daily["is_weekend_or_holiday"] == 0),
-                         ("Weekend/Holiday", daily["is_weekend_or_holiday"] == 1)]:
-        sub = daily.loc[mask]
-        r = sub[["count", f"{route_col}_lag2"]].dropna().corr().iloc[0, 1]
-        rpt.log(f"  {label:20s}: r = {r:+.3f}  (n={len(sub)})")
+    if route_col is not None and route_col in daily.columns:
 
-    rpt.log("\nDay-of-week Google intent vs count:")
-    for dow in range(7):
-        sub = daily[daily["dow"] == dow]
-        day_name = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][dow]
-        rpt.log(f"  {day_name}: intent={sub[route_col].mean():7.1f}   "
-                f"count={sub['count'].mean():7.1f}")
+        rpt.section(5, "Explaining the Negative Lag-2 Correlation")
+
+        rpt.log("\nLag correlations (full data):")
+        for lag in range(0, 8):
+            col = f"{route_col}_lag{lag}"
+            if col in daily.columns:
+                r = daily[["count", col]].dropna().corr().iloc[0, 1]
+                rpt.log(f"  lag {lag}: r = {r:+.3f}")
+
+        for label, mask in [("Weekday", daily["is_weekend_or_holiday"] == 0),
+                            ("Weekend/Holiday", daily["is_weekend_or_holiday"] == 1)]:
+            sub = daily.loc[mask]
+            lag_col = f"{route_col}_lag2"
+            if lag_col in sub.columns:
+                r = sub[["count", lag_col]].dropna().corr().iloc[0, 1]
+                rpt.log(f"  {label:20s}: r = {r:+.3f}  (n={len(sub)})")
+
+        rpt.log("\nDay-of-week Google intent vs count:")
+        for dow in range(7):
+            sub = daily[daily["dow"] == dow]
+            day_name = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][dow]
+            rpt.log(
+                f"  {day_name}: intent={sub[route_col].mean():7.1f}   "
+                f"count={sub['count'].mean():7.1f}"
+            )
+
+    else:
+        rpt.section(5, "Explaining the Negative Lag-2 Correlation")
+        rpt.log("Skipping correlation analysis (no Google intent data available).")
 
     # ══════════════════════════════════════════════════════════════════════
     # 6. VISUALISATIONS (Figs 1-7)
@@ -161,12 +180,7 @@ def main() -> None:
     rpt.section(6, "Generating Figures")
     y = model_df["count"].values
 
-    fig_num += 1
-    viz.plot_timeseries(
-        daily, route_col,
-        os.path.join(fig_dir, f"fig{fig_num:02d}_timeseries.png"),
-        rpt, dpi=dpi)
-
+    # Always safe plots
     fig_num += 1
     viz.plot_correlation_heatmap(
         corr_matrix,
@@ -190,19 +204,25 @@ def main() -> None:
         rf_result.r2_train, rf_result.cv_r2_mean,
         os.path.join(fig_dir, "paper_fig2_rf_prediction.png"),
         rpt, dpi=300)
-
-    fig_num += 1
-    viz.plot_opportunity_gap(
-        daily, route_col, intent_median, count_median,
-        os.path.join(fig_dir, f"fig{fig_num:02d}_opportunity_gap.png"),
-        rpt, dpi=dpi)
-
-    fig_num += 1
-    viz.plot_lag_correlations(
-        daily, route_col,
-        os.path.join(fig_dir, f"fig{fig_num:02d}_lag_correlations.png"),
-        rpt, dpi=dpi)
-
+    # Google-dependent plots 
+    if route_col is not None and route_col in daily.columns:
+        fig_num += 1
+        viz.plot_timeseries(
+            daily, route_col,
+            os.path.join(fig_dir, f"fig{fig_num:02d}_timeseries.png"),
+            rpt, dpi=dpi)
+        fig_num += 1
+        viz.plot_opportunity_gap(
+            daily, route_col, intent_median, count_median,
+            os.path.join(fig_dir, f"fig{fig_num:02d}_opportunity_gap.png"),
+            rpt, dpi=dpi)
+        fig_num += 1
+        viz.plot_lag_correlations(
+            daily, route_col,
+            os.path.join(fig_dir, f"fig{fig_num:02d}_lag_correlations.png"),
+            rpt, dpi=dpi)
+    else:
+        rpt.log("Skipping Google-dependent visualizations (no Google data).")
     # ══════════════════════════════════════════════════════════════════════
     # 7. CROSS-PREFECTURAL SIGNAL
     # ══════════════════════════════════════════════════════════════════════
@@ -292,7 +312,7 @@ def main() -> None:
     # produced later as part of the spatial section and copied below.
     viz.plot_resurrection(
         sim_df, total_lost, mean_actual_rank, mean_hypo_rank,
-        os.path.join("/tmp", "fig16_resurrection_temp.png"),
+        os.path.join(fig_dir, "fig16_resurrection_temp.png"),
         rpt, dpi=dpi)
 
     # ══════════════════════════════════════════════════════════════════════
