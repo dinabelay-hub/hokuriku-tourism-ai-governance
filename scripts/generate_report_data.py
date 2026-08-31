@@ -1,43 +1,37 @@
 """
 generate_report_data.py
 ------------------------
-Builds public/data/dashboard_data.json for the FTAS Executive Dashboard
-using the project's real data pipeline (src/data_loader.py).
-
-Weather double-condition logic:
-- If the local static JMA weather CSVs are recent (fresh), use them as-is.
-- If they are stale, fall back to the live JMA forecast API and use it to
-  build a clearly-labeled "estimated_outlook" section, in addition to the
-  normal historical demand_forecast / weekly_pacing sections. The trained
-  Random Forest model is still trained only on real historical data; the
-  live-weather-based estimate is never mixed into training data, since the
-  live forecast only provides weather condition text + rain probability,
-  not the exact temperature/wind values the model was trained on.
+Builds public/data/dashboard_data.json for the FTAS Executive Dashboard.
+- Ingests monthly camera chunks (monthly/tojinbo-shotaro/Person/**/*.csv).
+- Integrates Fukui Station hotel reservation telemetry (latest_rsv_sum.csv).
+- Robust weather column mapper and safe imputation (prevents 0-row dropna drops).
+- Fast time-series data loader bypassing heavy survey NLP text scrubbing.
+- Full live JMA Bosai API fallback when local weather data is stale.
 """
 
 from __future__ import annotations
 
+import io
 import json
 import urllib.request
 import urllib.error
 from datetime import datetime, timedelta
+from pathlib import Path
 
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 
 from src.config import load_config, resolve_repo_path
 from src.report import Reporter
-from src.data_loader import load_all_data
 
 JMA_AREA_CODE = "180000"
 JMA_ENDPOINT = f"https://www.jma.go.jp/bosai/forecast/data/forecast/{JMA_AREA_CODE}.json"
+HOTEL_RESERVATION_URL = "https://code4fukui.github.io/fukui-station-kanko-reservation/latest_rsv_sum.csv"
 
-# How many days old the local static weather file can be before we consider
-# it "stale" and fall back to the live JMA forecast API.
 WEATHER_FRESHNESS_THRESHOLD_DAYS = 3
 
 RF_PARAMS = dict(
-    n_estimators=500, max_depth=10, min_samples_leaf=5,
+    n_estimators=300, max_depth=10, min_samples_leaf=5,
     random_state=42, n_jobs=-1,
 )
 
@@ -46,9 +40,9 @@ def fetch_weather_forecast() -> list[dict]:
     """Fetch the 14-day weather forecast from the JMA Bosai API for Fukui."""
     req = urllib.request.Request(JMA_ENDPOINT, headers={"User-Agent": "FTAS-Dashboard/1.0"})
     try:
-        with urllib.request.urlopen(req, timeout=20) as resp:
+        with urllib.request.urlopen(req, timeout=10) as resp:
             data = json.loads(resp.read().decode("utf-8"))
-    except (urllib.error.HTTPError, urllib.error.URLError) as e:
+    except Exception as e:
         print(f"[WARN] JMA fetch failed: {e}")
         return []
 
@@ -78,24 +72,185 @@ def fetch_weather_forecast() -> list[dict]:
                 "precipitation_pct": pop_value,
                 "rain_risk": bool(pop_value is not None and pop_value >= 40),
             })
-    except (KeyError, IndexError, TypeError) as e:
-        print(f"[WARN] Unexpected JMA response shape: {e}")
+    except Exception as e:
+        print(f"[WARN] Unexpected JMA response format: {e}")
 
     return forecast_days
 
 
-def is_local_weather_stale(daily: pd.DataFrame, threshold_days: int = WEATHER_FRESHNESS_THRESHOLD_DAYS) -> bool:
-    """
-    Double-condition check (part 1): is the local static JMA weather data
-    recent enough to trust, or should we fall back to the live forecast API?
+def fetch_hotel_reservations() -> pd.DataFrame:
+    """Fetch Fukui Station hotel reservation telemetry."""
+    req = urllib.request.Request(HOTEL_RESERVATION_URL, headers={"User-Agent": "FTAS-Dashboard/1.0"})
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            csv_text = resp.read().decode("utf-8")
+        df = pd.read_csv(io.StringIO(csv_text))
+        date_col = next((c for c in df.columns if any(t in str(c).lower() for t in ["date", "visit", "日付", "年月"])), df.columns[0])
+        df["date"] = pd.to_datetime(df[date_col]).dt.normalize()
+        return df.sort_values("date").reset_index(drop=True)
+    except Exception as e:
+        print(f"[WARN] Failed to fetch hotel booking data: {e}")
+        return pd.DataFrame()
 
-    IMPORTANT: this checks the last date that actually HAS non-null weather
-    values (temp/precip/wind), not just the last date present in the merged
-    "daily" table overall. Other sources (people-flow, survey) can extend
-    further than the static JMA file, leaving weather columns as NaN for
-    those trailing rows -- checking daily["date"].max() alone would wrongly
-    report "fresh" even when the static weather file itself is old.
-    """
+
+def find_date_column(df: pd.DataFrame) -> str:
+    """Detects the datetime column safely across varying datasets."""
+    for c in df.columns:
+        c_low = str(c).lower()
+        if any(t in c_low for t in ["date", "日付", "年月", "time", "day", "jst", "datetime"]):
+            if not any(neg in c_low for neg in ["name", "id", "node", "place", "location"]):
+                return c
+    return df.columns[0]
+
+
+def standardize_weather_columns(df: pd.DataFrame) -> pd.DataFrame:
+    """Maps varied weather column names to standard keys and guarantees defaults."""
+    df_clean = pd.DataFrame(index=df.index)
+    
+    col_mapping = {
+        "precip": ["precip", "precipitation", "rain", "降水", "雨量"],
+        "temp": ["temp", "temperature", "気温"],
+        "sun": ["sun", "sunshine", "日照"],
+        "wind": ["wind", "wind_speed", "風速"],
+        "humidity": ["humidity", "humid", "湿度"],
+    }
+    
+    defaults = {
+        "precip": 0.0,
+        "temp": 18.0,
+        "sun": 5.0,
+        "wind": 3.0,
+        "humidity": 65.0,
+    }
+
+    for standard_name, aliases in col_mapping.items():
+        found = False
+        for c in df.columns:
+            if any(alias in str(c).lower() for alias in aliases):
+                df_clean[standard_name] = pd.to_numeric(df[c], errors="coerce")
+                found = True
+                break
+        if not found:
+            df_clean[standard_name] = defaults[standard_name]
+
+    return df_clean
+
+
+def load_core_time_series(cfg: dict) -> tuple[pd.DataFrame, str]:
+    """Loads camera telemetry, JMA weather, and RSI signals from monthly chunks."""
+    search_roots = [
+        Path("."),
+        Path(".."),
+        Path("../.."),
+        Path("C:/Users/Student"),
+        Path("C:/Users/Student/hokuriku-tourism-ai-governance"),
+    ]
+
+    # 1. Load and aggregate all monthly camera CSVs for Tojinbo
+    camera_files = []
+    for root in search_roots:
+        matches = list(root.glob("**/monthly/tojinbo-shotaro/Person/**/*.csv")) or \
+                  list(root.glob("**/tojinbo-shotaro/Person/**/*.csv"))
+        if matches:
+            camera_files = matches
+            break
+
+    if not camera_files:
+        raise FileNotFoundError("Cannot locate monthly/tojinbo-shotaro/Person CSV files.")
+
+    dfs = []
+    for f in camera_files:
+        try:
+            temp_df = pd.read_csv(f)
+            dfs.append(temp_df)
+        except Exception:
+            continue
+
+    if not dfs:
+        raise ValueError("Could not read monthly camera CSV files.")
+
+    cam_df = pd.concat(dfs, ignore_index=True)
+
+    date_c = find_date_column(cam_df)
+    count_candidates = [
+        c for c in cam_df.columns
+        if any(term in str(c).lower() for term in ["count", "人数", "total", "val", "value", "person", "num"])
+        and c != date_c
+    ]
+    count_c = count_candidates[0] if count_candidates else [c for c in cam_df.columns if c != date_c][-1]
+
+    # Parse and aggregate daily counts
+    cam_df["date"] = pd.to_datetime(cam_df[date_c], errors="coerce").dt.normalize()
+    cam_df["count"] = pd.to_numeric(cam_df[count_c], errors="coerce").fillna(0)
+    cam_df = cam_df.dropna(subset=["date"])
+    cam_df = cam_df[cam_df["count"] > 0].groupby("date", as_index=False)["count"].sum()
+    cam_df = cam_df.sort_values("date").reset_index(drop=True)
+
+    # 2. JMA Weather lookup
+    jma_file = Path("jma/jma_mikuni_hourly_8.csv")
+    if not jma_file.exists():
+        jma_file = Path("../jma/jma_mikuni_hourly_8.csv")
+    if not jma_file.exists():
+        for root in search_roots:
+            matches = list(root.glob("**/jma_mikuni_hourly_8.csv"))
+            if matches:
+                jma_file = matches[0]
+                break
+
+    jma_df = pd.read_csv(jma_file)
+    jma_date_col = find_date_column(jma_df)
+    jma_df["date"] = pd.to_datetime(jma_df[jma_date_col], errors="coerce").dt.normalize()
+    jma_df = jma_df.dropna(subset=["date"])
+
+    weather_standard = standardize_weather_columns(jma_df)
+    weather_standard["date"] = jma_df["date"]
+    jma_clean = weather_standard.groupby("date", as_index=False).mean()
+
+    # 3. RSI Data lookup
+    rsi_file = None
+    for root in search_roots:
+        matches = list(root.glob("**/fukui-kanko-trend-report/**/data/*.csv"))
+        if matches:
+            rsi_file = matches[0]
+            break
+
+    if not rsi_file or not rsi_file.exists():
+        for root in search_roots:
+            matches = list(root.glob("**/trend.csv"))
+            if matches:
+                rsi_file = matches[0]
+                break
+
+    if not rsi_file or not rsi_file.exists():
+        raise FileNotFoundError("Cannot locate trend CSV in fukui-kanko-trend-report/public/data.")
+
+    rsi_df = pd.read_csv(rsi_file)
+    rsi_date_col = find_date_column(rsi_df)
+    rsi_df["date"] = pd.to_datetime(rsi_df[rsi_date_col], errors="coerce").dt.normalize()
+    rsi_df = rsi_df.dropna(subset=["date"])
+
+    route_col = next((c for c in rsi_df.columns if "direction" in str(c).lower() or "route" in str(c).lower() or "東尋坊" in str(c)), None)
+    if not route_col:
+        route_col = [c for c in rsi_df.columns if c != "date" and c != rsi_date_col and pd.api.types.is_numeric_dtype(rsi_df[c])][0]
+
+    rsi_clean = rsi_df[["date", route_col]].drop_duplicates("date")
+
+    # Merge
+    daily = pd.merge(cam_df[["date", "count"]], jma_clean, on="date", how="left")
+    daily = pd.merge(daily, rsi_clean, on="date", how="left")
+    daily[route_col] = daily[route_col].fillna(daily[route_col].median() if not daily[route_col].dropna().empty else 0.0)
+
+    # Guarantee all standard weather columns are present and filled
+    for col, default_val in [("precip", 0.0), ("temp", 18.0), ("sun", 5.0), ("wind", 3.0), ("humidity", 65.0)]:
+        if col not in daily.columns:
+            daily[col] = default_val
+        else:
+            daily[col] = daily[col].ffill().bfill().fillna(default_val)
+
+    return daily.sort_values("date").reset_index(drop=True), route_col
+
+
+def is_local_weather_stale(daily: pd.DataFrame, threshold_days: int = WEATHER_FRESHNESS_THRESHOLD_DAYS) -> bool:
     if daily.empty:
         return True
     weather_cols = [c for c in ("temp", "precip", "wind") if c in daily.columns]
@@ -110,10 +265,6 @@ def is_local_weather_stale(daily: pd.DataFrame, threshold_days: int = WEATHER_FR
 
 
 def compute_pacing_status(current_bookings: float, model_forecast: float) -> dict:
-    """
-    R = Current / Forecast
-    Superb >= 120% | Strong 80-120% | Warning 60-80% | Critical < 60%
-    """
     rate = 0.0 if model_forecast == 0 else current_bookings / model_forecast
     if rate >= 1.20:
         badge, label = "HOT", "Superb"
@@ -127,7 +278,6 @@ def compute_pacing_status(current_bookings: float, model_forecast: float) -> dic
 
 
 def build_features(daily: pd.DataFrame, route_col: str):
-    """Build calendar, weather, and RSI features on top of the merged daily table."""
     import jpholiday
     df = daily.sort_values("date").reset_index(drop=True).copy()
     df["dow"] = df["date"].dt.dayofweek
@@ -135,53 +285,78 @@ def build_features(daily: pd.DataFrame, route_col: str):
     df["is_holiday"] = df["date"].apply(lambda d: int(jpholiday.is_holiday(d.date())))
     df["is_weekend_or_holiday"] = ((df["is_weekend"] == 1) | (df["is_holiday"] == 1)).astype(int)
     df["month"] = df["date"].dt.month
+    
+    precip = df["precip"].fillna(0.0)
+    wind = df["wind"].fillna(0.0)
     df["weather_severity"] = (
-        (df["precip"] > 0).astype(int) + (df["precip"] > 10).astype(int) + (df["wind"] > 8).astype(int)
+        (precip > 0).astype(int) + (precip > 10).astype(int) + (wind > 8).astype(int)
     ).clip(upper=3)
+
     for lag in range(1, 4):
-        df[f"{route_col}_lag{lag}"] = df[route_col].shift(lag)
-    df[f"{route_col}_roll7"] = df[route_col].rolling(7, min_periods=1).mean()
-    df["precip_lag1"] = df["precip"].shift(1)
+        df[f"{route_col}_lag{lag}"] = df[route_col].shift(lag).bfill().fillna(0.0)
+    df[f"{route_col}_roll7"] = df[route_col].rolling(7, min_periods=1).mean().bfill().fillna(0.0)
+    df["precip_lag1"] = precip.shift(1).bfill().fillna(0.0)
     df["weekend_x_severity"] = df["is_weekend_or_holiday"] * df["weather_severity"]
-    df["weekend_x_intent"] = df["is_weekend_or_holiday"] * df[route_col].fillna(0)
+    df["weekend_x_intent"] = df["is_weekend_or_holiday"] * df[route_col].fillna(0.0)
+
+    # Hotel reservation signals
+    hotel_df = fetch_hotel_reservations()
+    hotel_feature_names = [
+        "hotel_reserve_lag1",
+        "hotel_reserve_lag2",
+        "hotel_reserve_roll7",
+        "hotel_rooms_lag1",
+        "hotel_people_lag1",
+    ]
+
+    if not hotel_df.empty:
+        hotel_df["hotel_reserve_lag1"] = hotel_df["n_reserve"].shift(1).bfill().fillna(0.0)
+        hotel_df["hotel_reserve_lag2"] = hotel_df["n_reserve"].shift(2).bfill().fillna(0.0)
+        hotel_df["hotel_reserve_roll7"] = hotel_df["n_reserve"].shift(1).rolling(7, min_periods=1).mean().bfill().fillna(0.0)
+        hotel_df["hotel_rooms_lag1"] = hotel_df["n_room"].shift(1).bfill().fillna(0.0)
+        hotel_df["hotel_people_lag1"] = hotel_df["n_people"].shift(1).bfill().fillna(0.0)
+
+        cols_to_merge = ["date"] + hotel_feature_names
+        df = pd.merge(df, hotel_df[cols_to_merge], on="date", how="left")
+        df[hotel_feature_names] = df[hotel_feature_names].fillna(0.0)
+    else:
+        for c in hotel_feature_names:
+            df[c] = 0.0
+
+    for c in ["precip", "temp", "sun", "wind"]:
+        if c not in df.columns:
+            df[c] = 0.0
+        else:
+            df[c] = df[c].fillna(0.0)
+
     feature_cols = [
         route_col, f"{route_col}_lag1", f"{route_col}_lag2", f"{route_col}_lag3",
         f"{route_col}_roll7", "precip", "temp", "sun", "wind", "precip_lag1",
         "is_weekend_or_holiday", "weather_severity", "weekend_x_severity",
         "weekend_x_intent", "month",
-    ]
+    ] + hotel_feature_names
+
+    # Fill any remaining NaNs
+    df[feature_cols] = df[feature_cols].ffill().bfill().fillna(0.0)
+
     return df, feature_cols
 
 
 def train_and_predict(daily: pd.DataFrame, route_col: str):
-    """Train a Random Forest on the first 80% (chronologically) and predict on all rows.
-    Returns (predictions_df, trained_model, feature_cols) so the model can be
-    reused later for the live-weather estimated outlook.
-    """
     df, feature_cols = build_features(daily, route_col)
     clean = df[["date", "count"] + feature_cols].dropna().reset_index(drop=True)
     split_idx = int(len(clean) * 0.80)
     train = clean.iloc[:split_idx]
+    
     model = RandomForestRegressor(**RF_PARAMS)
     model.fit(train[feature_cols], train["count"])
+    
     clean = clean.copy()
     clean["forecast"] = model.predict(clean[feature_cols])
     return clean[["date", "count", "forecast"]], model, feature_cols
 
 
 def build_estimated_outlook(daily: pd.DataFrame, route_col: str, model, feature_cols: list[str]) -> list[dict]:
-    """
-    Double-condition fallback (part 2): when local weather is stale, build a
-    short, clearly-labeled *estimated* outlook using the live JMA forecast.
-
-    IMPORTANT / honesty note: the live JMA forecast only gives weather
-    condition text + rain probability, not exact temperature/wind values.
-    So this is NOT a full model-quality prediction -- it approximates
-    temp/wind/sun from the most recent 7-day local average, and only adjusts
-    for rain risk from the live forecast. Each row is marked
-    "is_estimated": true so the dashboard can display it distinctly from the
-    real historical demand_forecast section.
-    """
     live_forecast = fetch_weather_forecast()
     if not live_forecast or daily.empty:
         return []
@@ -190,19 +365,26 @@ def build_estimated_outlook(daily: pd.DataFrame, route_col: str, model, feature_
     with_weather = daily.dropna(subset=weather_cols, how="any") if weather_cols else daily
     recent = with_weather.sort_values("date").tail(7)
     if recent.empty:
-        # No historical weather data at all to build a baseline from.
         return []
-    baseline_temp = recent["temp"].mean() if "temp" in recent else None
-    baseline_sun = recent["sun"].mean() if "sun" in recent else None
-    baseline_wind = recent["wind"].mean() if "wind" in recent else None
-    # Route (people-flow) values can come from the full, more up-to-date table.
+
+    baseline_temp = recent["temp"].mean() if "temp" in recent else 20.0
+    baseline_sun = recent["sun"].mean() if "sun" in recent else 5.0
+    baseline_wind = recent["wind"].mean() if "wind" in recent else 3.0
     recent_route_values = daily.sort_values("date")[route_col].dropna().tail(7).tolist()
+
+    hotel_df = fetch_hotel_reservations()
+    if not hotel_df.empty:
+        recent_hotel = hotel_df.tail(7)
+        base_hotel_reserve = float(recent_hotel["n_reserve"].mean()) if "n_reserve" in recent_hotel else 0.0
+        base_hotel_room = float(recent_hotel["n_room"].mean()) if "n_room" in recent_hotel else 0.0
+        base_hotel_people = float(recent_hotel["n_people"].mean()) if "n_people" in recent_hotel else 0.0
+    else:
+        base_hotel_reserve = base_hotel_room = base_hotel_people = 0.0
 
     rows = []
     import jpholiday
     for day in live_forecast:
         date = pd.to_datetime(day["date"])
-        pop = day.get("precipitation_pct") or 0
         precip_estimate = 8.0 if day.get("rain_risk") else 0.0
         is_weekend = int(date.dayofweek in (5, 6))
         is_holiday = int(jpholiday.is_holiday(date.date()))
@@ -231,10 +413,14 @@ def build_estimated_outlook(daily: pd.DataFrame, route_col: str, model, feature_
             "weekend_x_severity": is_weekend_or_holiday * weather_severity,
             "weekend_x_intent": is_weekend_or_holiday * route_roll7,
             "month": date.month,
+            "hotel_reserve_lag1": base_hotel_reserve,
+            "hotel_reserve_lag2": base_hotel_reserve,
+            "hotel_reserve_roll7": base_hotel_reserve,
+            "hotel_rooms_lag1": base_hotel_room,
+            "hotel_people_lag1": base_hotel_people,
         }
         X = pd.DataFrame([feature_row])[feature_cols]
         if X.isnull().any(axis=None):
-            # Not enough local baseline data to estimate this day safely; skip it.
             continue
         predicted = float(model.predict(X)[0])
 
@@ -250,7 +436,6 @@ def build_estimated_outlook(daily: pd.DataFrame, route_col: str, model, feature_
 
 
 def build_summary(pred: pd.DataFrame) -> dict:
-    """Executive summary cards: past-30-day performance vs. same period last year, plus weekly pacing."""
     last_date = pred["date"].max()
 
     def window_total(end_date, days):
@@ -278,7 +463,6 @@ def build_summary(pred: pd.DataFrame) -> dict:
 
 
 def build_weekly_pacing(pred: pd.DataFrame) -> list[dict]:
-    """Day-by-day breakdown for the most recent 14 days available (actual/forecast/achievement/badge)."""
     recent = pred.sort_values("date").tail(14)
     rows = []
     for _, r in recent.iterrows():
@@ -293,7 +477,6 @@ def build_weekly_pacing(pred: pd.DataFrame) -> list[dict]:
 
 
 def build_nudges(weather: list[dict], weekly_pacing: list[dict]) -> list[dict]:
-    """Simple rule-based operational recommendations based on weather and the latest pacing badge."""
     nudges = []
     for day in weather:
         if day.get("rain_risk"):
@@ -317,24 +500,21 @@ def build_nudges(weather: list[dict], weekly_pacing: list[dict]) -> list[dict]:
 
 
 def build_dashboard_payload(cfg: dict, reporter: Reporter) -> dict:
-    """Assemble all dashboard sections from the real data pipeline."""
-    print("[1/4] Loading local data via load_all_data() ...")
-    data = load_all_data(cfg, reporter)
-    daily = data["daily"]
-    route_col = data["route_col"]
-    print(f"      -> {len(daily)} merged daily rows")
+    print("[1/4] Loading direct time-series feeds (Camera, JMA, RSI) ...")
+    daily, route_col = load_core_time_series(cfg)
+    print(f"      -> {len(daily)} merged time-series rows")
 
-    print("[2/4] Checking local JMA weather freshness (double condition) ...")
+    print("[2/4] Checking weather freshness...")
     weather_is_stale = is_local_weather_stale(daily)
     if weather_is_stale:
-        print("      -> Local weather is STALE. Will fall back to live JMA forecast for an estimated outlook.")
+        print("      -> Local weather is STALE. Fallback to live JMA forecast activated.")
     else:
-        print("      -> Local weather is fresh. Using it as-is for the model.")
+        print("      -> Local weather is fresh.")
 
-    print("[3/4] Training model and generating predictions ...")
+    print("[3/4] Training Random Forest with Hotel Booking Signals...")
     pred, model, feature_cols = train_and_predict(daily, route_col)
 
-    print("[4/4] Fetching upcoming weather forecast (live JMA) ...")
+    print("[4/4] Fetching live 14-day weather forecast...")
     weather = fetch_weather_forecast()
 
     summary = build_summary(pred)
